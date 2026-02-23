@@ -1,1142 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vega | Vertically Integrated Real Estate</title>
-  <style>
-    /* ===== Vega Design Tokens — Dark Theme ===== */
-    :root {
-      --black-hole: #000000;
-      --night-sky: #27474D;
-      --meteorite: #566F69;
-      --space-grey: #797469;
-      --galaxy-green: #3F4B2A;
-      --neptune: #6A8F78;
-      --moon-dust: #FDF6E5;
-      --glacier-white: #FFFFFF;
-
-      /* Semantic mappings — Dark */
-      --bg-primary: #0a0f0f;
-      --bg-secondary: #121a1c;
-      --bg-elevated: #182124;
-      --bg-card: #162023;
-      --text-primary: var(--moon-dust);
-      --text-secondary: rgba(253, 246, 229, 0.65);
-      --text-muted: rgba(253, 246, 229, 0.4);
-      --accent: var(--neptune);
-      --accent-glow: rgba(106, 143, 120, 0.15);
-      --border: rgba(253, 246, 229, 0.08);
-      --border-hover: rgba(106, 143, 120, 0.3);
-      --card-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-      --card-hover-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    /* ===== Reset ===== */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Akzidenz-Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--text-primary);
-      background-color: var(--bg-primary);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    /* ===== Header ===== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background-color: rgba(10, 15, 15, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .nav__logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav__logo svg { flex-shrink: 0; }
-
-    .nav__logo-text {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--moon-dust);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .nav__menu { display: flex; gap: 8px; }
-
-    .nav__link {
-      padding: 8px 18px;
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      border-radius: 6px;
-      transition: all 0.25s ease;
-    }
-
-    .nav__link:hover, .nav__link.active {
-      color: var(--moon-dust);
-      background-color: rgba(106, 143, 120, 0.12);
-    }
-
-    /* ===== Buttons ===== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 36px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      font-family: inherit;
-      letter-spacing: 0.75px;
-      border-radius: 4px;
-      border: 1.5px solid transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn--primary {
-      background-color: var(--neptune);
-      color: var(--bg-primary);
-      border-color: var(--neptune);
-    }
-
-    .btn--primary:hover {
-      background-color: #7ca98a;
-      border-color: #7ca98a;
-      box-shadow: 0 0 24px rgba(106, 143, 120, 0.25);
-    }
-
-    .btn--outline {
-      background: transparent;
-      color: var(--moon-dust);
-      border-color: rgba(253, 246, 229, 0.25);
-    }
-
-    .btn--outline:hover {
-      border-color: var(--moon-dust);
-      background-color: rgba(253, 246, 229, 0.06);
-    }
-
-    /* ===== Hero ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: var(--bg-primary);
-      padding-top: 72px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(39, 71, 77, 0.2) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 30%, rgba(63, 75, 42, 0.15) 0%, transparent 50%);
-    }
-
-    .hero__content { max-width: 680px; position: relative; z-index: 1; }
-
-    .hero__tag {
-      display: inline-block;
-      padding: 6px 16px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--neptune);
-      border: 1px solid rgba(106, 143, 120, 0.35);
-      border-radius: 2px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 28px;
-    }
-
-    .hero__title {
-      font-size: clamp(2.5rem, 5vw, 3.75rem);
-      font-weight: 400;
-      line-height: 1.12;
-      letter-spacing: -1px;
-      color: var(--moon-dust);
-      margin-bottom: 24px;
-    }
-
-    .hero__title span {
-      color: var(--neptune);
-    }
-
-    .hero__subtitle {
-      font-size: 1.125rem;
-      line-height: 1.75;
-      color: var(--text-secondary);
-      margin-bottom: 44px;
-      max-width: 520px;
-    }
-
-    .hero__buttons { display: flex; gap: 16px; }
-
-    /* ===== Section Common ===== */
-    .section { padding: 120px 0; }
-    .section--alt { background-color: var(--bg-secondary); }
-    .section--elevated { background-color: var(--bg-elevated); }
-
-    .section__header {
-      max-width: 600px;
-      margin-bottom: 72px;
-    }
-
-    .section__header--center {
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section__tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--neptune);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 16px;
-    }
-
-    .section__title {
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 400;
-      line-height: 1.25;
-      letter-spacing: -0.5px;
-      color: var(--moon-dust);
-      margin-bottom: 20px;
-    }
-
-    .section__description {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-    }
-
-    .divider {
-      width: 48px;
-      height: 2px;
-      background-color: var(--neptune);
-      margin-bottom: 28px;
-    }
-
-    /* ===== About Cards ===== */
-    .about__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .about__card {
-      padding: 40px 32px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .about__card:hover {
-      border-color: var(--border-hover);
-      box-shadow: var(--card-hover-shadow);
-    }
-
-    .about__icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--neptune);
-      margin-bottom: 24px;
-    }
-
-    .about__card h3 {
-      font-size: 1.15rem;
-      font-weight: 500;
-      margin-bottom: 12px;
-      color: var(--moon-dust);
-    }
-
-    .about__card p {
-      font-size: 0.925rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    /* ===== Stats ===== */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      margin-top: 72px;
-      padding: 56px 48px;
-      background: linear-gradient(135deg, var(--night-sky), #1e3a3f);
-      border-radius: 4px;
-      text-align: center;
-      border: 1px solid rgba(106, 143, 120, 0.15);
-    }
-
-    .stat__number {
-      font-size: 2.75rem;
-      font-weight: 400;
-      letter-spacing: -1px;
-      color: var(--moon-dust);
-      display: inline;
-    }
-
-    .stat__suffix {
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--neptune);
-    }
-
-    .stat__label {
-      display: block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: rgba(253, 246, 229, 0.45);
-      margin-top: 8px;
-    }
-
-    /* ===== Constellation Diagram ===== */
-    .constellation { display: block; margin: 0 auto 72px; max-width: 500px; width: 100%; }
-
-    /* ===== Services ===== */
-    .services__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-    }
-
-    .service__card {
-      padding: 44px 32px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service__card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--neptune);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .service__card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .service__card:hover {
-      border-color: var(--border-hover);
-      box-shadow: var(--card-hover-shadow);
-    }
-
-    .service__icon {
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--neptune);
-      margin-bottom: 28px;
-    }
-
-    .service__card h3 {
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 12px;
-      color: var(--moon-dust);
-    }
-
-    .service__card p {
-      font-size: 0.925rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    /* ===== Team ===== */
-    .team__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-    }
-
-    .team__card {
-      text-align: center;
-      padding: 40px 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .team__card:hover {
-      border-color: var(--border-hover);
-      box-shadow: var(--card-hover-shadow);
-    }
-
-    .team__photo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: 0 auto 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(106, 143, 120, 0.1);
-      border: 1px solid rgba(106, 143, 120, 0.2);
-    }
-
-    .team__card h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 4px;
-      color: var(--moon-dust);
-    }
-
-    .team__role {
-      font-size: 0.8rem;
-      color: var(--neptune);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      display: block;
-      margin-bottom: 12px;
-    }
-
-    .team__card p {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ===== Testimonials ===== */
-    .testimonials__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .testimonial__card {
-      padding: 40px;
-      background: rgba(106, 143, 120, 0.06);
-      border: 1px solid rgba(106, 143, 120, 0.12);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .testimonial__card:hover {
-      background: rgba(106, 143, 120, 0.1);
-      border-color: rgba(106, 143, 120, 0.2);
-    }
-
-    .testimonial__quote {
-      font-size: 2rem;
-      color: var(--neptune);
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    .testimonial__text {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--moon-dust);
-      margin-bottom: 28px;
-      font-style: italic;
-    }
-
-    .testimonial__author strong {
-      display: block;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--moon-dust);
-    }
-
-    .testimonial__author span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    /* ===== Contact ===== */
-    .contact__grid {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 72px;
-      align-items: start;
-    }
-
-    .contact__item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 36px;
-    }
-
-    .contact__icon {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--neptune);
-      flex-shrink: 0;
-    }
-
-    .contact__item h4 {
-      font-size: 0.95rem;
-      font-weight: 500;
-      margin-bottom: 4px;
-      color: var(--moon-dust);
-    }
-
-    .contact__item p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .contact__form {
-      padding: 48px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-
-    .form__row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .form__group { margin-bottom: 24px; }
-
-    .form__group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .form__group input,
-    .form__group textarea {
-      width: 100%;
-      padding: 14px 16px;
-      font-size: 0.925rem;
-      font-family: inherit;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background-color: rgba(253, 246, 229, 0.03);
-      color: var(--moon-dust);
-      transition: all 0.25s ease;
-    }
-
-    .form__group input::placeholder,
-    .form__group textarea::placeholder {
-      color: var(--text-muted);
-    }
-
-    .form__group input:focus,
-    .form__group textarea:focus {
-      outline: none;
-      border-color: var(--neptune);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-      background-color: rgba(253, 246, 229, 0.05);
-    }
-
-    .form__group textarea { resize: vertical; }
-
-    /* ===== Footer ===== */
-    .footer {
-      background-color: var(--black-hole);
-      color: var(--text-muted);
-      padding: 72px 0 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer__grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(253, 246, 229, 0.06);
-    }
-
-    .footer__logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .footer__logo-text {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--moon-dust);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .footer__brand p { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
-
-    .footer__links h4 {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--moon-dust);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 24px;
-    }
-
-    .footer__links li { margin-bottom: 14px; }
-
-    .footer__links a {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      transition: color 0.25s;
-    }
-
-    .footer__links a:hover { color: var(--moon-dust); }
-
-    .footer__bottom {
-      padding: 28px 0;
-      text-align: center;
-      font-size: 0.8rem;
-      color: rgba(253, 246, 229, 0.2);
-    }
-
-    /* ===== Glow accent line ===== */
-    .glow-line {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--neptune), transparent);
-      opacity: 0.3;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 1024px) {
-      .services__grid { grid-template-columns: repeat(2, 1fr); }
-      .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
-      .team__grid { grid-template-columns: repeat(2, 1fr); }
-      .footer__grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      .about__grid, .services__grid, .testimonials__grid { grid-template-columns: 1fr; }
-      .team__grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .contact__grid { grid-template-columns: 1fr; gap: 40px; }
-      .form__row { grid-template-columns: 1fr; }
-      .footer__grid { grid-template-columns: 1fr; }
-      .section { padding: 80px 0; }
-      .hero { min-height: auto; padding: 140px 0 100px; }
-      .hero__buttons { flex-direction: column; }
-      .btn { width: 100%; text-align: center; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vega Companies — The New North Star</title>
+<meta name="description" content="Vega is a family of companies built over a decade on conviction, discipline, and a belief that the right partners can deliver extraordinary outcomes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000;--white:#fff;--off-white:#f4f1eb;--grey:#636058;--grey-label:#6e6c66;--grey-label-dark:#B0ACA3;--grey-on-dark:#9E9A90;--grey-rule:#E0DDD6;--grey-dark-rule:#222;--green:#6A8F78;--green-on-white:#4A7259;--font-mono:'Space Mono',monospace;--font-sans:'Inter',-apple-system,'Helvetica Neue',Helvetica,Arial,sans-serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--white);font-family:var(--font-sans);line-height:1.6;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--green-on-white);color:var(--white)}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.skip-link{position:absolute;top:-100%;left:16px;background:var(--green-on-white);color:var(--white);padding:12px 24px;z-index:9999;font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;transition:top .3s}
+.skip-link:focus{top:16px}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--grey-dark-rule);transition:background .4s,border-color .4s}
+header.nav-light{background:rgba(244,241,235,.92);border-bottom-color:var(--grey-rule)}
+header.nav-light .logo svg{fill:var(--black)}
+header.nav-light nav a{color:var(--black)}
+header.nav-light .nav-portal{color:var(--green-on-white)!important}
+.logo svg{height:20px;fill:var(--white);transition:fill .4s}
+.logo:hover{opacity:.6}
+nav ul{list-style:none;display:flex;gap:32px;align-items:center}
+nav a{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--white);transition:color .4s,opacity .25s}
+nav a:hover{opacity:.6}
+.nav-portal{color:var(--green)!important}
+
+/* VERTICAL LABELS */
+.label-v{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;position:absolute;left:-60px;top:0;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;padding-right:16px}
+.label-v::after{content:'';position:absolute;right:0;top:0;width:2px;height:24px}
+.label-v.light{color:var(--grey-label)}.label-v.light::after{background:var(--green-on-white)}
+.label-v.dark{color:var(--grey-label-dark)}.label-v.dark::after{background:var(--green)}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--black);color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 88px;position:relative;overflow:hidden}
+.hero-v{position:absolute;right:-3%;top:50%;transform:translateY(-50%);width:35vw;pointer-events:none;z-index:1;opacity:0}
+.hero-v.revealed{animation:iconIn 2s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes iconIn{from{opacity:0;transform:translateY(-50%) scale(.94)}to{opacity:1;transform:translateY(-50%) scale(1)}}
+.hero-line{position:absolute;bottom:0;left:48px;right:48px;height:1px;background:rgba(255,255,255,.2);transform:scaleX(0);transform-origin:left;animation:lineGrow 1.2s cubic-bezier(.16,1,.3,1) .8s forwards}
+@keyframes lineGrow{to{transform:scaleX(1)}}
+.hero h1{font-family:var(--font-sans);font-weight:300;font-size:clamp(48px,7vw,108px);line-height:1;letter-spacing:-.04em;max-width:800px;position:relative;z-index:2}
+.reveal-line{display:block;overflow:hidden}
+.reveal-line span{display:block;transform:translateY(110%);transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal-line.visible span{transform:translateY(0)}
+.reveal-line:nth-child(2) span{transition-delay:.08s}
+.hero-sub{margin-top:36px;display:flex;align-items:flex-start;gap:56px;position:relative;z-index:2;opacity:0;transform:translateY(16px);transition:opacity .8s .5s,transform .8s .5s}
+.hero-sub.visible{opacity:1;transform:translateY(0)}
+.hero-sub p{font-family:var(--font-sans);font-size:16px;line-height:1.75;color:var(--grey-label-dark);max-width:440px;font-weight:400}
+.hero-tag{font-family:var(--font-mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);white-space:nowrap;padding-top:4px;font-weight:700}
+.hero-pillars{margin-top:48px;position:relative;z-index:2;opacity:0;transform:translateY(12px);transition:opacity .8s .7s,transform .8s .7s}
+.hero-pillars.visible{opacity:1;transform:translateY(0)}
+.hero-pillars span{font-family:var(--font-mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey-on-dark);font-weight:500}
+.hero-pillars .sep{margin:0 16px;color:var(--green)}
+
+/* COMPANIES */
+.companies{padding:120px 48px;background:var(--off-white);color:#1a1a1a;scroll-margin-top:64px}
+.companies-inner{max-width:1100px;margin:0 auto;position:relative}
+.companies h2{font-family:var(--font-sans);font-weight:700;font-size:32px;line-height:1.3;letter-spacing:-.02em;color:#1a1a1a;margin-bottom:36px}
+.origins-text{max-width:600px;margin-bottom:80px}
+.origins-text p{font-family:var(--font-sans);font-size:15px;line-height:1.9;color:var(--grey);font-weight:400;margin-bottom:20px}
+.origins-text p:last-child{margin-bottom:0}
+.constellation-map{width:100%;margin-bottom:72px}
+.constellation-map svg{width:100%;height:auto;display:block}
+.details{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--grey-rule)}
+.detail-item{padding:32px 36px;border-right:1px solid var(--grey-rule);border-bottom:1px solid var(--grey-rule);transition:background .3s;cursor:pointer;position:relative;overflow:hidden}
+.detail-item:nth-child(2n){border-right:none}
+.detail-item:nth-last-child(-n+2){border-bottom:none}
+.detail-item:hover{background:rgba(255,255,255,.5)}
+.detail-item .accent-line{width:24px;height:2px;background:var(--green-on-white);margin-bottom:14px}
+.detail-item h3{font-family:var(--font-mono);font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px;letter-spacing:.02em}
+.detail-item p{font-family:var(--font-sans);font-size:14px;color:var(--grey);line-height:1.75;font-weight:400}
+.detail-item .coming-tag{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(244,241,235,.95);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;pointer-events:none}
+.detail-item .coming-tag span{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green-on-white);font-weight:500}
+.detail-item.show-coming .coming-tag{opacity:1}
+
+/* STATS */
+.stats-band{background:var(--black);color:var(--white);padding:0 48px;position:relative;overflow:hidden;scroll-margin-top:64px}
+.stats-light{position:absolute;inset:0;pointer-events:none;z-index:0;width:100%;height:100%}
+.stats-header{max-width:1100px;margin:0 auto;position:relative;z-index:1;padding:60px 32px 0}
+.stats-header-inner{position:relative}
+.stats-accent{width:24px;height:2px;background:var(--green);margin-bottom:16px}
+.stats-title{font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--grey-label-dark)}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.stat{padding:40px 32px 60px;border-right:1px solid var(--grey-dark-rule)}
+.stat:last-child{border-right:none}
+.stat-number{font-family:var(--font-sans);font-size:48px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px;color:var(--white)}
+.stat-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-label-dark);line-height:1.6;font-weight:500}
+
+/* LEADERSHIP */
+.leadership{background:var(--black);color:var(--white);padding:120px 48px;position:relative}
+.leadership-inner{max-width:1100px;margin:0 auto;position:relative}
+.leadership h2{font-family:var(--font-sans);font-weight:700;font-size:32px;line-height:1.3;letter-spacing:-.02em;margin-bottom:36px}
+.coming-soon{display:flex;align-items:center;justify-content:center;min-height:180px;border:1px solid var(--grey-dark-rule)}
+.coming-soon span{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-label-dark);font-weight:500}
+
+/* CONTACT */
+.cta{padding:120px 48px;background:var(--off-white);color:#1a1a1a;position:relative;scroll-margin-top:64px}
+.cta-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.cta h2{font-family:var(--font-sans);font-weight:700;font-size:32px;line-height:1.3;letter-spacing:-.02em;color:#1a1a1a;margin-bottom:48px;max-width:500px}
+.form{max-width:520px}
+.form .form-row{margin-bottom:28px}
+.form .form-row-half{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.form label{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);font-weight:500;margin-bottom:8px}
+.form input,.form select,.form textarea{width:100%;background:transparent;border:none;border-bottom:1px solid #ccc8be;padding:10px 0;font-family:var(--font-sans);font-size:15px;color:#1a1a1a;font-weight:400;outline:none;transition:border-color .3s;-webkit-appearance:none;border-radius:0}
+.form input:focus,.form select:focus,.form textarea:focus{border-bottom-color:var(--green-on-white)}
+.form input::placeholder,.form textarea::placeholder{color:#bbb7ad}
+.form textarea{resize:vertical;min-height:100px;line-height:1.6}
+.form select{cursor:pointer}
+.submit-row{display:flex;align-items:center;gap:24px;margin-top:8px}
+.submit-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background:none;border:1px solid var(--green-on-white);color:var(--green-on-white);cursor:pointer;padding:13px 28px;transition:all .3s;border-radius:0}
+.submit-btn:hover{background:var(--green-on-white);color:var(--white)}
+.submit-note{font-family:var(--font-sans);font-size:12px;color:#716d67}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--white);padding:48px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-upper{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:40px;border-bottom:1px solid var(--grey-dark-rule)}
+.footer-left{display:flex;align-items:flex-end;gap:20px}
+.footer-left .v-icon{height:28px;fill:var(--grey-on-dark)}
+.footer-left .linkedin{display:flex;align-items:center;color:var(--grey-on-dark);transition:color .3s}
+.footer-left .linkedin:hover{color:var(--white)}
+.footer-left .linkedin svg{width:16px;height:16px;fill:currentColor}
+.footer-nav{display:flex;gap:28px}
+.footer-nav a{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-on-dark);font-weight:500;transition:color .3s}
+.footer-nav a:hover{color:var(--white)}
+.footer-disclaimer{padding-top:32px;font-family:var(--font-sans);font-size:12px;line-height:1.8;color:#999;max-width:700px;font-weight:400}
+.footer-copy{margin-top:24px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:#999;font-weight:500}
+
+/* SCROLL REVEAL */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.fade-up:nth-child(2){transition-delay:.08s}
+.fade-up:nth-child(3){transition-delay:.16s}
+.fade-up:nth-child(4){transition-delay:.24s}
+
+/* HAMBURGER */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:101}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);margin:5px 0;transition:transform .3s,opacity .3s,background .4s}
+header.nav-light .hamburger span{background:var(--black)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* MOBILE NAV OVERLAY */
+.nav-overlay{display:none}
+
+/* ═══════════════════════════════════════════════ */
+/* TABLET — 1024px and below                      */
+/* ═══════════════════════════════════════════════ */
+@media(max-width:1024px){
+  .label-v{display:none}
+  .hero{padding:0 32px 72px}
+  .hero-line{left:32px;right:32px}
+  .hero-v{width:45vw;right:-5%}
+  .companies{padding:80px 32px}
+  .stats-band{padding:0 32px}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat{border-bottom:1px solid var(--grey-dark-rule)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(3){border-right:1px solid var(--grey-dark-rule)}
+  .stat:nth-child(4){border-right:none}
+  .stat:nth-last-child(-n+2){border-bottom:none}
+  .leadership{padding:80px 32px}
+  .cta{padding:80px 32px}
+  footer{padding:40px 32px}
+}
+
+/* ═══════════════════════════════════════════════ */
+/* TABLET PORTRAIT — 768px and below              */
+/* ═══════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* NAV — hamburger */
+  header{padding:0 24px;height:56px}
+  nav ul{display:none}
+  .hamburger{display:block}
+  .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:0}
+  .nav-overlay.open{display:flex}
+  .nav-overlay a{font-family:var(--font-mono);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--white);font-weight:500;padding:20px;display:block;transition:opacity .25s}
+  .nav-overlay a:hover{opacity:.6}
+  .nav-overlay .nav-portal{color:var(--green)!important}
+
+  /* HERO */
+  .hero{padding:0 24px 56px;min-height:100svh}
+  .hero-line{left:24px;right:24px}
+  .hero-v{width:60vw;right:-10%;opacity:.5}
+  .hero h1{font-size:clamp(40px,10vw,72px)}
+  .hero-sub{flex-direction:column;gap:16px;margin-top:28px}
+  .hero-sub p{font-size:15px;max-width:100%}
+  .hero-tag{padding-top:0}
+  .hero-pillars{margin-top:32px}
+  .hero-pillars span{font-size:10px;letter-spacing:.2em}
+  .hero-pillars .sep{margin:0 10px}
+
+  /* COMPANIES */
+  .companies{padding:64px 24px}
+  .companies h2{font-size:26px}
+  .origins-text{margin-bottom:48px}
+  .origins-text p{font-size:14px}
+  /* Constellation — scale text for mobile readability */
+  .constellation-map svg text{font-size:11px!important}
+  .details{grid-template-columns:1fr}
+  .detail-item{border-right:none!important;padding:24px 20px}
+  .detail-item:nth-last-child(-n+2){border-bottom:1px solid var(--grey-rule)}
+  .detail-item:last-child{border-bottom:none}
+
+  /* STATS */
+  .stats-band{padding:0 24px}
+  .stats-header{padding:48px 16px 0}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:28px 16px 40px}
+  .stat-number{font-size:36px}
+  .stat-label{font-size:10px}
+
+  /* LEADERSHIP */
+  .leadership{padding:64px 24px}
+  .leadership h2{font-size:26px}
+
+  /* CONTACT */
+  .cta{padding:64px 24px}
+  .cta h2{font-size:26px}
+  .form .form-row-half{grid-template-columns:1fr;gap:0}
+  .form .form-row-half>div{margin-bottom:28px}
+  .submit-row{flex-direction:column;align-items:flex-start;gap:12px}
+
+  /* FOOTER */
+  footer{padding:32px 24px}
+  .footer-upper{flex-direction:column;align-items:flex-start;gap:24px}
+  .footer-nav{flex-wrap:wrap;gap:16px}
+  .footer-nav a{font-size:10px}
+  .footer-disclaimer{font-size:11px}
+}
+
+/* ═══════════════════════════════════════════════ */
+/* MOBILE — 480px and below                       */
+/* ═══════════════════════════════════════════════ */
+@media(max-width:480px){
+  header{padding:0 16px}
+  .hero{padding:0 16px 40px}
+  .hero-line{left:16px;right:16px}
+  .hero-v{width:75vw;right:-15%}
+  .hero h1{font-size:clamp(36px,12vw,56px)}
+  .hero-sub p{font-size:14px}
+  .hero-pillars span{font-size:9px;letter-spacing:.15em}
+  .hero-pillars .sep{margin:0 6px}
+
+  .companies{padding:48px 16px}
+  .companies h2{font-size:22px}
+  .origins-text p{font-size:13px}
+  .constellation-map{margin-bottom:40px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .constellation-map svg{min-width:600px}
+
+  .stats-band{padding:0 16px}
+  .stats-header{padding:40px 8px 0}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .stat{padding:24px 12px 32px}
+  .stat-number{font-size:32px}
+  .stat-label{font-size:9px;letter-spacing:.08em}
+
+  .leadership{padding:48px 16px}
+  .cta{padding:48px 16px}
+  .cta h2{font-size:22px;max-width:100%}
+  .form label{font-size:11px}
+  .form input,.form select,.form textarea{font-size:16px}
+
+  footer{padding:24px 16px}
+  .footer-nav{gap:12px}
+  .footer-copy{font-size:10px}
+}
+</style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- Header -->
-  <header class="header">
-    <nav class="nav container">
-      <a href="#" class="nav__logo">
-        <svg width="36" height="36" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="logoGlow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          <!-- Constellation lines -->
-          <line x1="50" y1="12" x2="18" y2="50" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-          <line x1="50" y1="12" x2="82" y2="50" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-          <line x1="18" y1="50" x2="35" y2="88" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-          <line x1="82" y1="50" x2="65" y2="88" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-          <line x1="18" y1="50" x2="82" y2="50" stroke="#6A8F78" stroke-width="0.8" opacity="0.25"/>
-          <line x1="35" y1="88" x2="65" y2="88" stroke="#6A8F78" stroke-width="0.8" opacity="0.25"/>
-          <line x1="50" y1="12" x2="50" y2="50" stroke="#6A8F78" stroke-width="0.8" opacity="0.25"/>
-          <!-- Star dots -->
-          <circle cx="50" cy="12" r="3.5" fill="#6A8F78" filter="url(#logoGlow)"/>
-          <circle cx="18" cy="50" r="2.5" fill="#6A8F78" filter="url(#logoGlow)"/>
-          <circle cx="82" cy="50" r="2.5" fill="#6A8F78" filter="url(#logoGlow)"/>
-          <circle cx="35" cy="88" r="2.5" fill="#6A8F78" filter="url(#logoGlow)"/>
-          <circle cx="65" cy="88" r="2.5" fill="#6A8F78" filter="url(#logoGlow)"/>
-          <circle cx="50" cy="50" r="2" fill="#FDF6E5" opacity="0.6"/>
-        </svg>
-        <span class="nav__logo-text">Vega</span>
-      </a>
-      <ul class="nav__menu">
-        <li><a href="#home" class="nav__link active">Home</a></li>
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#services" class="nav__link">Business Units</a></li>
-        <li><a href="#team" class="nav__link">Team</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<header id="nav" role="banner">
+  <a href="/" class="logo" aria-label="Vega Companies home">
+    <svg viewBox="0 0 1602.14 586.87" aria-hidden="true"><polygon points="474.94 371.81 694.38 371.81 694.38 320.83 474.94 320.83 474.94 184.06 727.34 184.06 727.34 133.09 416.51 133.09 416.51 575.71 733.55 575.71 733.55 524.74 474.94 524.74 474.94 371.81"/><path d="M1441.79,133.12h-62.16l-169.15,442.55h62.82l51.03-135.47,18-51.03,67.08-183.39h1.3l63.46,183.39,18,51.03,47.27,135.47h62.69l-160.34-442.55Z"/><path d="M0,133.09h64.04l115.63,361.8h1.24l123.09-361.8h61.54l-157.28,442.62h-60.3L0,133.09Z"/><path d="M182.77,0c-8.8,61.66-27.56,110.27-51.34,133.09,23.79,22.82,42.54,71.43,51.34,133.09,8.8-61.66,27.56-110.27,51.34-133.09-23.79-22.82-42.54-71.43-51.34-133.09Z"/><path d="M965.68,381.82h137.75v129.49c-10.38,6.49-21.85,11.63-34.51,15.59-19.29,6.09-40.54,9.07-63.72,9.07-27.33,0-51.03-5.05-71.23-15.28-20.07-10.1-36.65-23.7-49.73-40.67-12.95-16.97-22.66-36.78-28.88-59.06-6.22-22.41-9.33-45.85-9.33-70.33s3.63-46.11,10.88-67.74c7.25-21.5,17.74-40.41,31.47-56.6,13.6-16.19,30.3-29.01,49.99-38.85,19.69-9.71,41.96-14.63,66.82-14.63,21.12,0,39.89,2.46,56.21,7.25,16.45,4.79,30.56,11.27,42.61,19.56,8.28,5.7,16.7,12.56,23.96,20.08l33.41-43.52c-9.45-8.81-21.11-16.84-29.14-21.76-18-11.01-37.68-18.52-59.31-24.09-21.5-5.7-44.17-8.42-67.74-8.42-35.62,0-67.22,6.73-94.8,20.2-27.58,13.47-50.9,31.21-69.94,53.1-19.04,22.02-33.42,46.88-43.13,74.6-9.84,27.84-14.63,55.95-14.63,84.57,0,34.45,5.05,65.92,15.15,94.54,10.23,28.49,24.87,53.1,44.17,73.56,19.29,20.59,42.74,36.39,70.2,47.66,27.58,11.14,58.54,16.71,92.99,16.71,31.09,0,65.15-2.59,92.73-12.95,2.48-.88,5.08-1.96,7.76-3.17h0c.16-.07.32-.14.48-.22.19-.09.38-.17.58-.26,16.42-7.43,35.61-19.49,51.54-35.86v-207.45h-192.61v54.86Z"/></svg>
+  </a>
+  <nav aria-label="Main navigation"><ul>
+    <li><a href="#companies">Our Companies</a></li>
+    <li><a href="#performance">Performance &amp; Leadership</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://vega.invportal.com/login" class="nav-portal" target="_blank" rel="noopener noreferrer">Investor Portal</a></li>
+  </ul></nav>
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <div class="container hero__content">
-      <span class="hero__tag">Vertically Integrated Real Estate</span>
-      <h1 class="hero__title">One platform across the full <span>real estate lifecycle</span></h1>
-      <p class="hero__subtitle">Vega is a vertically integrated real estate and investment platform — eight specialized business units operating as one to acquire, build, manage, and maximize asset value.</p>
-      <div class="hero__buttons">
-        <a href="#services" class="btn btn--primary">Our Business Units</a>
-        <a href="#contact" class="btn btn--outline">Get in Touch</a>
-      </div>
+<div class="nav-overlay" role="dialog" aria-label="Mobile navigation">
+  <a href="#companies">Our Companies</a>
+  <a href="#performance">Performance &amp; Leadership</a>
+  <a href="#contact">Contact</a>
+  <a href="https://vega.invportal.com/login" class="nav-portal" target="_blank" rel="noopener noreferrer">Investor Portal</a>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-label="Introduction">
+  <svg class="hero-v" viewBox="0 0 186.57 293.85" aria-hidden="true">
+    <defs>
+      <linearGradient id="hv_base" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff" stop-opacity=".20"/><stop offset="50%" stop-color="#fff" stop-opacity=".08"/><stop offset="100%" stop-color="#fff" stop-opacity=".03"/></linearGradient>
+      <radialGradient id="hv_spec" cx="25%" cy="18%" r="40%"><stop offset="0%" stop-color="#fff" stop-opacity=".35"/><stop offset="30%" stop-color="#fff" stop-opacity=".14"/><stop offset="65%" stop-color="#fff" stop-opacity=".04"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <radialGradient id="hv_refl" cx="60%" cy="88%" r="25%"><stop offset="0%" stop-color="#fff" stop-opacity=".07"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="url(#hv_base)"/>
+    <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="url(#hv_base)"/>
+    <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="url(#hv_spec)"/>
+    <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="url(#hv_spec)"/>
+    <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="url(#hv_refl)"/>
+    <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="url(#hv_refl)"/>
+  </svg>
+  <div class="hero-line" aria-hidden="true"></div>
+  <h1><span class="reveal-line"><span>The New</span></span><span class="reveal-line"><span>North Star</span></span></h1>
+  <div class="hero-sub">
+    <span class="hero-tag">Est. 2012</span>
+    <p>Built over a decade on conviction, discipline, and a belief that the right partners — aligned around the right principles — can deliver extraordinary outcomes.</p>
+  </div>
+  <div class="hero-pillars" aria-label="Core pillars">
+    <span>Performance</span><span class="sep" aria-hidden="true">|</span><span>Partnership</span><span class="sep" aria-hidden="true">|</span><span>Prosperity</span>
+  </div>
+</section>
+
+<!-- OUR COMPANIES -->
+<section class="companies" id="companies" aria-label="Our Companies">
+  <div class="companies-inner">
+    <span class="label-v light">Our Companies</span>
+    <h2 class="fade-up">One North Star. Diverse Paths.</h2>
+    <div class="origins-text fade-up">
+      <p>Since 2012, Vega has grown into a constellation of companies — each grounded in the same principles: execute with discipline, partner with conviction, and deliver consistent results. Across every company and every venture, we hold ourselves to a single standard: build something that lasts and create lasting value for the partners and communities we serve.</p>
+      <p>Our name comes from the Vega star, destined to once again become Earth's North Star as part of a predictable 26,000-year celestial cycle. The metaphor is simple: hold course, stay constant, perform. It's not just a name — it's how we think about every decision we make.</p>
     </div>
-  </section>
-
-  <div class="glow-line"></div>
-
-  <!-- About -->
-  <section class="section section--alt" id="about">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">About Us</span>
-        <div class="divider"></div>
-        <h2 class="section__title">A vertically integrated platform built for every stage of real estate</h2>
-        <p class="section__description">Vega unifies investment, development, construction, management, and brokerage under one roof — creating value at every point in the real estate lifecycle.</p>
-      </div>
-      <div class="about__grid">
-        <div class="about__card">
-          <div class="about__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <h3>Our Mission</h3>
-          <p>To deliver institutional-quality real estate outcomes through vertically integrated operations — from capital deployment and entitlement through construction, management, and disposition.</p>
-        </div>
-        <div class="about__card">
-          <div class="about__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h3>Our History</h3>
-          <p>Built from the ground up as an owner-operator, Vega has scaled into eight specialized business units spanning private equity, development, construction, brokerage, and asset management.</p>
-        </div>
-        <div class="about__card">
-          <div class="about__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Our Values</h3>
-          <p>Discipline, transparency, and alignment of interest drive every decision. We invest alongside our partners and operate with the rigor of institutional capital and the agility of an entrepreneurial team.</p>
-        </div>
-      </div>
-
-      <div class="stats">
-        <div class="stat">
-          <span class="stat__number">8</span>
-          <span class="stat__label">Business Units</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">1</span><span class="stat__suffix">B+</span>
-          <span class="stat__label">Assets Managed</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">50</span><span class="stat__suffix">+</span>
-          <span class="stat__label">Team Members</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">100</span><span class="stat__suffix">%</span>
-          <span class="stat__label">Vertically Integrated</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Business Units -->
-  <section class="section" id="services">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">What We Do</span>
-        <div class="divider"></div>
-        <h2 class="section__title">Our Business Units</h2>
-        <p class="section__description">Eight specialized platforms operating as one — spanning the full spectrum of real estate investment, development, construction, management, and brokerage.</p>
-      </div>
-
-      <!-- Constellation Diagram -->
-      <svg class="constellation" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <filter id="glowSoft">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        <!-- Connection lines from center to each node -->
-        <line x1="250" y1="250" x2="250" y2="80" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="370" y2="115" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="420" y2="250" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="370" y2="385" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="250" y2="420" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="130" y2="385" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="80" y2="250" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-        <line x1="250" y1="250" x2="130" y2="115" stroke="#6A8F78" stroke-width="0.75" opacity="0.35" filter="url(#glowSoft)"/>
-
-        <!-- Center node — VEGA -->
-        <circle cx="250" cy="250" r="6" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="250" y="246" text-anchor="middle" fill="#FDF6E5" font-size="13" font-weight="700" letter-spacing="3" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">VEGA</text>
-
-        <!-- Node 1: Assisted Living Mgmt (top center) -->
-        <circle cx="250" cy="80" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="250" y="60" text-anchor="middle" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Assisted Living</text>
-
-        <!-- Node 2: Builders (top right) -->
-        <circle cx="370" cy="115" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="390" y="103" text-anchor="start" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Builders</text>
-
-        <!-- Node 3: Capital Markets (right) -->
-        <circle cx="420" cy="250" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="440" y="254" text-anchor="start" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Capital Markets</text>
-
-        <!-- Node 4: Development (bottom right) -->
-        <circle cx="370" cy="385" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="390" y="397" text-anchor="start" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Development</text>
-
-        <!-- Node 5: Private Equity (bottom center) -->
-        <circle cx="250" cy="420" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="250" y="444" text-anchor="middle" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Private Equity</text>
-
-        <!-- Node 6: Property Management (bottom left) -->
-        <circle cx="130" cy="385" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="110" y="397" text-anchor="end" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Property Mgmt</text>
-
-        <!-- Node 7: Real Estate Brokerage (left) -->
-        <circle cx="80" cy="250" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="60" y="254" text-anchor="end" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Brokerage</text>
-
-        <!-- Node 8: Valuations (top left) -->
-        <circle cx="130" cy="115" r="3.5" fill="#6A8F78" filter="url(#glow)"/>
-        <text x="110" y="103" text-anchor="end" fill="#FDF6E5" font-size="9" font-family="'Akzidenz-Grotesk','Helvetica Neue',Helvetica,Arial,sans-serif">Valuations</text>
+    <div class="constellation-map fade-up" role="img" aria-label="Constellation diagram showing Vega's eight companies connected to a central star">
+      <svg viewBox="0 0 1100 560" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="starglow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4A7259" stop-opacity=".22"/><stop offset="40%" stop-color="#4A7259" stop-opacity=".08"/><stop offset="70%" stop-color="#4A7259" stop-opacity=".03"/><stop offset="100%" stop-color="#4A7259" stop-opacity="0"/></radialGradient><radialGradient id="starcore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6A8F78" stop-opacity=".30"/><stop offset="100%" stop-color="#4A7259" stop-opacity="0"/></radialGradient></defs>
+        <line x1="550" y1="167" x2="150" y2="90" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="340" y2="55" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="760" y2="55" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="950" y2="90" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="110" y2="390" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="330" y2="470" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="770" y2="470" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/><line x1="550" y1="167" x2="990" y2="390" stroke="#4A7259" stroke-opacity=".13" stroke-width="1"/>
+        <line x1="150" y1="90" x2="340" y2="55" stroke="#4A7259" stroke-opacity=".06" stroke-width="1"/><line x1="760" y1="55" x2="950" y2="90" stroke="#4A7259" stroke-opacity=".06" stroke-width="1"/><line x1="110" y1="390" x2="330" y2="470" stroke="#4A7259" stroke-opacity=".06" stroke-width="1"/><line x1="770" y1="470" x2="990" y2="390" stroke="#4A7259" stroke-opacity=".06" stroke-width="1"/><line x1="150" y1="90" x2="110" y2="390" stroke="#4A7259" stroke-opacity=".06" stroke-width="1"/><line x1="950" y1="90" x2="990" y2="390" stroke="#4A7259" stroke-opacity=".06" stroke-width="1"/>
+        <circle cx="550" cy="210" r="80" fill="url(#starglow)"/><circle cx="550" cy="175" r="35" fill="url(#starcore)"/>
+        <g transform="translate(511,138) scale(.42)"><path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="#4A7259" opacity=".9"/><path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="#4A7259" opacity=".4"/></g>
+        <circle cx="150" cy="90" r="3.5" fill="#4A7259" opacity=".55"/><text x="150" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">ASSISTED LIVING</text>
+        <circle cx="340" cy="55" r="3.5" fill="#4A7259" opacity=".55"/><text x="340" y="41" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">BUILDERS</text>
+        <circle cx="760" cy="55" r="3.5" fill="#4A7259" opacity=".55"/><text x="760" y="41" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">CAPITAL MARKETS</text>
+        <circle cx="950" cy="90" r="3.5" fill="#4A7259" opacity=".55"/><text x="950" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">DEVELOPMENT</text>
+        <circle cx="110" cy="390" r="3.5" fill="#4A7259" opacity=".55"/><text x="110" y="414" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">PRIVATE EQUITY</text>
+        <circle cx="330" cy="470" r="3.5" fill="#4A7259" opacity=".55"/><text x="330" y="494" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">PROPERTY MANAGEMENT</text>
+        <circle cx="770" cy="470" r="3.5" fill="#4A7259" opacity=".55"/><text x="770" y="494" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">REAL ESTATE BROKERAGE</text>
+        <circle cx="990" cy="390" r="3.5" fill="#4A7259" opacity=".55"/><text x="990" y="414" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6e6c66" font-weight="500">VALUATIONS</text>
       </svg>
-
-      <div class="services__grid">
-        <!-- 1. Assisted Living Management -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <h3>Assisted Living Management</h3>
-          <p>High-performance senior housing operations.</p>
-        </div>
-        <!-- 2. Builders -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 6V2"/><path d="M2 10h20"/><path d="M7 14h0"/><path d="M17 14h0"/></svg>
-          </div>
-          <h3>Builders</h3>
-          <p>General contracting and construction services.</p>
-        </div>
-        <!-- 3. Capital Markets -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <h3>Capital Markets</h3>
-          <p>Commercial debt brokerage and loan placement.</p>
-        </div>
-        <!-- 4. Development -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="16" rx="2"/><path d="M1 10h22"/><path d="M12 6v16"/><path d="M5 6V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2"/></svg>
-          </div>
-          <h3>Development</h3>
-          <p>Full-service entitlement and development platform.</p>
-        </div>
-        <!-- 5. Private Equity -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <h3>Private Equity</h3>
-          <p>Vertically integrated real estate investment platform.</p>
-        </div>
-        <!-- 6. Property Management -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"/><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M10 8h4"/><path d="M10 12h4"/><path d="M10 16h4"/></svg>
-          </div>
-          <h3>Property Management</h3>
-          <p>Full-service asset and property operations across multifamily and commercial portfolios.</p>
-        </div>
-        <!-- 7. Real Estate Brokerage -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-          </div>
-          <h3>Real Estate Brokerage</h3>
-          <p>Market-driven brokerage services from acquisition sourcing through disposition.</p>
-        </div>
-        <!-- 8. Valuations -->
-        <div class="service__card">
-          <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Valuations</h3>
-          <p>Institutional-grade commercial appraisals.</p>
-        </div>
-      </div>
     </div>
-  </section>
-
-  <div class="glow-line"></div>
-
-  <!-- Team -->
-  <section class="section section--alt" id="team">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Our Team</span>
-        <div class="divider"></div>
-        <h2 class="section__title">Meet the people behind our success</h2>
-        <p class="section__description">Our diverse team brings together decades of experience across industries and disciplines.</p>
-      </div>
-      <div class="team__grid">
-        <div class="team__card">
-          <div class="team__photo">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6A8F78" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <h3>Sarah Mitchell</h3>
-          <span class="team__role">Chief Executive Officer</span>
-          <p>15+ years leading transformative business initiatives across Fortune 500 companies.</p>
-        </div>
-        <div class="team__card">
-          <div class="team__photo">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6A8F78" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <h3>James Chen</h3>
-          <span class="team__role">Chief Technology Officer</span>
-          <p>Former tech lead specializing in scalable digital solutions and AI integration.</p>
-        </div>
-        <div class="team__card">
-          <div class="team__photo">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6A8F78" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <h3>Maria Rodriguez</h3>
-          <span class="team__role">Head of Strategy</span>
-          <p>MBA from Harvard with deep expertise in market analysis and corporate strategy.</p>
-        </div>
-        <div class="team__card">
-          <div class="team__photo">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6A8F78" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <h3>David Park</h3>
-          <span class="team__role">Head of Client Relations</span>
-          <p>Dedicated to building lasting partnerships and ensuring measurable client outcomes.</p>
-        </div>
-      </div>
+    <div class="details">
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Assisted Living Management</h3><p>High-performance senior housing operations — from clinical care and compliance to scalable third-party management.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Builders</h3><p>General contracting and construction services — vertically integrated for cost control, quality, and scalable delivery.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Capital Markets</h3><p>Commercial debt brokerage and loan placement — sourcing competitive financing solutions across asset classes.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Development</h3><p>A full-service entitlement and development platform — from project origination through delivery.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Private Equity</h3><p>A vertically integrated real estate investment platform — disciplined capital deployment, institutional asset management, and consistent investor returns.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Property Management</h3><p>Hands-on oversight of multifamily and commercial assets — from tenant relations and maintenance to financial reporting and operational efficiency.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Real Estate Brokerage</h3><p>Full-service commercial and residential brokerage — leveraging deep market knowledge to source, negotiate, and close transactions across asset classes.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
+      <div class="detail-item fade-up"><div class="accent-line"></div><h3>Valuations</h3><p>Institutional-grade commercial appraisals — built on accuracy, speed, and regulatory compliance.</p><div class="coming-tag"><span>Site Coming Soon</span></div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Testimonials -->
-  <section class="section" id="testimonials">
-    <div class="container">
-      <div class="section__header section__header--center">
-        <span class="section__tag">Testimonials</span>
-        <div class="divider" style="margin: 0 auto 28px;"></div>
-        <h2 class="section__title">What our clients say</h2>
+<!-- STATS -->
+<section class="stats-band" id="performance" aria-label="Performance metrics">
+  <svg class="stats-light" preserveAspectRatio="none" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><linearGradient id="sw" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff" stop-opacity=".06"/><stop offset="30%" stop-color="#fff" stop-opacity=".02"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient><linearGradient id="sb" x1="25%" y1="0%" x2="50%" y2="100%"><stop offset="0%" stop-color="#fff" stop-opacity="0"/><stop offset="40%" stop-color="#fff" stop-opacity=".04"/><stop offset="50%" stop-color="#fff" stop-opacity=".06"/><stop offset="60%" stop-color="#fff" stop-opacity=".04"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+    <rect width="1200" height="200" fill="url(#sw)"/><rect width="1200" height="200" fill="url(#sb)"/>
+  </svg>
+  <div class="stats-header"><div class="stats-header-inner">
+    <span class="label-v dark">Performance</span>
+    <div class="stats-accent"></div>
+    <div class="stats-title">A Disciplined Approach. Consistent Results.</div>
+  </div></div>
+  <div class="stats-inner">
+    <div class="stat fade-up"><div class="stat-number" data-target="10" data-suffix="+">0</div><div class="stat-label">Years of Operating History</div></div>
+    <div class="stat fade-up"><div class="stat-number" data-target="0" data-suffix="">0</div><div class="stat-label">Losses Across Entire Portfolio</div></div>
+    <div class="stat fade-up"><div class="stat-number" data-target="209" data-suffix="%">0</div><div class="stat-label">Avg Return on Disposed Assets</div></div>
+    <div class="stat fade-up"><div class="stat-number" data-prefix="~$" data-target="500" data-suffix="M">0</div><div class="stat-label">Assets Under Management</div></div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="leadership" aria-label="Leadership">
+  <div class="leadership-inner">
+    <span class="label-v dark">Leadership</span>
+    <h2 class="fade-up">Meet the Team.</h2>
+    <div class="coming-soon fade-up"><span>Coming Soon</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="cta" id="contact" aria-label="Contact">
+  <div class="cta-inner">
+    <span class="label-v light">Contact</span>
+    <h2 class="fade-up">Every Partnership Starts with a Conversation.</h2>
+    <form class="form fade-up" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contact form">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden" style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div class="form-row-half">
+        <div><label for="fname">First Name</label><input type="text" id="fname" name="fname" autocomplete="given-name" required></div>
+        <div><label for="lname">Last Name</label><input type="text" id="lname" name="lname" autocomplete="family-name" required></div>
       </div>
-      <div class="testimonials__grid">
-        <div class="testimonial__card">
-          <div class="testimonial__quote">"</div>
-          <p class="testimonial__text">Vega's vertically integrated approach meant our 200-unit multifamily project moved from acquisition to stabilized occupancy faster than anything we've done before. One team, one vision.</p>
-          <div class="testimonial__author">
-            <strong>Richard Caldwell</strong>
-            <span>LP Investor, Caldwell Family Office</span>
-          </div>
-        </div>
-        <div class="testimonial__card">
-          <div class="testimonial__quote">"</div>
-          <p class="testimonial__text">Their capital markets team secured financing terms we didn't think were possible, and the property management transition was seamless. Vega operates like an extension of our own team.</p>
-          <div class="testimonial__author">
-            <strong>Sandra Mejia</strong>
-            <span>Principal, Solana Development Group</span>
-          </div>
-        </div>
-        <div class="testimonial__card">
-          <div class="testimonial__quote">"</div>
-          <p class="testimonial__text">From valuation through disposition, Vega's brokerage and appraisal teams delivered institutional-grade work with real market insight. They maximized our exit in a challenging cycle.</p>
-          <div class="testimonial__author">
-            <strong>James Whitfield</strong>
-            <span>Managing Director, Ridgeline Equity Partners</span>
-          </div>
-        </div>
+      <div class="form-row-half">
+        <div><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+        <div><label for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
       </div>
+      <div class="form-row"><label for="dept">Department</label><select id="dept" name="dept" required><option value="">Select a department</option><option>Assisted Living Management</option><option>Builders</option><option>Capital Markets</option><option>Development</option><option>Private Equity</option><option>Property Management</option><option>Real Estate Brokerage</option><option>Valuations</option><option>General — Vega Companies</option></select></div>
+      <div class="form-row"><label for="message">Message</label><textarea id="message" name="message"></textarea></div>
+      <div class="submit-row"><button type="submit" class="submit-btn">Submit Inquiry</button><span class="submit-note">We typically respond within 1–2 business days.</span></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-upper">
+      <div class="footer-left">
+        <svg class="v-icon" viewBox="0 0 186.57 293.85" aria-hidden="true"><path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/><path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/></svg>
+        <a href="https://www.linkedin.com/company/vega-capital-partners-llc/" class="linkedin" aria-label="Vega Companies on LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="#companies">Our Companies</a><a href="#performance">Performance &amp; Leadership</a><a href="#contact">Contact</a><a href="https://vega.invportal.com/login" target="_blank" rel="noopener noreferrer">Investor Portal</a></nav>
     </div>
-  </section>
+    <p class="footer-disclaimer">Past performance does not predict future returns. All investments involve risk, including possible loss of capital. Nothing on this site constitutes an offer to sell or a solicitation to buy any security.</p>
+    <p class="footer-copy">&copy; 2026 Vega Companies. All rights reserved.</p>
+  </div>
+</footer>
 
-  <div class="glow-line"></div>
-
-  <!-- Contact -->
-  <section class="section section--alt" id="contact">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Contact</span>
-        <div class="divider"></div>
-        <h2 class="section__title">Let's start a conversation</h2>
-        <p class="section__description">Ready to take your business to the next level? Reach out and let's discuss how we can help.</p>
-      </div>
-      <div class="contact__grid">
-        <div class="contact__info">
-          <div class="contact__item">
-            <div class="contact__icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <h4>Office</h4>
-              <p>123 Business Ave, Suite 400<br>New York, NY 10001</p>
-            </div>
-          </div>
-          <div class="contact__item">
-            <div class="contact__icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <h4>Email</h4>
-              <p>info@companyname.com</p>
-            </div>
-          </div>
-          <div class="contact__item">
-            <div class="contact__icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div>
-              <h4>Phone</h4>
-              <p>(555) 123-4567</p>
-            </div>
-          </div>
-        </div>
-        <form class="contact__form">
-          <div class="form__row">
-            <div class="form__group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" placeholder="John Doe">
-            </div>
-            <div class="form__group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" placeholder="john@example.com">
-            </div>
-          </div>
-          <div class="form__group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" placeholder="How can we help?">
-          </div>
-          <div class="form__group">
-            <label for="message">Message</label>
-            <textarea id="message" rows="5" placeholder="Tell us about your project..."></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="#" class="footer__logo">
-            <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <line x1="50" y1="12" x2="18" y2="50" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-              <line x1="50" y1="12" x2="82" y2="50" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-              <line x1="18" y1="50" x2="35" y2="88" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-              <line x1="82" y1="50" x2="65" y2="88" stroke="#6A8F78" stroke-width="1.2" opacity="0.5"/>
-              <circle cx="50" cy="12" r="4" fill="#6A8F78"/>
-              <circle cx="18" cy="50" r="3" fill="#6A8F78"/>
-              <circle cx="82" cy="50" r="3" fill="#6A8F78"/>
-              <circle cx="35" cy="88" r="3" fill="#6A8F78"/>
-              <circle cx="65" cy="88" r="3" fill="#6A8F78"/>
-            </svg>
-            <span class="footer__logo-text">Vega</span>
-          </a>
-          <p>A vertically integrated real estate and investment platform — eight business units operating as one across the full asset lifecycle.</p>
-        </div>
-        <div class="footer__links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Business Units</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer__links">
-          <h4>Business Units</h4>
-          <ul>
-            <li><a href="#services">Private Equity</a></li>
-            <li><a href="#services">Development</a></li>
-            <li><a href="#services">Capital Markets</a></li>
-            <li><a href="#services">Property Management</a></li>
-          </ul>
-        </div>
-        <div class="footer__links">
-          <h4>Connect</h4>
-          <ul>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Instagram</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p>&copy; 2026 Vega. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
+<script>
+window.addEventListener('load',()=>{document.querySelector('.hero-v')?.classList.add('revealed');setTimeout(()=>{document.querySelectorAll('.reveal-line').forEach(el=>el.classList.add('visible'))},300);setTimeout(()=>{document.querySelector('.hero-sub')?.classList.add('visible');document.querySelector('.hero-pillars')?.classList.add('visible')},400)});
+const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target)}})},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+const hdr=document.getElementById('nav'),lSec=document.querySelectorAll('.companies,.cta');
+function upNav(){const s=window.scrollY+40;let l=false;lSec.forEach(sec=>{const t=sec.offsetTop,b=t+sec.offsetHeight;if(s>=t&&s<b)l=true});hdr.classList.toggle('nav-light',l)}
+window.addEventListener('scroll',upNav,{passive:true});upNav();
+const sObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){const el=en.target,t=parseInt(el.dataset.target),p=el.dataset.prefix||'',x=el.dataset.suffix||'',d=1200,st=performance.now();function tick(n){const pr=Math.min((n-st)/d,1),ea=1-Math.pow(1-pr,3),c=Math.round(t*ea);el.textContent=p+c+x;if(pr<1)requestAnimationFrame(tick)}requestAnimationFrame(tick);sObs.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll('.stat-number[data-target]').forEach(el=>sObs.observe(el));
+/* Hamburger toggle */
+const burger=document.querySelector('.hamburger'),overlay=document.querySelector('.nav-overlay');
+burger?.addEventListener('click',()=>{const o=burger.classList.toggle('open');overlay.classList.toggle('open');burger.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});overlay?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
+document.querySelectorAll('.detail-item').forEach(item=>{let t;item.addEventListener('click',()=>{item.classList.add('show-coming');clearTimeout(t);t=setTimeout(()=>item.classList.remove('show-coming'),2000)})});
+burger?.addEventListener('click',()=>{const open=burger.classList.toggle('open');overlay.classList.toggle('open');burger.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':''});
+overlay?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
+</script>
 </body>
 </html>
