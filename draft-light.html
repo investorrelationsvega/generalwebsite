@@ -317,10 +317,13 @@
       margin-top: 8px;
     }
 
+    /* ===== Constellation Diagram ===== */
+    .constellation { display: block; margin: 0 auto 72px; max-width: 500px; width: 100%; }
+
     /* ===== Services ===== */
     .services__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 28px;
     }
 
@@ -593,13 +596,15 @@
 
     /* ===== Responsive ===== */
     @media (max-width: 1024px) {
-      .services__grid, .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
       .team__grid { grid-template-columns: repeat(2, 1fr); }
       .footer__grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
-      .about__grid, .services__grid, .testimonials__grid { grid-template-columns: 1fr; }
+      .about__grid, .testimonials__grid { grid-template-columns: 1fr; }
+      .services__grid { grid-template-columns: 1fr; }
       .team__grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
       .stats { grid-template-columns: repeat(2, 1fr); }
       .contact__grid { grid-template-columns: 1fr; gap: 40px; }
@@ -621,7 +626,7 @@
       <ul class="nav__menu">
         <li><a href="#home" class="nav__link active">Home</a></li>
         <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#services" class="nav__link">Services</a></li>
+        <li><a href="#services" class="nav__link">Business Units</a></li>
         <li><a href="#team" class="nav__link">Team</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
       </ul>
@@ -632,10 +637,10 @@
   <section class="hero" id="home">
     <div class="container hero__content">
       <span class="hero__tag">Welcome to Vega</span>
-      <h1 class="hero__title">Building the future of your business</h1>
-      <p class="hero__subtitle">We deliver innovative solutions that drive growth, streamline operations, and position your company for long-term success.</p>
+      <h1 class="hero__title">A vertically integrated real estate and investment platform</h1>
+      <p class="hero__subtitle">Eight specialized business units working in concert — from acquisition and development to management and disposition — delivering institutional-grade results across every stage of the real estate lifecycle.</p>
       <div class="hero__buttons">
-        <a href="#services" class="btn btn--primary">Our Services</a>
+        <a href="#services" class="btn btn--primary">Our Business Units</a>
         <a href="#contact" class="btn btn--outline">Get in Touch</a>
       </div>
     </div>
@@ -647,8 +652,8 @@
       <div class="section__header">
         <span class="section__tag">About Us</span>
         <div class="divider"></div>
-        <h2 class="section__title">We help businesses thrive in a changing world</h2>
-        <p class="section__description">With over a decade of experience, we combine strategic insight with hands-on execution to deliver results that matter.</p>
+        <h2 class="section__title">Integrated expertise across the real estate lifecycle</h2>
+        <p class="section__description">Vega operates eight specialized business units under one platform, combining deep market knowledge with operational discipline to create value at every stage of real estate investment and management.</p>
       </div>
       <div class="about__grid">
         <div class="about__card">
@@ -656,21 +661,21 @@
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
           <h3>Our Mission</h3>
-          <p>To empower organizations with the tools, strategies, and support they need to achieve sustainable growth and competitive advantage.</p>
+          <p>To deliver institutional-grade real estate services through a vertically integrated platform — maximizing value for investors, owners, and communities across every asset class.</p>
         </div>
         <div class="about__card">
           <div class="about__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <h3>Our History</h3>
-          <p>Founded in 2012, we've grown from a small consultancy to a full-service firm trusted by hundreds of clients across industries.</p>
+          <p>Built from the ground up as an owner-operator platform, Vega has grown into a diversified real estate enterprise spanning development, investment, brokerage, and management.</p>
         </div>
         <div class="about__card">
           <div class="about__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <h3>Our Values</h3>
-          <p>Integrity, innovation, and client focus guide everything we do. We believe in building lasting partnerships based on trust and results.</p>
+          <p>Discipline, transparency, and long-term thinking guide every decision. We align our interests with our partners and believe that vertical integration creates a durable competitive advantage.</p>
         </div>
       </div>
 
@@ -695,57 +700,131 @@
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- Business Units -->
   <section class="section section--cream" id="services">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">What We Do</span>
         <div class="divider"></div>
-        <h2 class="section__title">Services tailored to your needs</h2>
-        <p class="section__description">From strategy to execution, we offer a comprehensive suite of services designed to address your most pressing business challenges.</p>
+        <h2 class="section__title">Our Business Units</h2>
+        <p class="section__description">Eight specialized divisions operating under one vertically integrated platform, spanning every stage of the real estate lifecycle.</p>
       </div>
+
+      <!-- Constellation Diagram -->
+      <svg class="constellation" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connecting lines from center to each node -->
+        <line x1="250" y1="250" x2="250" y2="68" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="378" y2="103" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="432" y2="250" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="378" y2="397" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="250" y2="432" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="122" y2="397" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="68" y2="250" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+        <line x1="250" y1="250" x2="122" y2="103" stroke="#6A8F78" stroke-width="1" opacity="0.4"/>
+
+        <!-- Center node -->
+        <circle cx="250" cy="250" r="6" fill="#27474D"/>
+        <text x="250" y="254" text-anchor="middle" font-size="14" font-weight="700" fill="#27474D" letter-spacing="3">VEGA</text>
+
+        <!-- Outer ring - subtle -->
+        <circle cx="250" cy="250" r="182" fill="none" stroke="#6A8F78" stroke-width="0.5" opacity="0.15"/>
+
+        <!-- Node dots -->
+        <circle cx="250" cy="68" r="4" fill="#6A8F78"/>
+        <circle cx="378" cy="103" r="4" fill="#6A8F78"/>
+        <circle cx="432" cy="250" r="4" fill="#6A8F78"/>
+        <circle cx="378" cy="397" r="4" fill="#6A8F78"/>
+        <circle cx="250" cy="432" r="4" fill="#6A8F78"/>
+        <circle cx="122" cy="397" r="4" fill="#6A8F78"/>
+        <circle cx="68" cy="250" r="4" fill="#6A8F78"/>
+        <circle cx="122" cy="103" r="4" fill="#6A8F78"/>
+
+        <!-- Labels -->
+        <text x="250" y="50" text-anchor="middle" font-size="11" fill="#27474D" font-weight="500">Assisted Living</text>
+        <text x="250" y="62" text-anchor="middle" font-size="9" fill="#566F69">Management</text>
+
+        <text x="400" y="90" text-anchor="start" font-size="11" fill="#27474D" font-weight="500">Builders</text>
+
+        <text x="448" y="247" text-anchor="start" font-size="11" fill="#27474D" font-weight="500">Capital</text>
+        <text x="448" y="259" text-anchor="start" font-size="9" fill="#566F69">Markets</text>
+
+        <text x="400" y="412" text-anchor="start" font-size="11" fill="#27474D" font-weight="500">Development</text>
+
+        <text x="250" y="458" text-anchor="middle" font-size="11" fill="#27474D" font-weight="500">Private Equity</text>
+
+        <text x="100" y="412" text-anchor="end" font-size="11" fill="#27474D" font-weight="500">Property</text>
+        <text x="100" y="424" text-anchor="end" font-size="9" fill="#566F69">Management</text>
+
+        <text x="52" y="247" text-anchor="end" font-size="11" fill="#27474D" font-weight="500">Real Estate</text>
+        <text x="52" y="259" text-anchor="end" font-size="9" fill="#566F69">Brokerage</text>
+
+        <text x="100" y="90" text-anchor="end" font-size="11" fill="#27474D" font-weight="500">Valuations</text>
+      </svg>
+
       <div class="services__grid">
+        <!-- 1. Assisted Living Management -->
         <div class="service__card">
           <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
-          <h3>Strategic Consulting</h3>
-          <p>Data-driven strategies that align with your goals and position your business for sustainable growth.</p>
+          <h3>Assisted Living Management</h3>
+          <p>High-performance senior housing operations.</p>
         </div>
+        <!-- 2. Builders -->
         <div class="service__card">
           <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="12" width="6" height="10"/><rect x="9" y="8" width="6" height="14"/><rect x="17" y="4" width="6" height="18"/></svg>
           </div>
-          <h3>Digital Transformation</h3>
-          <p>Modernize your operations with cutting-edge technology that improves efficiency and customer experiences.</p>
+          <h3>Builders</h3>
+          <p>General contracting and construction services.</p>
         </div>
+        <!-- 3. Capital Markets -->
         <div class="service__card">
           <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
-          <h3>Market Analysis</h3>
-          <p>Comprehensive research and competitive analysis to identify opportunities and make informed decisions.</p>
+          <h3>Capital Markets</h3>
+          <p>Commercial debt brokerage and loan placement.</p>
         </div>
+        <!-- 4. Development -->
         <div class="service__card">
           <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
           </div>
-          <h3>Risk Management</h3>
-          <p>Proactive risk assessment and mitigation strategies that protect your assets and bottom line.</p>
+          <h3>Development</h3>
+          <p>Full-service entitlement and development platform.</p>
         </div>
+        <!-- 5. Private Equity -->
         <div class="service__card">
           <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </div>
-          <h3>Talent Development</h3>
-          <p>Build high-performing teams through leadership training, organizational design, and talent programs.</p>
+          <h3>Private Equity</h3>
+          <p>Vertically integrated real estate investment platform.</p>
         </div>
+        <!-- 6. Property Management -->
         <div class="service__card">
           <div class="service__icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
           </div>
-          <h3>Global Expansion</h3>
-          <p>Navigate international markets with cross-border expertise, from market entry to regulatory compliance.</p>
+          <h3>Property Management</h3>
+          <p>Full-service asset and property operations across multifamily and commercial portfolios.</p>
+        </div>
+        <!-- 7. Real Estate Brokerage -->
+        <div class="service__card">
+          <div class="service__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3>Real Estate Brokerage</h3>
+          <p>Market-driven brokerage services from acquisition sourcing through disposition.</p>
+        </div>
+        <!-- 8. Valuations -->
+        <div class="service__card">
+          <div class="service__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Valuations</h3>
+          <p>Institutional-grade commercial appraisals.</p>
         </div>
       </div>
     </div>
@@ -807,24 +886,24 @@
       </div>
       <div class="testimonials__grid">
         <div class="testimonial__card">
-          <p class="testimonial__text">"Their strategic guidance helped us increase revenue by 40% in just one year. The team's dedication and expertise are unmatched."</p>
+          <p class="testimonial__text">"Vega's vertically integrated approach gave us a single point of accountability from acquisition through stabilization. The capital markets team secured financing we didn't think was possible."</p>
           <div class="testimonial__author">
-            <strong>Emily Watson</strong>
-            <span>CEO, TechVentures Inc.</span>
+            <strong>Richard Ames</strong>
+            <span>Managing Partner, Crestpoint Investors</span>
           </div>
         </div>
         <div class="testimonial__card">
-          <p class="testimonial__text">"The digital transformation project was flawless. Our operations are now 3x more efficient, and our customers love the new experience."</p>
+          <p class="testimonial__text">"From entitlement through construction closeout, the development and builders teams operated as one unit. They delivered our 240-unit project on time and under budget."</p>
           <div class="testimonial__author">
-            <strong>Michael Torres</strong>
-            <span>COO, Greenfield Industries</span>
+            <strong>Karen Ochoa</strong>
+            <span>Principal, Sagebrush Development Co.</span>
           </div>
         </div>
         <div class="testimonial__card">
-          <p class="testimonial__text">"They didn't just consult — they became a true partner. Their market analysis helped us pivot into a space that doubled our growth."</p>
+          <p class="testimonial__text">"Their brokerage and valuations teams gave us a clear-eyed view of the market. We made our disposition decision with total confidence — and achieved pricing above our pro forma."</p>
           <div class="testimonial__author">
-            <strong>Lisa Chang</strong>
-            <span>Founder, NovaBridge Capital</span>
+            <strong>Daniel Whitford</strong>
+            <span>Director of Acquisitions, Meridian Property Trust</span>
           </div>
         </div>
       </div>
@@ -901,25 +980,25 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <a href="#" class="footer__logo">Vega</a>
-          <p>Innovative business solutions that drive growth and deliver lasting results.</p>
+          <p>A vertically integrated real estate and investment platform spanning development, construction, brokerage, and management.</p>
         </div>
         <div class="footer__links">
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="#services">Business Units</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer__links">
-          <h4>Services</h4>
+          <h4>Business Units</h4>
           <ul>
-            <li><a href="#services">Strategic Consulting</a></li>
-            <li><a href="#services">Digital Transformation</a></li>
-            <li><a href="#services">Market Analysis</a></li>
-            <li><a href="#services">Risk Management</a></li>
+            <li><a href="#services">Private Equity</a></li>
+            <li><a href="#services">Development</a></li>
+            <li><a href="#services">Capital Markets</a></li>
+            <li><a href="#services">Property Management</a></li>
           </ul>
         </div>
         <div class="footer__links">
