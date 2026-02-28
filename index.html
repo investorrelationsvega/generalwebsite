@@ -225,7 +225,7 @@ header.nav-light .hamburger span{background:var(--black)}
   /* CONTACT */
   .cta{padding:64px 24px}
   .cta h2{font-size:26px}
-  .form .form-row-half{grid-template-columns:1fr;gap:0}
+  .form .form-row-half{grid-template-columns:1fr;gap:0
   .form .form-row-half>div{margin-bottom:28px}
   .submit-row{flex-direction:column;align-items:flex-start;gap:12px}
 
@@ -448,8 +448,6 @@ document.querySelectorAll('.stat-number[data-target]').forEach(el=>sObs.observe(
 const burger=document.querySelector('.hamburger'),overlay=document.querySelector('.nav-overlay');
 burger?.addEventListener('click',()=>{const o=burger.classList.toggle('open');overlay.classList.toggle('open');burger.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});overlay?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
 document.querySelectorAll('.detail-item').forEach(item=>{let t;item.addEventListener('click',()=>{item.classList.add('show-coming');clearTimeout(t);t=setTimeout(()=>item.classList.remove('show-coming'),2000)})});
-burger?.addEventListener('click',()=>{const open=burger.classList.toggle('open');overlay.classList.toggle('open');burger.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':''});
-overlay?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
 </script>
 </body>
 </html>
