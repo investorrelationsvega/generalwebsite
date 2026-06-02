@@ -413,7 +413,7 @@ header.nav-light .hamburger span{background:var(--black)}
       </div>
       <div class="form-row-half">
         <div><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required></div>
-        <div><label for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+        <div><label for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(xxx) xxx-xxxx" maxlength="14"></div>
       </div>
       <div class="form-row"><label for="dept">Department</label><select id="dept" name="dept" required><option value="">Select a department</option><option>Assisted Living Management</option><option>Builders</option><option>Capital Markets</option><option>Development</option><option>Private Equity</option><option>Property Management</option><option>Real Estate Brokerage</option><option>Valuations</option><option>General — Vega Companies</option></select></div>
       <div class="form-row"><label for="message">Message</label><textarea id="message" name="message"></textarea></div>
@@ -454,6 +454,9 @@ document.querySelectorAll('.stat-number[data-target]').forEach(el=>sObs.observe(
 const burger=document.querySelector('.hamburger'),overlay=document.querySelector('.nav-overlay');
 burger?.addEventListener('click',()=>{const o=burger.classList.toggle('open');overlay.classList.toggle('open');burger.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});overlay?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
 document.querySelectorAll('.detail-item').forEach(item=>{let t;item.addEventListener('click',()=>{item.classList.add('show-coming');clearTimeout(t);t=setTimeout(()=>item.classList.remove('show-coming'),2000)})});
+/* Phone auto-format (xxx) xxx-xxxx */
+const ph=document.getElementById('phone');
+ph?.addEventListener('input',function(){const d=this.value.replace(/\D/g,'').substring(0,10),l=d.length;this.value=l===0?'':l<=3?'('+d:l<=6?'('+d.slice(0,3)+') '+d.slice(3):'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6)});
 /* Cross-domain form submit to Netlify */
 const cForm=document.getElementById('contact-form');
 cForm?.addEventListener('submit',async function(e){e.preventDefault();const btn=cForm.querySelector('.submit-btn'),err=document.getElementById('form-error'),suc=document.getElementById('form-success');btn.disabled=true;btn.textContent='Sending...';err.style.display='none';try{await fetch('https://vegareiwebsite.netlify.app/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(cForm)).toString()});cForm.querySelectorAll('input:not([type=hidden]),select,textarea,button,.submit-note,.form-row,.form-row-half').forEach(el=>el.style.display='none');suc.style.display='block'}catch(ex){err.style.display='block';btn.disabled=false;btn.textContent='Submit Inquiry'}});
