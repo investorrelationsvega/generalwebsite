@@ -405,9 +405,8 @@ header.nav-light .hamburger span{background:var(--black)}
   <div class="cta-inner">
     <span class="label-v light">Contact</span>
     <h2 class="fade-up">Every Partnership Starts with a Conversation.</h2>
-    <form class="form fade-up" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contact form">
+    <form class="form fade-up" id="contact-form" name="contact" method="POST" action="https://vegareiwebsite.netlify.app/" aria-label="Contact form">
       <input type="hidden" name="form-name" value="contact">
-      <p class="hidden" style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-row-half">
         <div><label for="fname">First Name</label><input type="text" id="fname" name="fname" autocomplete="given-name" required></div>
         <div><label for="lname">Last Name</label><input type="text" id="lname" name="lname" autocomplete="family-name" required></div>
@@ -419,6 +418,8 @@ header.nav-light .hamburger span{background:var(--black)}
       <div class="form-row"><label for="dept">Department</label><select id="dept" name="dept" required><option value="">Select a department</option><option>Assisted Living Management</option><option>Builders</option><option>Capital Markets</option><option>Development</option><option>Private Equity</option><option>Property Management</option><option>Real Estate Brokerage</option><option>Valuations</option><option>General — Vega Companies</option></select></div>
       <div class="form-row"><label for="message">Message</label><textarea id="message" name="message"></textarea></div>
       <div class="submit-row"><button type="submit" class="submit-btn">Submit Inquiry</button><span class="submit-note">We typically respond within 1–2 business days.</span></div>
+      <div id="form-success" style="display:none;text-align:center;padding:3rem 0"><h3 style="color:var(--green);margin-bottom:.5rem">Thank you.</h3><p style="color:var(--mid)">Your inquiry has been received. We typically respond within 1–2 business days.</p></div>
+      <div id="form-error" style="display:none;text-align:center;padding:1rem 0;color:#c0392b">Something went wrong. Please try again.</div>
     </form>
   </div>
 </section>
@@ -453,6 +454,9 @@ document.querySelectorAll('.stat-number[data-target]').forEach(el=>sObs.observe(
 const burger=document.querySelector('.hamburger'),overlay=document.querySelector('.nav-overlay');
 burger?.addEventListener('click',()=>{const o=burger.classList.toggle('open');overlay.classList.toggle('open');burger.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});overlay?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');overlay.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}));
 document.querySelectorAll('.detail-item').forEach(item=>{let t;item.addEventListener('click',()=>{item.classList.add('show-coming');clearTimeout(t);t=setTimeout(()=>item.classList.remove('show-coming'),2000)})});
+/* Cross-domain form submit to Netlify */
+const cForm=document.getElementById('contact-form');
+cForm?.addEventListener('submit',function(e){e.preventDefault();const btn=cForm.querySelector('.submit-btn'),err=document.getElementById('form-error'),suc=document.getElementById('form-success');btn.disabled=true;btn.textContent='Sending...';err.style.display='none';fetch('https://vegareiwebsite.netlify.app/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(cForm)).toString()}).then(r=>{if(!r.ok)throw new Error(r.status);cForm.querySelectorAll('input:not([type=hidden]),select,textarea,button,.submit-note').forEach(el=>el.style.display='none');suc.style.display='block'}).catch(()=>{err.style.display='block';btn.disabled=false;btn.textContent='Submit Inquiry'})});
 </script>
 </body>
 </html>
