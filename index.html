@@ -120,6 +120,7 @@ nav a:hover{opacity:.6}
 .submit-btn{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background:none;border:1px solid var(--green-on-white);color:var(--green-on-white);cursor:pointer;padding:13px 28px;transition:all .3s;border-radius:0}
 .submit-btn:hover{background:var(--green-on-white);color:var(--white)}
 .submit-note{font-family:var(--font-sans);font-size:12px;color:#716d67}
+.hp-field{display:none}
 
 /* FOOTER */
 footer{background:var(--black);color:var(--white);padding:48px}
@@ -405,8 +406,8 @@ header.nav-light .hamburger span{background:var(--black)}
   <div class="cta-inner">
     <span class="label-v light">Contact</span>
     <h2 class="fade-up">Every Partnership Starts with a Conversation.</h2>
-    <form class="form fade-up" id="contact-form" name="contact" method="POST" action="https://vegareiwebsite.netlify.app/" aria-label="Contact form">
-      <input type="hidden" name="form-name" value="contact">
+    <form class="form fade-up" id="contact-form" aria-label="Contact form">
+      <div class="hp-field"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
       <div class="form-row-half">
         <div><label for="fname">First Name</label><input type="text" id="fname" name="fname" autocomplete="given-name" required></div>
         <div><label for="lname">Last Name</label><input type="text" id="lname" name="lname" autocomplete="family-name" required></div>
@@ -457,9 +458,9 @@ document.querySelectorAll('.detail-item').forEach(item=>{let t;item.addEventList
 /* Phone auto-format (xxx) xxx-xxxx */
 const ph=document.getElementById('phone');
 ph?.addEventListener('input',function(){const d=this.value.replace(/\D/g,'').substring(0,10),l=d.length;this.value=l===0?'':l<=3?'('+d:l<=6?'('+d.slice(0,3)+') '+d.slice(3):'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6)});
-/* Cross-domain form submit to Netlify */
+/* Form submit to Cloudflare Pages Function */
 const cForm=document.getElementById('contact-form');
-cForm?.addEventListener('submit',async function(e){e.preventDefault();const btn=cForm.querySelector('.submit-btn'),err=document.getElementById('form-error'),suc=document.getElementById('form-success');btn.disabled=true;btn.textContent='Sending...';err.style.display='none';try{await fetch('https://vegareiwebsite.netlify.app/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(cForm)).toString()});cForm.querySelectorAll('input:not([type=hidden]),select,textarea,button,.submit-note,.form-row,.form-row-half').forEach(el=>el.style.display='none');suc.style.display='block'}catch(ex){err.style.display='block';btn.disabled=false;btn.textContent='Submit Inquiry'}});
+cForm?.addEventListener('submit',async function(e){e.preventDefault();const btn=cForm.querySelector('.submit-btn'),err=document.getElementById('form-error'),suc=document.getElementById('form-success');btn.disabled=true;btn.textContent='Sending...';err.style.display='none';try{const fd=Object.fromEntries(new FormData(cForm));const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fd)});const j=await r.json();if(!j.ok)throw new Error(j.error||'Submission failed');cForm.querySelectorAll('input,select,textarea,button,.submit-note,.form-row,.form-row-half,.hp-field').forEach(el=>el.style.display='none');suc.style.display='block'}catch(ex){err.style.display='block';btn.disabled=false;btn.textContent='Submit Inquiry'}});
 </script>
 </body>
 </html>
