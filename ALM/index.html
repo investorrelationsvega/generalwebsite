@@ -573,52 +573,18 @@ body {
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: 12px;
   cursor: pointer;
   flex-shrink: 0;
 }
 
-.nav__mark {
-  width: 20px;
-  height: auto;
-  color: var(--text-heading);
-  transition: color var(--dur-theme) var(--ease-standard);
+.nav__logo-img {
+  height: 48px;
+  width: auto;
+  transition: filter var(--dur-theme) var(--ease-standard);
 }
 
-.nav[data-theme="dark"] .nav__mark {
-  color: var(--text-on-dark);
-}
-
-.nav__wordmark {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.nav__wordmark-vega {
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-heading);
-  transition: color var(--dur-theme) var(--ease-standard);
-}
-
-.nav[data-theme="dark"] .nav__wordmark-vega {
-  color: var(--text-on-dark);
-}
-
-.nav__wordmark-desc {
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--valm-grey-muted);
-  transition: color var(--dur-theme) var(--ease-standard);
-}
-
-.nav[data-theme="dark"] .nav__wordmark-desc {
-  color: var(--text-on-dark-secondary);
+.nav[data-theme="dark"] .nav__logo-img {
+  filter: brightness(0) invert(1);
 }
 
 .nav__links {
@@ -743,9 +709,11 @@ body {
   flex-shrink: 0;
 }
 
-.footer__logo-lockup {
-  height: 64px;
-  color: #f6f3ee;
+.footer__logo-img {
+  height: 80px;
+  width: auto;
+  filter: invert(1);
+  mix-blend-mode: screen;
 }
 
 .footer__columns {
@@ -1465,9 +1433,11 @@ body {
   padding: 48px;
 }
 
-.vega-relationship__logo-svg {
+.vega-relationship__logo-img {
   height: 104px;
-  color: var(--text-on-dark);
+  width: auto;
+  filter: invert(1);
+  mix-blend-mode: screen;
 }
 
 /* Leadership */
@@ -2080,14 +2050,7 @@ body {
 <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
     <a class="nav__brand" href="#home" aria-label="Vega ALM Home">
-      <svg class="nav__mark" viewBox="0 0 186.57 293.85" aria-hidden="true">
-        <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
-        <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
-      </svg>
-      <div class="nav__wordmark">
-        <span class="nav__wordmark-vega">Vega</span>
-        <span class="nav__wordmark-desc">Assisted Living Management</span>
-      </div>
+      <img class="nav__logo-img" src="vega-alm-logo.png" alt="Vega Assisted Living Management">
     </a>
     <div class="nav__links" id="navLinks">
       <a class="nav__link" href="#home" data-page="home">Home</a>
@@ -2520,10 +2483,7 @@ body {
         <p>Ownership alignment is built into the structure. Vega invests in many of the communities we manage, which means our interests as operator and owner move in the same direction.</p>
       </div>
       <div class="vega-relationship__logo">
-        <svg class="vega-relationship__logo-svg" viewBox="0 0 186.57 293.85" aria-label="Vega">
-          <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
-          <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
-        </svg>
+        <img class="vega-relationship__logo-img" src="vega-alm-logo.png" alt="Vega Assisted Living Management">
       </div>
     </div>
   </section>
@@ -2818,10 +2778,7 @@ body {
   <div class="footer__inner">
     <div class="footer__top">
       <div class="footer__logo">
-        <svg class="footer__logo-lockup" viewBox="0 0 186.57 293.85" aria-label="Vega">
-          <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
-          <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
-        </svg>
+        <img class="footer__logo-img" src="vega-alm-logo.png" alt="Vega Assisted Living Management">
       </div>
       <div class="footer__columns">
         <div class="footer__col">
