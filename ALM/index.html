@@ -3,8 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vega Assisted Living Management</title>
-<meta name="description" content="Whole-building management for senior living communities. Operations, clinical, sales, and financial management under one roof.">
+<title>Vega Assisted Living Management | Senior Living Management Company in Utah</title>
+<meta name="description" content="Vega ALM is a Utah-based assisted living management company offering full-service senior living operations, staffing, clinical oversight, compliance, and financial management. A compassionate, hands-on approach to resident care.">
+<link rel="canonical" href="https://www.vegaalm.com/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Vega Assisted Living Management | Senior Living Management in Utah">
+<meta property="og:description" content="Full-service assisted living management with a compassionate, hands-on approach. Operations, clinical care, staffing, compliance, and financial oversight for senior living communities.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.vegaalm.com/">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Vega Assisted Living Management",
+      "alternateName": "Vega ALM",
+      "url": "https://www.vegaalm.com",
+      "description": "Vega ALM is a Utah-based third-party senior living operator providing full-service management for assisted living, independent living, and memory care communities. Services include operations, clinical oversight, staffing and HR, compliance, sales, financial management, dining, and life enrichment.",
+      "foundingDate": "2012",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Salt Lake City",
+        "addressRegion": "UT",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-801-555-0134",
+        "email": "care@vegaalm.com",
+        "contactType": "customer service"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Vega"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "Vega Assisted Living Management",
+      "url": "https://www.vegaalm.com"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What services does Vega ALM provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vega ALM provides full-service assisted living management including day-to-day operations, clinical oversight and care planning, staffing and HR, regulatory compliance, sales and marketing, financial management and reporting, dining programs, and life enrichment activities. We serve as a complete third-party operator for senior living communities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Vega ALM staff its communities?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vega ALM staffs above state-required minimums and publishes its caregiver-to-resident ratios. We use a consistent assignment model where the same caregivers work with the same residents each shift, building trust and continuity of care. We also invest in ongoing training, CNA certification, med-tech programs, and tuition assistance for LPN licensure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of senior living does Vega ALM manage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vega ALM manages assisted living, independent living, and memory care communities. We offer full management, consulting, and transition management engagements for building owners across the senior living spectrum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can building owners request a management proposal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Building owners can request a management proposal by completing the proposal form on our website or by contacting us directly at (801) 555-0134 or care@vegaalm.com. We tailor each proposal to the ownership structure, community size, and operating goals. All submissions are treated as confidential."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the consistent assignment model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The consistent assignment model means each caregiver works with the same group of residents every shift. This continuity builds genuine relationships, helps caregivers notice early changes in a resident's condition, and creates a more meaningful work environment. It is a core part of how Vega ALM delivers compassionate, personalized care."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Vega ALM provide financial reporting to owners?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every owner receives a complete financial package by the 15th of the following month, including a community-level profit and loss statement, a census and occupancy dashboard, and a rolling 12-month trend report. Quarterly reports include capital expenditure reviews and staffing audits, and annual budgets are built collaboratively with each ownership group."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -798,238 +897,6 @@ body {
 }
 
 /* ========================================
-   HOMEPAGE: COMMUNITIES
-   ======================================== */
-.communities {
-  background: var(--surface-alt);
-  padding: var(--sp-26) 0;
-}
-
-.communities__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 var(--gutter);
-  max-width: calc(var(--container-max) + var(--gutter) * 2);
-  margin: 0 auto 48px;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-.communities__header-left {
-  flex: 1;
-  min-width: 200px;
-}
-
-.communities__filters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.filter-chip {
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 8px 18px;
-  border: 1px solid var(--border-on-light);
-  background: transparent;
-  color: var(--text-body);
-  cursor: pointer;
-  border-radius: 0;
-  transition: background var(--dur-fast) var(--ease-standard),
-              color var(--dur-fast) var(--ease-standard),
-              border-color var(--dur-fast) var(--ease-standard);
-}
-
-.filter-chip:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.filter-chip.active {
-  background: var(--accent);
-  color: var(--valm-white);
-  border-color: var(--accent);
-}
-
-.communities__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--valm-rule);
-  max-width: calc(var(--container-max) + var(--gutter) * 2);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.community-cell {
-  background: var(--surface-card);
-  padding: 24px;
-  cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-standard);
-}
-
-.community-cell:hover {
-  background: var(--surface-alt);
-}
-
-.community-cell__photo {
-  height: 168px;
-  margin-bottom: 20px;
-}
-
-.community-cell__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.community-cell__name {
-  font-weight: 300;
-  font-size: 22px;
-  line-height: 1.24;
-  color: var(--text-heading);
-}
-
-.community-cell__meta {
-  font-size: 13px;
-  color: var(--text-body);
-  margin-bottom: 12px;
-}
-
-.community-cell__level {
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* ========================================
-   COMMUNITY DRAWER
-   ======================================== */
-.drawer-scrim {
-  position: fixed;
-  inset: 0;
-  background: rgba(23,21,15,0.4);
-  z-index: 140;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-base) var(--ease-standard);
-}
-
-.drawer-scrim.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.community-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 460px;
-  max-width: 100%;
-  background: var(--surface-base);
-  z-index: 150;
-  transform: translateX(100%);
-  transition: transform var(--dur-slow) var(--ease-out-expo);
-  overflow-y: auto;
-  box-shadow: var(--shadow-overlay);
-}
-
-.community-drawer.open {
-  transform: translateX(0);
-}
-
-.drawer__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 32px 32px 0;
-}
-
-.drawer__close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-body);
-  flex-shrink: 0;
-}
-
-.drawer__close:hover {
-  color: var(--text-heading);
-}
-
-.drawer__name {
-  font-weight: 300;
-  font-size: 38px;
-  line-height: 1.14;
-  letter-spacing: -0.02em;
-  color: var(--text-heading);
-  padding: 16px 32px 0;
-}
-
-.drawer__city {
-  font-size: 15px;
-  color: var(--text-body);
-  padding: 8px 32px 0;
-}
-
-.drawer__photo {
-  height: 200px;
-  margin: 24px 32px;
-}
-
-.drawer__badges {
-  display: flex;
-  gap: 8px;
-  padding: 0 32px;
-  margin-bottom: 24px;
-}
-
-.drawer__specs {
-  padding: 0 32px;
-  margin-bottom: 32px;
-}
-
-.drawer__spec {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border-on-light);
-  font-size: 14px;
-}
-
-.drawer__spec:first-child {
-  border-top: 1px solid var(--border-on-light);
-}
-
-.drawer__spec-label {
-  color: var(--label-on-light);
-  font-weight: 500;
-}
-
-.drawer__spec-value {
-  color: var(--text-heading);
-  font-weight: 400;
-}
-
-.drawer__action {
-  padding: 0 32px 40px;
-}
-
-/* ========================================
    HOMEPAGE: SERVICES
    ======================================== */
 .services {
@@ -1357,43 +1224,28 @@ body {
   margin-bottom: 16px;
 }
 
-.reporting__table {
-  width: 100%;
-  border-collapse: collapse;
+.reporting__deliverable {
+  border-top: 1px solid var(--border-on-light);
+  padding: 20px 0 4px;
 }
 
-.reporting__table thead th {
+.reporting__deliverable-title {
   font-weight: 600;
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 15px;
   color: var(--text-heading);
-  text-align: left;
-  padding: 0 0 12px 0;
-  border-bottom: 1px solid var(--text-heading);
+  margin-bottom: 6px;
 }
 
-.reporting__table thead th:nth-child(n+2) {
-  text-align: right;
-}
-
-.reporting__table tbody td {
-  font-weight: 400;
+.reporting__deliverable-body {
   font-size: 14px;
-  padding: 17px 0;
-  border-bottom: 1px solid var(--border-on-light);
-  color: var(--text-heading);
-  font-variant-numeric: tabular-nums;
+  line-height: 1.7;
+  color: var(--text-body);
 }
 
-.reporting__table tbody td:nth-child(n+2) {
-  text-align: right;
-}
-
-.reporting__table-caption {
+.reporting__note {
   font-size: 11px;
   color: var(--valm-grey-muted);
-  margin-top: 16px;
+  margin-top: 20px;
   font-style: italic;
 }
 
@@ -1965,10 +1817,6 @@ body {
     --gutter: 32px;
   }
 
-  .communities__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .stats-band__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px 32px;
@@ -2089,15 +1937,6 @@ body {
     opacity: 0.06;
   }
 
-  .communities__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .communities__header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .services__grid {
     grid-template-columns: 1fr;
   }
@@ -2123,10 +1962,6 @@ body {
 
   .contact__form-grid {
     grid-template-columns: 1fr;
-  }
-
-  .community-drawer {
-    width: 100%;
   }
 
   .owners-hero__title,
@@ -2217,19 +2052,6 @@ body {
   .approach__quote-text {
     font-size: 22px;
   }
-
-  .reporting__table {
-    font-size: 13px;
-  }
-
-  .reporting__table thead th {
-    font-size: 8px;
-  }
-
-  .reporting__table tbody td {
-    font-size: 13px;
-    padding: 12px 0;
-  }
 }
 
 /* ========================================
@@ -2243,10 +2065,6 @@ body {
 
   html {
     scroll-behavior: auto;
-  }
-
-  .community-drawer {
-    transition: none;
   }
 
   .accordion__caret {
@@ -2301,37 +2119,12 @@ body {
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- ==========================================
-     COMMUNITY DRAWER
-     ========================================== -->
-<div class="drawer-scrim" id="drawerScrim"></div>
-<aside class="community-drawer" id="communityDrawer" aria-label="Community details">
-  <div class="drawer__header">
-    <span class="eyebrow eyebrow--no-dash" id="drawerLevel"></span>
-    <button class="drawer__close" id="drawerClose" aria-label="Close drawer">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5"/>
-      </svg>
-    </button>
-  </div>
-  <h2 class="drawer__name" id="drawerName"></h2>
-  <p class="drawer__city" id="drawerCity"></p>
-  <div class="drawer__photo photo-slot" id="drawerPhoto">
-    <span>Community Photo</span>
-  </div>
-  <div class="drawer__badges" id="drawerBadges"></div>
-  <div class="drawer__specs" id="drawerSpecs"></div>
-  <div class="drawer__action">
-    <button class="btn btn--solid btn--full" onclick="navigateTo('home','contact')">Schedule a Visit</button>
-  </div>
-</aside>
-
-<!-- ==========================================
      PAGE 1: HOME
      ========================================== -->
 <main class="page" id="page-home">
 
   <!-- HERO -->
-  <section class="home-hero">
+  <section class="home-hero" aria-label="Welcome to Vega Assisted Living Management">
     <div class="home-hero__watermark" aria-hidden="true">
       <svg viewBox="0 0 186.57 293.85">
         <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
@@ -2342,75 +2135,58 @@ body {
       <h1 class="home-hero__title">True North for<br>Resident Care</h1>
       <div class="home-hero__sub">
         <span class="home-hero__tag">Est. 2012 &middot; A Vega Company</span>
-        <p class="home-hero__desc">We provide compassionate, consistent care across every community we manage. Our operational discipline means residents feel it where it matters most: in the daily rhythms of their lives.</p>
+        <p class="home-hero__desc">We take a compassionate, hands-on approach to senior living management. Every decision we make starts with one question: will this make life better for the people who live here?</p>
       </div>
       <div class="home-hero__actions">
         <a class="btn btn--solid btn--lg" href="#contact" onclick="scrollToSection(event,'contact')">Schedule a Visit</a>
-        <a class="btn btn--outline btn--lg" href="#our-communities" onclick="scrollToSection(event,'our-communities')">Our Communities</a>
+        <a class="btn btn--outline btn--lg" href="#services" onclick="scrollToSection(event,'services')">Our Services</a>
       </div>
     </div>
   </section>
   <hr class="home-hero__rule">
 
-  <!-- COMMUNITIES -->
-  <section class="communities" id="our-communities">
-    <div class="communities__header">
-      <div class="communities__header-left">
-        <div class="eyebrow">Our Communities</div>
-        <h2 class="type-h2">Where We Operate</h2>
-      </div>
-      <div class="communities__filters" id="communityFilters">
-        <button class="filter-chip active" data-filter="all">All</button>
-        <button class="filter-chip" data-filter="Independent Living">Independent Living</button>
-        <button class="filter-chip" data-filter="Assisted Living">Assisted Living</button>
-        <button class="filter-chip" data-filter="Memory Care">Memory Care</button>
-      </div>
-    </div>
-    <div class="communities__grid" id="communityGrid"></div>
-  </section>
-
   <!-- SERVICES -->
-  <section class="services">
+  <section class="services" id="services" aria-label="Senior living management services">
     <div class="services__header">
       <div class="eyebrow">What We Do</div>
-      <h2 class="services__title">Whole-Building Management for Senior Living</h2>
+      <h2 class="services__title">Full-Service Management for Senior Living Communities</h2>
     </div>
     <div class="services__grid">
-      <div class="service-card">
+      <article class="service-card">
         <div class="service-card__kicker">Operations</div>
-        <h3 class="service-card__title">Day-to-Day Management</h3>
-        <p class="service-card__body">We handle staffing, compliance, vendor contracts, and resident services so owners can focus on the asset.</p>
-      </div>
-      <div class="service-card">
+        <h3 class="service-card__title">Day-to-Day Community Management</h3>
+        <p class="service-card__body">From staffing and scheduling to vendor management and resident services, we handle the daily work of running a senior living community so owners can focus on the bigger picture, and families can focus on their loved ones.</p>
+      </article>
+      <article class="service-card">
         <div class="service-card__kicker">Clinical</div>
-        <h3 class="service-card__title">Clinical Oversight</h3>
-        <p class="service-card__body">Licensed nurses manage care plans, medication administration, and state survey readiness across every community.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-card__kicker">Sales</div>
-        <h3 class="service-card__title">Census Development</h3>
-        <p class="service-card__body">Our sales team drives occupancy through local outreach, referral partnerships, and conversion-focused follow-up.</p>
-      </div>
-      <div class="service-card">
+        <h3 class="service-card__title">Personalized Care Plans</h3>
+        <p class="service-card__body">Licensed nurses develop individualized care plans, manage medication administration, and ensure every resident receives the attention they need. We stay survey-ready year round so quality never takes a day off.</p>
+      </article>
+      <article class="service-card">
+        <div class="service-card__kicker">Staffing</div>
+        <h3 class="service-card__title">How We Staff Our Communities</h3>
+        <p class="service-card__body">We staff above state-required minimums and publish our caregiver-to-resident ratios. Our consistent assignment model means the same caregivers work with the same residents, building trust and continuity of care.</p>
+      </article>
+      <article class="service-card">
         <div class="service-card__kicker">Financial</div>
-        <h3 class="service-card__title">Financial Management</h3>
-        <p class="service-card__body">Monthly reporting, budgeting, accounts payable, and NOI optimization with full transparency to ownership.</p>
-      </div>
-      <div class="service-card">
+        <h3 class="service-card__title">Transparent Financial Management</h3>
+        <p class="service-card__body">Monthly reporting, budgeting, accounts payable, and financial planning with full transparency to ownership. Owners see what we see, because better information leads to better decisions for everyone.</p>
+      </article>
+      <article class="service-card">
         <div class="service-card__kicker">Compliance</div>
-        <h3 class="service-card__title">Regulatory Compliance</h3>
-        <p class="service-card__body">We stay ahead of state and federal requirements, maintaining survey-ready operations year-round.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-card__kicker">Culinary</div>
-        <h3 class="service-card__title">Culinary and Life Enrichment</h3>
-        <p class="service-card__body">Restaurant-style dining programs and daily activities designed around resident preferences and abilities.</p>
-      </div>
+        <h3 class="service-card__title">Regulatory Compliance and Training</h3>
+        <p class="service-card__body">We stay ahead of state and federal requirements, maintaining survey-ready operations and ongoing staff training. Families should never have to worry about whether their loved one's home meets the standard.</p>
+      </article>
+      <article class="service-card">
+        <div class="service-card__kicker">Dining &amp; Enrichment</div>
+        <h3 class="service-card__title">Dining Programs and Daily Activities</h3>
+        <p class="service-card__body">Restaurant-style dining and life enrichment programs designed around each resident's preferences and abilities. Mealtimes and activities are some of the most important moments in a resident's day, and we treat them that way.</p>
+      </article>
     </div>
   </section>
 
   <!-- STATS BAND -->
-  <section class="stats-band" id="homeStatsBand">
+  <section class="stats-band" id="homeStatsBand" aria-label="Key performance metrics">
     <div class="stats-band__grid">
       <div class="stat">
         <div class="stat__number" data-target="14" data-suffix="">0</div>
@@ -2425,7 +2201,7 @@ body {
         <div class="stat__label">Occupancy</div>
       </div>
       <div class="stat">
-        <div class="stat__number" data-target="12" data-suffix="">0</div>
+        <div class="stat__number" data-target="14" data-suffix="">0</div>
         <div class="stat__label">Years Operating</div>
       </div>
     </div>
@@ -2433,16 +2209,18 @@ body {
   </section>
 
   <!-- APPROACH -->
-  <section class="approach">
+  <section class="approach" aria-label="Our approach to senior care management">
     <div class="approach__grid">
       <div class="approach__quote">
-        <p class="approach__quote-text">"We took what we learned underwriting buildings and asked what it would take to never lose a resident we should have kept."</p>
+        <blockquote>
+          <p class="approach__quote-text">"We started by asking what it would take to never lose a resident we should have kept. The answer was always the same: better people, treated well, staying longer."</p>
+        </blockquote>
         <span class="approach__quote-attr">Sayer Leslie, Owner</span>
       </div>
       <div class="approach__content">
         <div class="eyebrow">Our Approach</div>
-        <p>Vega ALM was born out of a real estate investment firm. That background gives us a bias toward measurable outcomes: occupancy, retention, NOI. But we learned early that the path to those numbers runs through people, not spreadsheets. Operational discipline only works when it is built on a culture that retains staff and earns the trust of residents and their families.</p>
-        <p>We staff above state minimums and publish our ratios. We assign caregivers to the same residents so relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard.</p>
+        <p>Vega ALM grew out of a real estate investment firm that saw firsthand what happens when operations fall short. That experience gave us a deep respect for measurable outcomes, but it also taught us that the path to strong occupancy and retention runs through people, not spreadsheets.</p>
+        <p>We staff above state minimums and publish our ratios. We assign caregivers to the same residents so genuine relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard. When the people who live and work in our communities feel cared for, everything else follows.</p>
         <div class="approach__pillars">
           Staffing-First<span class="approach__pillar-sep">|</span>Transparent Reporting<span class="approach__pillar-sep">|</span>Resident Retention
         </div>
@@ -2451,12 +2229,12 @@ body {
   </section>
 
   <!-- CONTACT -->
-  <section class="contact" id="contact">
+  <section class="contact" id="contact" aria-label="Contact Vega ALM">
     <div class="contact__grid">
       <div class="contact__info">
         <div class="eyebrow">Get in Touch</div>
-        <h2>We would like to hear from you.</h2>
-        <p>Whether you are exploring care options for a loved one or you own a community looking for a management partner, we are here to help.</p>
+        <h2>We would love to hear from you.</h2>
+        <p>Whether you are exploring care options for a loved one or you own a community looking for a management partner, we are here to help. Every conversation starts with listening.</p>
         <a class="contact__link" href="tel:+18015550134">(801) 555-0134</a>
         <a class="contact__link" href="mailto:care@vegaalm.com">care@vegaalm.com</a>
       </div>
@@ -2508,93 +2286,72 @@ body {
 <main class="page" id="page-owners">
 
   <!-- HERO -->
-  <section class="owners-hero">
+  <section class="owners-hero" aria-label="Information for building owners">
     <div class="owners-hero__inner">
       <div class="eyebrow">For Owners</div>
-      <h1 class="owners-hero__title">An Operator You Can Hold to a Number.</h1>
-      <p class="owners-hero__lede">We tie our management fee to the metrics that matter to you: occupancy, NOI, and retention. If the building underperforms, so does our compensation. That alignment is the foundation of every engagement.</p>
+      <h1 class="owners-hero__title">A Management Partner Who Cares as Much as You Do.</h1>
+      <p class="owners-hero__lede">We believe a well-run community starts with aligned goals. We tie our management performance to the outcomes that matter most to you: occupancy, resident satisfaction, and financial health. When your community thrives, so does our partnership.</p>
       <div class="owners-hero__actions">
         <a class="btn btn--solid btn--lg" href="#proposal" onclick="scrollToSection(event,'proposal')">Request a Proposal</a>
-        <a class="btn btn--outline btn--lg" href="#reporting" onclick="scrollToSection(event,'reporting')">See a Reporting Sample</a>
+        <a class="btn btn--outline btn--lg" href="#reporting" onclick="scrollToSection(event,'reporting')">Our Reporting Process</a>
       </div>
     </div>
   </section>
 
   <!-- WHY VEGA ALM -->
-  <section class="why-vega">
+  <section class="why-vega" aria-label="Why partner with Vega ALM">
     <div class="why-vega__inner">
       <div class="eyebrow">Why Vega ALM</div>
       <div class="why-vega__cards">
-        <div class="why-card">
-          <h3 class="why-card__title">Aligned Incentives</h3>
-          <p class="why-card__body">We tie our fee to NOI performance, not just revenue. When the building wins, we win.</p>
-        </div>
-        <div class="why-card">
-          <h3 class="why-card__title">Operator-Owner Reporting</h3>
-          <p class="why-card__body">Monthly P&amp;L, census dashboard, and capital planning delivered in a format owners actually read.</p>
-        </div>
-        <div class="why-card">
+        <article class="why-card">
+          <h3 class="why-card__title">Aligned Interests</h3>
+          <p class="why-card__body">We tie our fee to the performance of your community, not just revenue. When your building does well, we do well. That simple alignment shapes every decision we make on the ground.</p>
+        </article>
+        <article class="why-card">
+          <h3 class="why-card__title">Clear, Honest Reporting</h3>
+          <p class="why-card__body">Monthly financials, census dashboards, and capital planning delivered in a format you will actually want to read. No jargon, no buried numbers. Just the information you need to make confident decisions.</p>
+        </article>
+        <article class="why-card">
           <h3 class="why-card__title">Transition Expertise</h3>
-          <p class="why-card__body">We have taken over underperforming communities and stabilized them within two quarters. Our playbook is tested.</p>
-        </div>
+          <p class="why-card__body">We have taken over underperforming communities and stabilized them within two quarters. Our approach is tested and repeatable, whether you need a full turnaround or a steady hand during a change of ownership.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- OWNER REPORTING -->
-  <section class="reporting" id="reporting">
+  <section class="reporting" id="reporting" aria-label="Owner reporting process">
     <div class="reporting__grid">
       <div class="reporting__left">
         <div class="eyebrow">Reporting</div>
         <h2>Monthly Transparency, No Exceptions</h2>
-        <p>Every owner receives a full financial package by the 15th of the following month. The package includes a community-level P&amp;L, a census and occupancy dashboard, and a rolling 12-month trend report.</p>
-        <p>We use a standardized chart of accounts across all communities so comparisons are meaningful and variance analysis is straightforward.</p>
-        <p>Quarterly, we add a capital expenditure review and a staffing audit. Annual budgets are built collaboratively with each ownership group.</p>
+        <p>Every owner receives a complete financial package by the 15th of the following month. We use a standardized chart of accounts across all communities so comparisons are meaningful and variance analysis is straightforward.</p>
+        <p>Quarterly, we add a capital expenditure review and a staffing audit. Annual budgets are built collaboratively with each ownership group, because the best plans come from working together.</p>
       </div>
       <div class="reporting__right">
-        <table class="reporting__table">
-          <thead>
-            <tr>
-              <th>Community</th>
-              <th>Units</th>
-              <th>Occupancy</th>
-              <th>NOI Variance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Willow Creek, Salt Lake City</td>
-              <td>48</td>
-              <td>96%</td>
-              <td><span class="badge badge--ok">+4.2%</span></td>
-            </tr>
-            <tr>
-              <td>Orchard Park, Provo</td>
-              <td>64</td>
-              <td>91%</td>
-              <td><span class="badge badge--attention">-1.8%</span></td>
-            </tr>
-            <tr>
-              <td>Bell Canyon, Sandy</td>
-              <td>36</td>
-              <td>98%</td>
-              <td><span class="badge badge--ok">+7.1%</span></td>
-            </tr>
-            <tr>
-              <td>Harvest House, Ogden</td>
-              <td>52</td>
-              <td>94%</td>
-              <td><span class="badge badge--ok">+2.3%</span></td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="reporting__table-caption">Illustrative figures. Placeholder data pending real portfolio numbers.</p>
+        <div class="reporting__deliverable">
+          <h3 class="reporting__deliverable-title">Monthly Financial Package</h3>
+          <p class="reporting__deliverable-body">A community-level profit and loss statement, census and occupancy dashboard, and a rolling 12-month trend report. Delivered by the 15th of each month, every month.</p>
+        </div>
+        <div class="reporting__deliverable">
+          <h3 class="reporting__deliverable-title">Quarterly Reviews</h3>
+          <p class="reporting__deliverable-body">Capital expenditure tracking, staffing audits, and a review of operating performance against the annual budget, with variance explanations for every line that moves.</p>
+        </div>
+        <div class="reporting__deliverable">
+          <h3 class="reporting__deliverable-title">Annual Budget Collaboration</h3>
+          <p class="reporting__deliverable-body">We build each year's budget alongside ownership, aligning on staffing plans, capital priorities, and occupancy targets before the year begins.</p>
+        </div>
+        <div class="reporting__deliverable">
+          <h3 class="reporting__deliverable-title">On-Demand Access</h3>
+          <p class="reporting__deliverable-body">Owners have access to real-time census data and financial dashboards at any time. You should never have to wait for a scheduled report to know how your community is performing.</p>
+        </div>
+        <p class="reporting__note">All reporting is standardized across communities for easy comparison and portfolio-level analysis.</p>
       </div>
     </div>
   </section>
 
   <!-- STATS BAND -->
-  <section class="stats-band" id="ownersStatsBand">
+  <section class="stats-band" id="ownersStatsBand" aria-label="Portfolio performance metrics">
     <div class="stats-band__grid">
       <div class="stat">
         <div class="stat__number" data-target="14" data-suffix="">0</div>
@@ -2609,7 +2366,7 @@ body {
         <div class="stat__label">Occupancy</div>
       </div>
       <div class="stat">
-        <div class="stat__number" data-target="12" data-suffix="">0</div>
+        <div class="stat__number" data-target="14" data-suffix="">0</div>
         <div class="stat__label">Years Operating</div>
       </div>
     </div>
@@ -2617,7 +2374,7 @@ body {
   </section>
 
   <!-- ENGAGEMENT TYPES -->
-  <section class="engagement">
+  <section class="engagement" aria-label="How we work with building owners">
     <div class="engagement__grid">
       <div class="engagement__photo photo-slot">
         <span>Community Photo</span>
@@ -2625,29 +2382,29 @@ body {
       <div class="engagement__right">
         <div class="eyebrow">Engagement Types</div>
         <h2>How We Work With Owners</h2>
-        <div class="engagement__entry">
+        <article class="engagement__entry">
           <h3 class="engagement__entry-title">Full Management</h3>
-          <p class="engagement__entry-body">End-to-end operations, clinical, sales, and financial management under a single contract.</p>
-        </div>
-        <div class="engagement__entry">
+          <p class="engagement__entry-body">End-to-end operations, clinical oversight, sales, staffing, and financial management under a single contract. We become your on-the-ground team, handling every aspect of daily life in the community.</p>
+        </article>
+        <article class="engagement__entry">
           <h3 class="engagement__entry-title">Consulting</h3>
-          <p class="engagement__entry-body">Targeted operational or clinical consulting for owners who keep their own team in place.</p>
-        </div>
-        <div class="engagement__entry">
+          <p class="engagement__entry-body">Targeted operational or clinical consulting for owners who want to keep their own team in place but need expert guidance on specific challenges, from compliance readiness to staffing models.</p>
+        </article>
+        <article class="engagement__entry">
           <h3 class="engagement__entry-title">Transition Management</h3>
-          <p class="engagement__entry-body">Short-term stabilization for communities changing hands or recovering from regulatory action.</p>
-        </div>
+          <p class="engagement__entry-body">Short-term stabilization for communities changing hands or recovering from regulatory challenges. We step in quickly, steady the team, and build a foundation for long-term success.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- PROPOSAL FORM -->
-  <section class="proposal" id="proposal">
+  <section class="proposal" id="proposal" aria-label="Request a management proposal">
     <div class="proposal__grid">
       <div class="proposal__left">
         <div class="eyebrow">Request a Proposal</div>
-        <h2>Let Us Show You the Numbers</h2>
-        <p>Tell us about your community and we will put together a management proposal tailored to your ownership structure and operating goals.</p>
+        <h2>Let Us Learn About Your Community</h2>
+        <p>Tell us about your building and your goals, and we will put together a management proposal tailored to your ownership structure and the residents you serve.</p>
         <p class="proposal__nda">All submissions are treated as confidential. We are happy to sign an NDA before any detailed discussion.</p>
       </div>
       <form id="proposalForm" onsubmit="handleFormSubmit(event, 'proposalSubmitBtn', 'Proposal request received. We will follow up within one business day.')">
@@ -2715,52 +2472,52 @@ body {
 <main class="page" id="page-about">
 
   <!-- HERO -->
-  <section class="about-hero">
+  <section class="about-hero" aria-label="About Vega Assisted Living Management">
     <div class="about-hero__inner">
       <div class="eyebrow">About</div>
-      <h1 class="about-hero__title">A Real Estate Operator That Learned to Run Care.</h1>
-      <p class="about-hero__lede">Vega ALM started because a real estate firm needed better operations in its own buildings. What began as an internal solution became a standalone management company serving owners across the region.</p>
+      <h1 class="about-hero__title">Born From Experience. Built Around People.</h1>
+      <p class="about-hero__lede">Vega ALM started because a real estate firm saw what happens when the people running a community do not share the same priorities as the people living in one. What began as an internal solution became a standalone management company built around a simple idea: when you take care of the people, the building takes care of itself.</p>
     </div>
   </section>
 
   <!-- HISTORY TIMELINE -->
-  <section class="timeline">
+  <section class="timeline" aria-label="Company history">
     <div class="timeline__inner">
       <div class="eyebrow">Our History</div>
       <div class="timeline__grid">
-        <div class="timeline__cell">
+        <article class="timeline__cell">
           <div class="timeline__year">2012</div>
           <div class="timeline__title">Founded</div>
-          <p class="timeline__body">Vega begins as a real estate investment firm focused on senior housing.</p>
-        </div>
-        <div class="timeline__cell">
+          <p class="timeline__body">Vega begins as a real estate investment firm focused on senior housing, learning the industry from the ownership side.</p>
+        </article>
+        <article class="timeline__cell">
           <div class="timeline__year">2016</div>
-          <div class="timeline__title">First Operation</div>
-          <p class="timeline__body">Vega takes over management of its first assisted living community after a third-party operator underperforms.</p>
-        </div>
-        <div class="timeline__cell">
+          <div class="timeline__title">First Community</div>
+          <p class="timeline__body">Vega takes over management of its first assisted living community after seeing firsthand that residents deserved better day-to-day care.</p>
+        </article>
+        <article class="timeline__cell">
           <div class="timeline__year">2019</div>
           <div class="timeline__title">Formalized</div>
-          <p class="timeline__body">Assisted Living Management is established as a standalone operating company within the Vega platform.</p>
-        </div>
-        <div class="timeline__cell">
+          <p class="timeline__body">Assisted Living Management is established as a standalone operating company within the Vega platform, with its own leadership and clinical team.</p>
+        </article>
+        <article class="timeline__cell">
           <div class="timeline__year">2024</div>
-          <div class="timeline__title">Scale</div>
-          <p class="timeline__body">The portfolio grows to 14 communities across three states with consistent operating metrics.</p>
-        </div>
+          <div class="timeline__title">Growing</div>
+          <p class="timeline__body">The team grows to serve communities across multiple states, earning the trust of owners and families through consistent, compassionate operations.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- VEGA RELATIONSHIP -->
-  <section class="vega-relationship">
+  <section class="vega-relationship" aria-label="Relationship with Vega platform">
     <div class="vega-relationship__grid">
       <div class="vega-relationship__left">
         <div class="eyebrow eyebrow--dark">Vega Platform</div>
         <h2>Built by Vega. Run Independently.</h2>
         <p>Vega ALM operates as an independent management company within the Vega platform. Our leadership team makes operating decisions without layers of approval, which means faster responses to the realities on the ground in each community.</p>
-        <p>The Vega platform provides shared infrastructure: legal, accounting, human resources, and capital markets expertise. That lets our operators focus on what they do best, which is running buildings and taking care of residents.</p>
-        <p>Ownership alignment is built into the structure. Vega invests in many of the communities we manage, which means our interests as operator and owner are never in conflict.</p>
+        <p>The Vega platform provides shared infrastructure: legal, accounting, human resources, and capital markets expertise. That support lets our operators focus on what they do best, which is running communities and taking care of residents.</p>
+        <p>Ownership alignment is built into the structure. Vega invests in many of the communities we manage, which means our interests as operator and owner move in the same direction.</p>
       </div>
       <div class="vega-relationship__logo">
         <svg class="vega-relationship__logo-svg" viewBox="0 0 186.57 293.85" aria-label="Vega">
@@ -2772,55 +2529,55 @@ body {
   </section>
 
   <!-- LEADERSHIP -->
-  <section class="leadership">
+  <section class="leadership" aria-label="Leadership team">
     <div class="leadership__inner">
       <div class="eyebrow">Leadership</div>
       <div class="leadership__grid">
-        <div class="leader">
+        <article class="leader">
           <div class="leader__portrait photo-slot"><span>Portrait</span></div>
           <h3 class="leader__name">Sayer Leslie</h3>
           <div class="leader__role">Owner, Chief Executive</div>
-        </div>
-        <div class="leader">
+        </article>
+        <article class="leader">
           <div class="leader__portrait photo-slot"><span>Portrait</span></div>
           <h3 class="leader__name">Name TK</h3>
           <div class="leader__role">Chief Operating Officer</div>
-        </div>
-        <div class="leader">
+        </article>
+        <article class="leader">
           <div class="leader__portrait photo-slot"><span>Portrait</span></div>
           <h3 class="leader__name">Name TK</h3>
           <div class="leader__role">Director of Clinical Services</div>
-        </div>
-        <div class="leader">
+        </article>
+        <article class="leader">
           <div class="leader__portrait photo-slot"><span>Portrait</span></div>
           <h3 class="leader__name">Name TK</h3>
           <div class="leader__role">Director of Sales</div>
-        </div>
+        </article>
       </div>
       <p class="leadership__caption">Awaiting confirmed names and portraits.</p>
     </div>
   </section>
 
   <!-- VALUES -->
-  <section class="values">
+  <section class="values" aria-label="Our guiding principles">
     <div class="values__inner">
       <div class="eyebrow">What We Believe</div>
       <div class="values__cards">
-        <div class="value-card">
+        <article class="value-card">
           <div class="value-card__kicker">Principle</div>
           <h3 class="value-card__title">Staffing First</h3>
-          <p class="value-card__body">When staffing is right, care follows. We publish our ratios and hold ourselves to them.</p>
-        </div>
-        <div class="value-card">
+          <p class="value-card__body">When staffing is right, care follows. We publish our ratios and hold ourselves to them, because families deserve to know their loved ones are always well cared for.</p>
+        </article>
+        <article class="value-card">
           <div class="value-card__kicker">Principle</div>
           <h3 class="value-card__title">Transparent Reporting</h3>
-          <p class="value-card__body">Owners see what we see. Monthly financials, census data, and incident reports without filters.</p>
-        </div>
-        <div class="value-card">
+          <p class="value-card__body">Owners see what we see. Monthly financials, census data, and incident reports without filters. Trust is built on honesty, and honesty starts with sharing the full picture.</p>
+        </article>
+        <article class="value-card">
           <div class="value-card__kicker">Principle</div>
           <h3 class="value-card__title">Resident Retention</h3>
-          <p class="value-card__body">The best measure of care quality is whether residents stay. We track it and tie compensation to it.</p>
-        </div>
+          <p class="value-card__body">The best measure of care quality is whether residents choose to stay. We track it, learn from it, and build our practices around making every resident feel genuinely at home.</p>
+        </article>
       </div>
       <div class="values__action">
         <a class="btn btn--solid btn--lg" href="#owners">Work With Us</a>
@@ -2836,37 +2593,37 @@ body {
 <main class="page" id="page-careers">
 
   <!-- HERO -->
-  <section class="careers-hero">
+  <section class="careers-hero" aria-label="Career opportunities at Vega ALM">
     <div class="careers-hero__inner">
       <div class="eyebrow">Careers</div>
       <h1 class="careers-hero__title">The Staffing Plan Is the Care Plan.</h1>
-      <p class="careers-hero__lede">We believe the quality of care in a community is determined by the people who show up every day. That is why we invest in staffing ratios, training, and a culture where caregivers stay and grow.</p>
+      <p class="careers-hero__lede">We believe the quality of care in a community is determined by the people who show up every day. That is why we invest in staffing ratios, training, and a culture where caregivers feel valued, stay longer, and grow into new roles.</p>
     </div>
   </section>
 
   <!-- WHY WORK HERE -->
-  <section class="why-work">
+  <section class="why-work" aria-label="Why work at Vega ALM">
     <div class="why-work__inner">
       <div class="eyebrow">Why Work Here</div>
       <div class="why-work__cards">
-        <div class="why-card">
+        <article class="why-card">
           <h3 class="why-card__title">Published Ratios</h3>
-          <p class="why-card__body">We staff above state minimums and publish our caregiver-to-resident ratios publicly. You will never work short.</p>
-        </div>
-        <div class="why-card">
+          <p class="why-card__body">We staff above state minimums and publish our caregiver-to-resident ratios publicly. You will never be asked to work short-staffed, because we know that is not fair to you or the people you care for.</p>
+        </article>
+        <article class="why-card">
           <h3 class="why-card__title">Promote From Within</h3>
-          <p class="why-card__body">Every community leader started on the floor. We fund training and promote before we hire outside.</p>
-        </div>
-        <div class="why-card">
+          <p class="why-card__body">Every community leader started on the floor. We fund training and promote before we hire outside, because the best leaders are the ones who already understand the work.</p>
+        </article>
+        <article class="why-card">
           <h3 class="why-card__title">Tuition and Licensure</h3>
-          <p class="why-card__body">CNA certification, med-tech training, and LPN tuition assistance are available from day one.</p>
-        </div>
+          <p class="why-card__body">CNA certification, med-tech training, and LPN tuition assistance are available from day one. We want you to build a career here, and we will invest in helping you get there.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- CONSISTENT ASSIGNMENT -->
-  <section class="consistent">
+  <section class="consistent" aria-label="Our consistent assignment model">
     <div class="consistent__grid">
       <div class="consistent__photo photo-slot">
         <span>Community Photo</span>
@@ -2874,14 +2631,14 @@ body {
       <div class="consistent__right">
         <div class="eyebrow">Consistent Assignment</div>
         <h2>Same Residents, Same Caregivers.</h2>
-        <p>Our consistent assignment model means caregivers work with the same group of residents every shift. That continuity builds trust, catches changes in condition earlier, and makes the work more meaningful.</p>
-        <p>Rotating assignments might look efficient on a schedule, but they erode the relationships that define good care. We choose consistency over convenience, and we see it in our retention numbers for both residents and staff.</p>
+        <p>Our consistent assignment model means caregivers work with the same group of residents every shift. That continuity builds genuine trust, helps you notice changes in a resident's condition earlier, and makes the work more meaningful.</p>
+        <p>Rotating assignments might look efficient on a schedule, but they come at the cost of the relationships that define good care. We choose consistency over convenience, and we see the difference in our retention numbers for both residents and staff.</p>
       </div>
     </div>
   </section>
 
   <!-- OPEN ROLES -->
-  <section class="roles">
+  <section class="roles" aria-label="Open positions">
     <div class="roles__inner">
       <div class="eyebrow">Open Positions</div>
       <p class="roles__caption">Placeholder postings.</p>
@@ -2893,12 +2650,12 @@ body {
             <span class="accordion__location">Salt Lake City, UT</span>
             <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
             <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
             </span>
           </div>
           <div class="accordion__body">
             <div class="accordion__summary">
-              <p>Resident Care Aides are the foundation of daily life in our communities. You will assist residents with personal care, mobility, meals, and social activities while building meaningful relationships through consistent assignment.</p>
+              <p>Resident Care Aides are the heart of daily life in our communities. You will assist residents with personal care, mobility, meals, and social activities while building meaningful relationships through consistent assignment. If you are the kind of person who remembers how someone takes their coffee, you belong here.</p>
             </div>
             <div class="accordion__details">
               <h4 class="accordion__req-heading">Requirements</h4>
@@ -2919,12 +2676,12 @@ body {
             <span class="accordion__location">Provo, UT</span>
             <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
             <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
             </span>
           </div>
           <div class="accordion__body">
             <div class="accordion__summary">
-              <p>Our LPNs lead the clinical side of resident care, managing medication administration, care plan updates, and communication with families and physicians. You will work closely with a consistent group of residents and their care aides.</p>
+              <p>Our LPNs lead the clinical side of resident care, managing medication administration, care plan updates, and communication with families and physicians. You will work closely with a consistent group of residents and their care aides, becoming a trusted part of their daily lives.</p>
             </div>
             <div class="accordion__details">
               <h4 class="accordion__req-heading">Requirements</h4>
@@ -2945,12 +2702,12 @@ body {
             <span class="accordion__location">Sandy, UT</span>
             <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
             <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
             </span>
           </div>
           <div class="accordion__body">
             <div class="accordion__summary">
-              <p>The Community Sales Director owns census development for a single community. You will build referral relationships, conduct tours, follow up with prospective families, and collaborate with the operations team to ensure a smooth move-in experience.</p>
+              <p>The Community Sales Director is the first point of contact for families exploring senior living. You will build referral relationships, conduct tours, follow up with prospective families, and work closely with the operations team to ensure every move-in feels welcoming and well-organized.</p>
             </div>
             <div class="accordion__details">
               <h4 class="accordion__req-heading">Requirements</h4>
@@ -2971,12 +2728,12 @@ body {
             <span class="accordion__location">Ogden, UT</span>
             <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
             <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
             </span>
           </div>
           <div class="accordion__body">
             <div class="accordion__summary">
-              <p>The Executive Director leads all aspects of community operations: staffing, clinical quality, sales performance, financial results, and regulatory compliance. You will report to Vega ALM leadership and work with the ownership group.</p>
+              <p>The Executive Director leads all aspects of community life: staffing, clinical quality, sales, financial results, and regulatory compliance. You will set the tone for your community's culture and work closely with Vega ALM leadership and the ownership group to deliver outstanding care.</p>
             </div>
             <div class="accordion__details">
               <h4 class="accordion__req-heading">Requirements</h4>
@@ -2996,12 +2753,12 @@ body {
   </section>
 
   <!-- APPLICATION FORM -->
-  <section class="application" id="apply">
+  <section class="application" id="apply" aria-label="Submit a job application">
     <div class="application__grid">
       <div class="application__left">
         <div class="eyebrow">Apply</div>
         <h2>Join Our Team</h2>
-        <p>Tell us who you are and what role interests you. A person reads every application, and we respond within five business days.</p>
+        <p>Tell us who you are and what role interests you. A real person reads every application, and we respond within five business days. We are looking for people who care deeply about the work they do.</p>
       </div>
       <form id="applicationForm" onsubmit="handleFormSubmit(event, 'applicationSubmitBtn', 'Application received. A person reads every one.')">
         <div class="application__form-grid">
@@ -3057,7 +2814,7 @@ body {
 <!-- ==========================================
      FOOTER
      ========================================== -->
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer__inner">
     <div class="footer__top">
       <div class="footer__logo">
@@ -3074,9 +2831,9 @@ body {
           <a href="#careers">Careers</a>
         </div>
         <div class="footer__col">
-          <h4 class="footer__col-heading">Care</h4>
-          <a href="#home" onclick="setTimeout(function(){var e=document.getElementById('our-communities');e&&e.scrollIntoView({behavior:'smooth'})},100)">Our Communities</a>
-          <a href="#home" onclick="setTimeout(function(){var e=document.querySelector('.services');e&&e.scrollIntoView({behavior:'smooth'})},100)">Services</a>
+          <h4 class="footer__col-heading">Services</h4>
+          <a href="#home" onclick="setTimeout(function(){var e=document.getElementById('services');e&&e.scrollIntoView({behavior:'smooth'})},100)">Our Services</a>
+          <a href="#owners">For Owners</a>
           <a href="#home" onclick="setTimeout(function(){var e=document.getElementById('contact');e&&e.scrollIntoView({behavior:'smooth'})},100)">Schedule a Visit</a>
         </div>
         <div class="footer__col">
@@ -3087,7 +2844,7 @@ body {
       </div>
     </div>
     <div class="footer__fine">
-      &copy; 2024 Vega Assisted Living Management. All rights reserved. A Vega Company.
+      &copy; 2026 Vega Assisted Living Management. All rights reserved. A Vega Company.
     </div>
   </div>
 </footer>
@@ -3098,18 +2855,6 @@ body {
 <script>
 (function() {
   'use strict';
-
-  /* ========================================
-     DATA
-     ======================================== */
-  var communities = [
-    { name: 'Willow Creek', city: 'Salt Lake City, UT', units: 48, occupancy: 96, level: 'Assisted Living', yearOpened: '2016', licenseType: 'Type I' },
-    { name: 'Orchard Park', city: 'Provo, UT', units: 64, occupancy: 91, level: 'Independent Living', yearOpened: '2014', licenseType: 'Type II' },
-    { name: 'Bell Canyon', city: 'Sandy, UT', units: 36, occupancy: 98, level: 'Memory Care', yearOpened: '2018', licenseType: 'Type I-MC' },
-    { name: 'Harvest House', city: 'Ogden, UT', units: 52, occupancy: 94, level: 'Assisted Living', yearOpened: '2017', licenseType: 'Type I' },
-    { name: 'Cedar Terrace', city: 'Draper, UT', units: 44, occupancy: 89, level: 'Independent Living', yearOpened: '2015', licenseType: 'Type II' },
-    { name: 'Stonebridge', city: 'Logan, UT', units: 40, occupancy: 97, level: 'Memory Care', yearOpened: '2020', licenseType: 'Type I-MC' }
-  ];
 
   /* ========================================
      ROUTING
@@ -3226,87 +2971,6 @@ body {
 
   window.addEventListener('hashchange', function() {
     showPage(getHash());
-  });
-
-  /* ========================================
-     COMMUNITY GRID
-     ======================================== */
-  function renderCommunities(filter) {
-    var grid = document.getElementById('communityGrid');
-    grid.innerHTML = '';
-    var filtered = filter === 'all' ? communities : communities.filter(function(c) { return c.level === filter; });
-
-    filtered.forEach(function(c) {
-      var cell = document.createElement('div');
-      cell.className = 'community-cell';
-      cell.onclick = function() { openDrawer(c); };
-
-      var occBadgeClass = c.occupancy >= 95 ? 'badge--ok' : (c.occupancy >= 90 ? 'badge--sage' : 'badge--attention');
-
-      cell.innerHTML =
-        '<div class="community-cell__photo photo-slot"><span>Community Photo</span></div>' +
-        '<div class="community-cell__top">' +
-          '<span class="community-cell__name">' + c.name + '</span>' +
-          '<span class="badge ' + occBadgeClass + '">' + c.occupancy + '%</span>' +
-        '</div>' +
-        '<p class="community-cell__meta">' + c.city + ' &middot; ' + c.units + ' units</p>' +
-        '<span class="community-cell__level">' + c.level + '</span>';
-
-      grid.appendChild(cell);
-    });
-  }
-
-  // Filter chips
-  document.getElementById('communityFilters').addEventListener('click', function(e) {
-    var chip = e.target.closest('.filter-chip');
-    if (!chip) return;
-    document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
-    chip.classList.add('active');
-    renderCommunities(chip.dataset.filter);
-  });
-
-  /* ========================================
-     COMMUNITY DRAWER
-     ======================================== */
-  function openDrawer(community) {
-    var drawer = document.getElementById('communityDrawer');
-    var scrim = document.getElementById('drawerScrim');
-
-    document.getElementById('drawerLevel').textContent = community.level;
-    document.getElementById('drawerName').textContent = community.name;
-    document.getElementById('drawerCity').textContent = community.city;
-
-    var badgesHtml =
-      '<span class="badge badge--sage">' + community.level + '</span>' +
-      '<span class="badge ' + (community.occupancy >= 95 ? 'badge--ok' : 'badge--attention') + '">' + community.occupancy + '% Occupied</span>';
-    document.getElementById('drawerBadges').innerHTML = badgesHtml;
-
-    var specsHtml =
-      '<div class="drawer__spec"><span class="drawer__spec-label">Units</span><span class="drawer__spec-value">' + community.units + '</span></div>' +
-      '<div class="drawer__spec"><span class="drawer__spec-label">Occupancy</span><span class="drawer__spec-value">' + community.occupancy + '%</span></div>' +
-      '<div class="drawer__spec"><span class="drawer__spec-label">Year Opened</span><span class="drawer__spec-value">' + community.yearOpened + '</span></div>' +
-      '<div class="drawer__spec"><span class="drawer__spec-label">License Type</span><span class="drawer__spec-value">' + community.licenseType + '</span></div>';
-    document.getElementById('drawerSpecs').innerHTML = specsHtml;
-
-    drawer.classList.add('open');
-    scrim.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDrawer() {
-    document.getElementById('communityDrawer').classList.remove('open');
-    document.getElementById('drawerScrim').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
-  document.getElementById('drawerScrim').addEventListener('click', closeDrawer);
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeDrawer();
-      closeMobileDrawer();
-    }
   });
 
   /* ========================================
@@ -3494,10 +3158,16 @@ body {
     });
   });
 
+  // Close mobile drawer on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeMobileDrawer();
+    }
+  });
+
   /* ========================================
      INIT
      ======================================== */
-  renderCommunities('all');
   showPage(getHash());
 
 })();
