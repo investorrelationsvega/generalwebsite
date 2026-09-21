@@ -1,0 +1,3506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vega Assisted Living Management</title>
+<meta name="description" content="Whole-building management for senior living communities. Operations, clinical, sales, and financial management under one roof.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   RESET
+   ======================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+fieldset { border: none; }
+
+/* ========================================
+   DESIGN TOKENS
+   ======================================== */
+:root {
+  /* Raw palette */
+  --valm-white: #ffffff;
+  --valm-sand: #edeae4;
+  --valm-charcoal: #1c1b18;
+  --valm-ink: #1c1b18;
+  --valm-grey: #67635b;
+  --valm-grey-label: #7c786f;
+  --valm-grey-on-dark: #b2ada3;
+  --valm-grey-label-dark: #c6c0b5;
+  --valm-grey-muted: #918c83;
+  --valm-rule: #ddd9d1;
+  --valm-rule-soft: #c6c0b5;
+  --valm-dark-rule: #2c2a26;
+  --valm-green-on-light: #3f6350;
+  --valm-green: #8a9a86;
+  --valm-green-wash: #eaefea;
+  --valm-clay: #a06844;
+  --valm-clay-soft: #d3b39a;
+  --valm-clay-wash: #f2e8e0;
+
+  /* Semantic aliases */
+  --surface-base: #ffffff;
+  --surface-alt: #edeae4;
+  --surface-card: #ffffff;
+  --surface-dark: #1c1b18;
+  --surface-overlay: rgba(23,21,15,0.94);
+  --text-body: #67635b;
+  --text-heading: #1c1b18;
+  --text-on-dark: #f6f3ee;
+  --text-on-dark-secondary: #b2ada3;
+  --label-on-light: #7c786f;
+  --label-on-dark: #c6c0b5;
+  --accent: #3f6350;
+  --accent-on-dark: #8a9a86;
+  --link: #3f6350;
+  --link-hover: #1c1b18;
+  --border-on-light: #ddd9d1;
+  --border-on-dark: #2c2a26;
+  --border-input: #c6c0b5;
+  --focus-ring: #3f6350;
+  --selection-bg: #3f6350;
+  --selection-fg: #ffffff;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(31,27,22,0.05), 0 8px 24px rgba(31,27,22,0.06);
+  --shadow-overlay: 0 16px 48px rgba(31,27,22,0.16);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.25s;
+  --dur-base: 0.35s;
+  --dur-slow: 0.7s;
+  --dur-reveal: 0.9s;
+  --dur-theme: 0.4s;
+
+  /* Nav glass */
+  --nav-blur: 16px;
+  --nav-bg-light: rgba(255,255,255,0.92);
+  --nav-bg-dark: rgba(23,21,15,0.9);
+
+  /* Image treatment */
+  --img-filter: saturate(0.94) contrast(0.97);
+  --img-overlay-warm: linear-gradient(180deg, rgba(23,21,15,0) 40%, rgba(23,21,15,0.55) 100%);
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-22: 88px;
+  --sp-26: 104px;
+
+  --container-max: 1080px;
+  --gutter: 48px;
+  --nav-height: 72px;
+}
+
+/* ========================================
+   GLOBAL
+   ======================================== */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+body {
+  font-family: 'Archivo', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-body);
+  background: var(--surface-base);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+.type-hero {
+  font-weight: 200;
+  font-size: clamp(48px, 6.2vw, 100px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+}
+
+.type-display {
+  font-weight: 300;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-heading);
+}
+
+.type-h1 {
+  font-weight: 300;
+  font-size: 42px;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--text-heading);
+}
+
+.type-h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+}
+
+.type-h3 {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--text-heading);
+}
+
+.type-body-lg {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.type-body {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.type-body-sm {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.type-fine {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.type-label {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.type-label-sm {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   EYEBROW
+   ======================================== */
+.eyebrow {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 16px;
+}
+
+.eyebrow--dark {
+  color: var(--accent-on-dark);
+}
+.eyebrow--dark::before {
+  background: var(--accent-on-dark);
+}
+
+.eyebrow--inline {
+  display: inline-block;
+}
+.eyebrow--no-dash::before {
+  display: none;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-standard),
+              color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.btn--solid {
+  background: var(--accent);
+  color: var(--valm-white);
+  border-color: var(--accent);
+  padding: 14px 32px;
+}
+.btn--solid:hover {
+  background: var(--text-heading);
+  border-color: var(--text-heading);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--text-heading);
+  border-color: var(--border-on-light);
+  padding: 14px 32px;
+}
+.btn--outline:hover {
+  background: var(--accent);
+  color: var(--valm-white);
+  border-color: var(--accent);
+}
+
+.btn--lg {
+  padding: 16px 36px;
+  font-size: 12px;
+}
+
+.btn--sm {
+  padding: 10px 22px;
+  font-size: 11px;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn--on-dark {
+  background: transparent;
+  color: var(--text-on-dark);
+  border-color: var(--border-on-dark);
+}
+.btn--on-dark:hover {
+  background: var(--accent-on-dark);
+  color: var(--surface-dark);
+  border-color: var(--accent-on-dark);
+}
+
+/* ========================================
+   FORM FIELDS (underline style)
+   ======================================== */
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--label-on-light);
+  margin-bottom: 8px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-input);
+  border-radius: 0;
+  padding: 8px 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-heading);
+  transition: border-color var(--dur-fast) var(--ease-standard);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%2367635b' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 24px;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+/* ========================================
+   BADGES
+   ======================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 0;
+}
+
+.badge--sage {
+  background: var(--valm-green-wash);
+  color: var(--accent);
+}
+
+.badge--clay {
+  background: var(--valm-clay-wash);
+  color: var(--valm-clay);
+}
+
+.badge--ok {
+  background: var(--valm-green-wash);
+  color: var(--accent);
+}
+
+.badge--attention {
+  background: var(--valm-clay-wash);
+  color: var(--valm-clay);
+}
+
+/* ========================================
+   PHOTO SLOT
+   ======================================== */
+.photo-slot {
+  background: var(--valm-sand);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo-slot span {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--valm-grey-muted);
+}
+
+/* ========================================
+   NAV
+   ======================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(var(--nav-blur));
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  transition: background var(--dur-theme) var(--ease-standard),
+              color var(--dur-theme) var(--ease-standard);
+  background: var(--nav-bg-light);
+}
+
+.nav[data-theme="dark"] {
+  background: var(--nav-bg-dark);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: calc(var(--container-max) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav__mark {
+  width: 20px;
+  height: auto;
+  color: var(--text-heading);
+  transition: color var(--dur-theme) var(--ease-standard);
+}
+
+.nav[data-theme="dark"] .nav__mark {
+  color: var(--text-on-dark);
+}
+
+.nav__wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.nav__wordmark-vega {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  transition: color var(--dur-theme) var(--ease-standard);
+}
+
+.nav[data-theme="dark"] .nav__wordmark-vega {
+  color: var(--text-on-dark);
+}
+
+.nav__wordmark-desc {
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--valm-grey-muted);
+  transition: color var(--dur-theme) var(--ease-standard);
+}
+
+.nav[data-theme="dark"] .nav__wordmark-desc {
+  color: var(--text-on-dark-secondary);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav__link {
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--text-heading);
+  opacity: 0.72;
+  transition: opacity var(--dur-fast) var(--ease-standard),
+              color var(--dur-theme) var(--ease-standard);
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+}
+
+.nav__link:hover {
+  opacity: 1;
+}
+
+.nav__link.active {
+  opacity: 1;
+  border-bottom-color: currentColor;
+}
+
+.nav[data-theme="dark"] .nav__link {
+  color: var(--text-on-dark);
+}
+
+.nav__cta {
+  margin-left: 12px;
+}
+
+.nav__cta .btn--solid {
+  padding: 10px 24px;
+  font-size: 11px;
+}
+
+.nav[data-theme="dark"] .nav__cta .btn--solid {
+  background: var(--accent-on-dark);
+  border-color: var(--accent-on-dark);
+  color: var(--surface-dark);
+}
+
+.nav[data-theme="dark"] .nav__cta .btn--solid:hover {
+  background: var(--text-on-dark);
+  border-color: var(--text-on-dark);
+}
+
+/* Hamburger */
+.nav__hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nav__hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-heading);
+  position: absolute;
+  left: 5px;
+  transition: transform var(--dur-fast) var(--ease-standard),
+              opacity var(--dur-fast) var(--ease-standard),
+              background var(--dur-theme) var(--ease-standard);
+}
+
+.nav[data-theme="dark"] .nav__hamburger span {
+  background: var(--text-on-dark);
+}
+
+.nav__hamburger span:nth-child(1) { top: 9px; }
+.nav__hamburger span:nth-child(2) { top: 15px; }
+.nav__hamburger span:nth-child(3) { top: 21px; }
+
+.nav__hamburger.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav__hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav__hamburger.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile drawer */
+.nav__drawer {
+  display: none;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+  background: var(--surface-dark);
+  padding: 56px var(--gutter);
+}
+
+.footer__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.footer__logo {
+  flex-shrink: 0;
+}
+
+.footer__logo-lockup {
+  height: 64px;
+  color: #f6f3ee;
+}
+
+.footer__columns {
+  display: flex;
+  gap: 64px;
+}
+
+.footer__col-heading {
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+  margin-bottom: 16px;
+}
+
+.footer__col a {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--valm-grey-on-dark);
+  padding: 3px 0;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.footer__col a:hover {
+  color: var(--text-on-dark);
+}
+
+.footer__fine {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-on-dark);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--valm-grey-on-dark);
+}
+
+/* ========================================
+   TOAST
+   ======================================== */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--surface-dark);
+  color: var(--text-on-dark);
+  border: 1px solid var(--accent-on-dark);
+  padding: 14px 28px;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform var(--dur-base) var(--ease-out-expo),
+              opacity var(--dur-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ========================================
+   PAGE SECTIONS (visibility)
+   ======================================== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ========================================
+   HOMEPAGE: HERO
+   ======================================== */
+.home-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--gutter) 88px;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-base);
+}
+
+.home-hero__watermark {
+  position: absolute;
+  right: 2%;
+  top: 46%;
+  transform: translateY(-50%);
+  width: 26vw;
+  opacity: 0.1;
+  color: var(--valm-green);
+  pointer-events: none;
+}
+
+.home-hero__content {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.home-hero__title {
+  font-weight: 200;
+  font-size: clamp(48px, 6.2vw, 100px);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+}
+
+.home-hero__sub {
+  margin-top: 34px;
+  display: flex;
+  align-items: flex-start;
+  gap: 56px;
+}
+
+.home-hero__tag {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  padding-top: 4px;
+}
+
+.home-hero__desc {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-body);
+  max-width: 48ch;
+}
+
+.home-hero__actions {
+  margin-top: 44px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.home-hero__rule {
+  border: none;
+  border-bottom: 1px solid var(--border-on-light);
+  margin: 0 var(--gutter);
+}
+
+/* ========================================
+   HOMEPAGE: COMMUNITIES
+   ======================================== */
+.communities {
+  background: var(--surface-alt);
+  padding: var(--sp-26) 0;
+}
+
+.communities__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 var(--gutter);
+  max-width: calc(var(--container-max) + var(--gutter) * 2);
+  margin: 0 auto 48px;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.communities__header-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.communities__filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 1px solid var(--border-on-light);
+  background: transparent;
+  color: var(--text-body);
+  cursor: pointer;
+  border-radius: 0;
+  transition: background var(--dur-fast) var(--ease-standard),
+              color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+
+.filter-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  color: var(--valm-white);
+  border-color: var(--accent);
+}
+
+.communities__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--valm-rule);
+  max-width: calc(var(--container-max) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.community-cell {
+  background: var(--surface-card);
+  padding: 24px;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+
+.community-cell:hover {
+  background: var(--surface-alt);
+}
+
+.community-cell__photo {
+  height: 168px;
+  margin-bottom: 20px;
+}
+
+.community-cell__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.community-cell__name {
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.24;
+  color: var(--text-heading);
+}
+
+.community-cell__meta {
+  font-size: 13px;
+  color: var(--text-body);
+  margin-bottom: 12px;
+}
+
+.community-cell__level {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ========================================
+   COMMUNITY DRAWER
+   ======================================== */
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(23,21,15,0.4);
+  z-index: 140;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-standard);
+}
+
+.drawer-scrim.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.community-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 460px;
+  max-width: 100%;
+  background: var(--surface-base);
+  z-index: 150;
+  transform: translateX(100%);
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+  overflow-y: auto;
+  box-shadow: var(--shadow-overlay);
+}
+
+.community-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 32px 32px 0;
+}
+
+.drawer__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-body);
+  flex-shrink: 0;
+}
+
+.drawer__close:hover {
+  color: var(--text-heading);
+}
+
+.drawer__name {
+  font-weight: 300;
+  font-size: 38px;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--text-heading);
+  padding: 16px 32px 0;
+}
+
+.drawer__city {
+  font-size: 15px;
+  color: var(--text-body);
+  padding: 8px 32px 0;
+}
+
+.drawer__photo {
+  height: 200px;
+  margin: 24px 32px;
+}
+
+.drawer__badges {
+  display: flex;
+  gap: 8px;
+  padding: 0 32px;
+  margin-bottom: 24px;
+}
+
+.drawer__specs {
+  padding: 0 32px;
+  margin-bottom: 32px;
+}
+
+.drawer__spec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-on-light);
+  font-size: 14px;
+}
+
+.drawer__spec:first-child {
+  border-top: 1px solid var(--border-on-light);
+}
+
+.drawer__spec-label {
+  color: var(--label-on-light);
+  font-weight: 500;
+}
+
+.drawer__spec-value {
+  color: var(--text-heading);
+  font-weight: 400;
+}
+
+.drawer__action {
+  padding: 0 32px 40px;
+}
+
+/* ========================================
+   HOMEPAGE: SERVICES
+   ======================================== */
+.services {
+  background: var(--surface-base);
+  padding: var(--sp-26) 0;
+}
+
+.services__header {
+  padding: 0 var(--gutter);
+  max-width: calc(var(--container-max) + var(--gutter) * 2);
+  margin: 0 auto 56px;
+}
+
+.services__title {
+  font-weight: 300;
+  font-size: 42px;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--text-heading);
+  max-width: 24ch;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 44px;
+  padding: 0 var(--gutter);
+  max-width: calc(var(--container-max) + var(--gutter) * 2);
+  margin: 0 auto;
+}
+
+.service-card {
+  border-top: 1px solid var(--border-on-light);
+  padding-top: 26px;
+}
+
+.service-card__kicker {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.service-card__title {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--text-heading);
+  margin-bottom: 10px;
+}
+
+.service-card__body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* ========================================
+   STATS BAND
+   ======================================== */
+.stats-band {
+  background: var(--surface-dark);
+  padding: var(--sp-22) 0;
+}
+
+.stats-band__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+.stat__number {
+  font-weight: 200;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-on-dark);
+}
+
+.stat__label {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+  margin-top: 8px;
+}
+
+.stats-band__caption {
+  text-align: center;
+  margin-top: 24px;
+  padding: 0 var(--gutter);
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 11px;
+  color: var(--text-on-dark-secondary);
+}
+
+/* ========================================
+   HOMEPAGE: APPROACH
+   ======================================== */
+.approach {
+  background: var(--surface-base);
+  padding: var(--sp-26) 0;
+}
+
+.approach__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  align-items: start;
+}
+
+.approach__quote {
+  border-left: 1px solid var(--border-on-light);
+  padding-left: 32px;
+}
+
+.approach__quote-text {
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 24px;
+}
+
+.approach__quote-attr {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--label-on-light);
+}
+
+.approach__content p {
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 58ch;
+  margin-bottom: 20px;
+}
+
+.approach__pillars {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 28px;
+}
+
+.approach__pillar-sep {
+  color: var(--accent);
+  margin: 0 8px;
+}
+
+/* ========================================
+   HOMEPAGE: CONTACT
+   ======================================== */
+.contact {
+  background: var(--surface-alt);
+  padding: var(--sp-26) 0;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 72px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.contact__info h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+}
+
+.contact__info p {
+  font-size: 15px;
+  max-width: 38ch;
+  margin-bottom: 24px;
+}
+
+.contact__link {
+  display: block;
+  font-size: 15px;
+  color: var(--link);
+  margin-bottom: 8px;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.contact__link:hover {
+  color: var(--link-hover);
+}
+
+.contact__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 32px;
+}
+
+.contact__submit {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 8px;
+}
+
+/* ========================================
+   OWNERS PAGE
+   ======================================== */
+.owners-hero {
+  padding: 148px var(--gutter) 88px;
+  background: var(--surface-base);
+}
+
+.owners-hero__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.owners-hero__title {
+  font-weight: 300;
+  font-size: 62px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+  max-width: 20ch;
+  margin-bottom: 24px;
+}
+
+.owners-hero__lede {
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 58ch;
+  margin-bottom: 40px;
+}
+
+.owners-hero__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Why Vega ALM (owners) */
+.why-vega {
+  background: var(--surface-alt);
+  padding: 96px 0;
+}
+
+.why-vega__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.why-vega__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 44px;
+  margin-top: 40px;
+}
+
+.why-card {
+  border-top: 1px solid var(--border-on-light);
+  padding-top: 26px;
+}
+
+.why-card__title {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--text-heading);
+  margin-bottom: 10px;
+}
+
+.why-card__body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* Owner Reporting */
+.reporting {
+  background: var(--surface-base);
+  padding: 96px 0;
+}
+
+.reporting__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  align-items: start;
+}
+
+.reporting__left h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 20px;
+}
+
+.reporting__left p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.reporting__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reporting__table thead th {
+  font-weight: 600;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  text-align: left;
+  padding: 0 0 12px 0;
+  border-bottom: 1px solid var(--text-heading);
+}
+
+.reporting__table thead th:nth-child(n+2) {
+  text-align: right;
+}
+
+.reporting__table tbody td {
+  font-weight: 400;
+  font-size: 14px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--border-on-light);
+  color: var(--text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.reporting__table tbody td:nth-child(n+2) {
+  text-align: right;
+}
+
+.reporting__table-caption {
+  font-size: 11px;
+  color: var(--valm-grey-muted);
+  margin-top: 16px;
+  font-style: italic;
+}
+
+/* Engagement Types */
+.engagement {
+  background: var(--surface-alt);
+  padding: 96px 0;
+}
+
+.engagement__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  align-items: center;
+}
+
+.engagement__photo {
+  height: 340px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-on-light);
+}
+
+.engagement__right h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 28px;
+}
+
+.engagement__entry {
+  border-top: 1px solid var(--border-on-light);
+  padding-top: 20px;
+  margin-bottom: 22px;
+}
+
+.engagement__entry-title {
+  font-weight: 400;
+  font-size: 21px;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+}
+
+.engagement__entry-body {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* Proposal Form */
+.proposal {
+  background: var(--surface-base);
+  padding: 96px 0;
+}
+
+.proposal__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.proposal__left h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+}
+
+.proposal__left p {
+  font-size: 15px;
+  max-width: 38ch;
+  margin-bottom: 16px;
+}
+
+.proposal__nda {
+  font-size: 13px;
+  color: var(--valm-grey-muted);
+}
+
+.proposal__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px 24px;
+}
+
+.proposal__submit {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 8px;
+}
+
+/* ========================================
+   ABOUT PAGE
+   ======================================== */
+.about-hero {
+  padding: 148px var(--gutter) 84px;
+  background: var(--surface-base);
+}
+
+.about-hero__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.about-hero__title {
+  font-weight: 300;
+  font-size: 62px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+  max-width: 22ch;
+  margin-bottom: 24px;
+}
+
+.about-hero__lede {
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 58ch;
+}
+
+/* Timeline */
+.timeline {
+  background: var(--surface-alt);
+  padding: 96px 0;
+}
+
+.timeline__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.timeline__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--valm-rule);
+  margin-top: 40px;
+}
+
+.timeline__cell {
+  background: var(--surface-base);
+  padding: 30px 26px 34px;
+}
+
+.timeline__year {
+  font-weight: 300;
+  font-size: 34px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.timeline__title {
+  font-weight: 600;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+}
+
+.timeline__body {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+/* Vega Relationship */
+.vega-relationship {
+  background: var(--surface-dark);
+  padding: 96px 0;
+}
+
+.vega-relationship__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  align-items: center;
+}
+
+.vega-relationship__left h2 {
+  font-weight: 300;
+  font-size: 42px;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--text-on-dark);
+  max-width: 24ch;
+  margin-bottom: 24px;
+}
+
+.vega-relationship__left p {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-on-dark-secondary);
+  max-width: 54ch;
+  margin-bottom: 16px;
+}
+
+.vega-relationship__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.vega-relationship__logo-svg {
+  height: 104px;
+  color: var(--text-on-dark);
+}
+
+/* Leadership */
+.leadership {
+  background: var(--surface-base);
+  padding: 96px 0;
+}
+
+.leadership__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.leadership__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 28px;
+  margin-top: 40px;
+}
+
+.leader__portrait {
+  aspect-ratio: 4 / 5;
+  background: var(--surface-base);
+  border: 1px solid var(--border-on-light);
+}
+
+.leader__name {
+  font-weight: 400;
+  font-size: 21px;
+  color: var(--text-heading);
+  margin-top: 18px;
+}
+
+.leader__role {
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--label-on-light);
+  margin-top: 8px;
+}
+
+.leadership__caption {
+  font-size: 11px;
+  color: var(--valm-grey-muted);
+  margin-top: 32px;
+  font-style: italic;
+}
+
+/* Values */
+.values {
+  background: var(--surface-alt);
+  padding: 96px 0;
+}
+
+.values__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.values__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 44px;
+  margin-top: 40px;
+}
+
+.value-card {
+  border-top: 1px solid var(--border-on-light);
+  padding-top: 26px;
+}
+
+.value-card__kicker {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.value-card__title {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--text-heading);
+  margin-bottom: 10px;
+}
+
+.value-card__body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.values__action {
+  margin-top: 56px;
+}
+
+/* ========================================
+   CAREERS PAGE
+   ======================================== */
+.careers-hero {
+  padding: 148px var(--gutter) 84px;
+  background: var(--surface-base);
+}
+
+.careers-hero__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.careers-hero__title {
+  font-weight: 300;
+  font-size: 62px;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+  max-width: 19ch;
+  margin-bottom: 24px;
+}
+
+.careers-hero__lede {
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 58ch;
+}
+
+/* Why Work Here */
+.why-work {
+  background: var(--surface-alt);
+  padding: 96px 0;
+}
+
+.why-work__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.why-work__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 44px;
+  margin-top: 40px;
+}
+
+/* Consistent Assignment */
+.consistent {
+  background: var(--surface-base);
+  padding: 96px 0;
+}
+
+.consistent__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  align-items: center;
+}
+
+.consistent__photo {
+  height: 360px;
+}
+
+.consistent__right h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 20px;
+}
+
+.consistent__right p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+/* Open Roles */
+.roles {
+  background: var(--surface-alt);
+  padding: 96px 0;
+}
+
+.roles__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.roles__caption {
+  font-size: 11px;
+  color: var(--valm-grey-muted);
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.accordion-row {
+  border-top: 1px solid var(--border-on-light);
+}
+
+.accordion-row:last-child {
+  border-bottom: 1px solid var(--border-on-light);
+}
+
+.accordion__header {
+  display: grid;
+  grid-template-columns: 1fr 220px 150px 24px;
+  gap: 20px;
+  align-items: center;
+  padding: 24px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion__title {
+  font-weight: 400;
+  font-size: 23px;
+  color: var(--text-heading);
+}
+
+.accordion__location {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--valm-grey-muted);
+}
+
+.accordion__caret {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-fast) var(--ease-standard);
+  color: var(--text-body);
+}
+
+.accordion-row.open .accordion__caret {
+  transform: rotate(180deg);
+}
+
+.accordion__body {
+  display: none;
+  padding-bottom: 30px;
+}
+
+.accordion-row.open .accordion__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+}
+
+.accordion__summary {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-body);
+}
+
+.accordion__req-heading {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  margin-bottom: 14px;
+}
+
+.accordion__req-list {
+  margin-bottom: 24px;
+}
+
+.accordion__req-list li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-body);
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.accordion__req-list li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+/* Application Form */
+.application {
+  background: var(--surface-base);
+  padding: 96px 0;
+}
+
+.application__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.application__left h2 {
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+  color: var(--text-heading);
+  margin-bottom: 16px;
+}
+
+.application__left p {
+  font-size: 15px;
+  max-width: 38ch;
+  margin-bottom: 16px;
+}
+
+.application__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px 24px;
+}
+
+.application__submit {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 8px;
+}
+
+/* ========================================
+   RESPONSIVE: TABLET
+   ======================================== */
+@media (max-width: 1024px) {
+  :root {
+    --gutter: 32px;
+  }
+
+  .communities__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-band__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+
+  .leadership__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .approach__grid,
+  .contact__grid,
+  .reporting__grid,
+  .engagement__grid,
+  .proposal__grid,
+  .vega-relationship__grid,
+  .consistent__grid,
+  .application__grid {
+    gap: 48px;
+  }
+
+  .owners-hero__title,
+  .about-hero__title,
+  .careers-hero__title {
+    font-size: 48px;
+  }
+
+  .accordion__header {
+    grid-template-columns: 1fr 160px 120px 24px;
+    gap: 12px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE: MOBILE
+   ======================================== */
+@media (max-width: 768px) {
+  :root {
+    --gutter: 24px;
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__hamburger {
+    display: block;
+  }
+
+  /* Mobile drawer */
+  .nav__drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--surface-base);
+    z-index: 99;
+    padding: 32px var(--gutter);
+    transform: translateX(100%);
+    transition: transform var(--dur-slow) var(--ease-out-expo);
+    gap: 0;
+  }
+
+  .nav[data-theme="dark"] .nav__drawer {
+    background: var(--surface-dark);
+  }
+
+  .nav__drawer.open {
+    transform: translateX(0);
+  }
+
+  .nav__drawer-link {
+    display: block;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--text-heading);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-on-light);
+    opacity: 0.72;
+    transition: opacity var(--dur-fast) var(--ease-standard);
+  }
+
+  .nav__drawer-link.active {
+    opacity: 1;
+  }
+
+  .nav[data-theme="dark"] .nav__drawer-link {
+    color: var(--text-on-dark);
+    border-bottom-color: var(--border-on-dark);
+  }
+
+  .nav__drawer-cta {
+    margin-top: 32px;
+  }
+
+  .home-hero {
+    min-height: 90vh;
+    padding-bottom: 56px;
+  }
+
+  .home-hero__sub {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .home-hero__watermark {
+    width: 50vw;
+    opacity: 0.06;
+  }
+
+  .communities__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .communities__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services__title {
+    font-size: 32px;
+  }
+
+  .stats-band__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .approach__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .community-drawer {
+    width: 100%;
+  }
+
+  .owners-hero__title,
+  .about-hero__title,
+  .careers-hero__title {
+    font-size: 38px;
+  }
+
+  .why-vega__cards,
+  .why-work__cards,
+  .values__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .reporting__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .engagement__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proposal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proposal__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vega-relationship__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leadership__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .consistent__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .accordion__header {
+    grid-template-columns: 1fr 24px;
+    gap: 8px;
+  }
+
+  .accordion__location,
+  .accordion__badge-col {
+    display: none;
+  }
+
+  .accordion-row.open .accordion__body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .application__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__top {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer__columns {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .nav__wordmark-desc {
+    display: none;
+  }
+
+  .vega-relationship__left h2 {
+    font-size: 32px;
+  }
+
+  .approach__quote-text {
+    font-size: 22px;
+  }
+
+  .reporting__table {
+    font-size: 13px;
+  }
+
+  .reporting__table thead th {
+    font-size: 8px;
+  }
+
+  .reporting__table tbody td {
+    font-size: 13px;
+    padding: 12px 0;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .community-drawer {
+    transition: none;
+  }
+
+  .accordion__caret {
+    transition: none;
+  }
+}
+</style>
+</head>
+<body>
+<!-- ==========================================
+     NAV
+     ========================================== -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#home" aria-label="Vega ALM Home">
+      <svg class="nav__mark" viewBox="0 0 186.57 293.85" aria-hidden="true">
+        <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
+        <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
+      </svg>
+      <div class="nav__wordmark">
+        <span class="nav__wordmark-vega">Vega</span>
+        <span class="nav__wordmark-desc">Assisted Living Management</span>
+      </div>
+    </a>
+    <div class="nav__links" id="navLinks">
+      <a class="nav__link" href="#home" data-page="home">Home</a>
+      <a class="nav__link" href="#owners" data-page="owners">For Owners</a>
+      <a class="nav__link" href="#about" data-page="about">About</a>
+      <a class="nav__link" href="#careers" data-page="careers">Careers</a>
+      <div class="nav__cta">
+        <button class="btn btn--solid" id="navCtaBtn">Schedule a Visit</button>
+      </div>
+    </div>
+    <button class="nav__hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__drawer" id="navDrawer">
+    <a class="nav__drawer-link" href="#home" data-page="home">Home</a>
+    <a class="nav__drawer-link" href="#owners" data-page="owners">For Owners</a>
+    <a class="nav__drawer-link" href="#about" data-page="about">About</a>
+    <a class="nav__drawer-link" href="#careers" data-page="careers">Careers</a>
+    <div class="nav__drawer-cta">
+      <button class="btn btn--solid btn--full" id="navDrawerCtaBtn">Schedule a Visit</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ==========================================
+     TOAST
+     ========================================== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ==========================================
+     COMMUNITY DRAWER
+     ========================================== -->
+<div class="drawer-scrim" id="drawerScrim"></div>
+<aside class="community-drawer" id="communityDrawer" aria-label="Community details">
+  <div class="drawer__header">
+    <span class="eyebrow eyebrow--no-dash" id="drawerLevel"></span>
+    <button class="drawer__close" id="drawerClose" aria-label="Close drawer">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+  <h2 class="drawer__name" id="drawerName"></h2>
+  <p class="drawer__city" id="drawerCity"></p>
+  <div class="drawer__photo photo-slot" id="drawerPhoto">
+    <span>Community Photo</span>
+  </div>
+  <div class="drawer__badges" id="drawerBadges"></div>
+  <div class="drawer__specs" id="drawerSpecs"></div>
+  <div class="drawer__action">
+    <button class="btn btn--solid btn--full" onclick="navigateTo('home','contact')">Schedule a Visit</button>
+  </div>
+</aside>
+
+<!-- ==========================================
+     PAGE 1: HOME
+     ========================================== -->
+<main class="page" id="page-home">
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="home-hero__watermark" aria-hidden="true">
+      <svg viewBox="0 0 186.57 293.85">
+        <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
+        <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="home-hero__content">
+      <h1 class="home-hero__title">True North for<br>Resident Care</h1>
+      <div class="home-hero__sub">
+        <span class="home-hero__tag">Est. 2012 &middot; A Vega Company</span>
+        <p class="home-hero__desc">We provide compassionate, consistent care across every community we manage. Our operational discipline means residents feel it where it matters most: in the daily rhythms of their lives.</p>
+      </div>
+      <div class="home-hero__actions">
+        <a class="btn btn--solid btn--lg" href="#contact" onclick="scrollToSection(event,'contact')">Schedule a Visit</a>
+        <a class="btn btn--outline btn--lg" href="#our-communities" onclick="scrollToSection(event,'our-communities')">Our Communities</a>
+      </div>
+    </div>
+  </section>
+  <hr class="home-hero__rule">
+
+  <!-- COMMUNITIES -->
+  <section class="communities" id="our-communities">
+    <div class="communities__header">
+      <div class="communities__header-left">
+        <div class="eyebrow">Our Communities</div>
+        <h2 class="type-h2">Where We Operate</h2>
+      </div>
+      <div class="communities__filters" id="communityFilters">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="Independent Living">Independent Living</button>
+        <button class="filter-chip" data-filter="Assisted Living">Assisted Living</button>
+        <button class="filter-chip" data-filter="Memory Care">Memory Care</button>
+      </div>
+    </div>
+    <div class="communities__grid" id="communityGrid"></div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="services__header">
+      <div class="eyebrow">What We Do</div>
+      <h2 class="services__title">Whole-Building Management for Senior Living</h2>
+    </div>
+    <div class="services__grid">
+      <div class="service-card">
+        <div class="service-card__kicker">Operations</div>
+        <h3 class="service-card__title">Day-to-Day Management</h3>
+        <p class="service-card__body">We handle staffing, compliance, vendor contracts, and resident services so owners can focus on the asset.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__kicker">Clinical</div>
+        <h3 class="service-card__title">Clinical Oversight</h3>
+        <p class="service-card__body">Licensed nurses manage care plans, medication administration, and state survey readiness across every community.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__kicker">Sales</div>
+        <h3 class="service-card__title">Census Development</h3>
+        <p class="service-card__body">Our sales team drives occupancy through local outreach, referral partnerships, and conversion-focused follow-up.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__kicker">Financial</div>
+        <h3 class="service-card__title">Financial Management</h3>
+        <p class="service-card__body">Monthly reporting, budgeting, accounts payable, and NOI optimization with full transparency to ownership.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__kicker">Compliance</div>
+        <h3 class="service-card__title">Regulatory Compliance</h3>
+        <p class="service-card__body">We stay ahead of state and federal requirements, maintaining survey-ready operations year-round.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__kicker">Culinary</div>
+        <h3 class="service-card__title">Culinary and Life Enrichment</h3>
+        <p class="service-card__body">Restaurant-style dining programs and daily activities designed around resident preferences and abilities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section class="stats-band" id="homeStatsBand">
+    <div class="stats-band__grid">
+      <div class="stat">
+        <div class="stat__number" data-target="14" data-suffix="">0</div>
+        <div class="stat__label">Communities</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number" data-target="1180" data-suffix="" data-comma="true">0</div>
+        <div class="stat__label">Units</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number" data-target="94" data-suffix="%">0%</div>
+        <div class="stat__label">Occupancy</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number" data-target="12" data-suffix="">0</div>
+        <div class="stat__label">Years Operating</div>
+      </div>
+    </div>
+    <p class="stats-band__caption">Placeholder data for illustration purposes.</p>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach">
+    <div class="approach__grid">
+      <div class="approach__quote">
+        <p class="approach__quote-text">"We took what we learned underwriting buildings and asked what it would take to never lose a resident we should have kept."</p>
+        <span class="approach__quote-attr">Sayer Leslie, Owner</span>
+      </div>
+      <div class="approach__content">
+        <div class="eyebrow">Our Approach</div>
+        <p>Vega ALM was born out of a real estate investment firm. That background gives us a bias toward measurable outcomes: occupancy, retention, NOI. But we learned early that the path to those numbers runs through people, not spreadsheets. Operational discipline only works when it is built on a culture that retains staff and earns the trust of residents and their families.</p>
+        <p>We staff above state minimums and publish our ratios. We assign caregivers to the same residents so relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard.</p>
+        <div class="approach__pillars">
+          Staffing-First<span class="approach__pillar-sep">|</span>Transparent Reporting<span class="approach__pillar-sep">|</span>Resident Retention
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact__grid">
+      <div class="contact__info">
+        <div class="eyebrow">Get in Touch</div>
+        <h2>We would like to hear from you.</h2>
+        <p>Whether you are exploring care options for a loved one or you own a community looking for a management partner, we are here to help.</p>
+        <a class="contact__link" href="tel:+18015550134">(801) 555-0134</a>
+        <a class="contact__link" href="mailto:care@vegaalm.com">care@vegaalm.com</a>
+      </div>
+      <form class="contact__form" id="contactForm" onsubmit="handleFormSubmit(event, 'contactSubmitBtn', 'Inquiry received. We will be in touch.')">
+        <div class="contact__form-grid">
+          <div class="field">
+            <label for="contactFirst">First Name</label>
+            <input type="text" id="contactFirst" name="firstName" required>
+          </div>
+          <div class="field">
+            <label for="contactLast">Last Name</label>
+            <input type="text" id="contactLast" name="lastName" required>
+          </div>
+          <div class="field">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" required>
+          </div>
+          <div class="field">
+            <label for="contactPhone">Phone</label>
+            <input type="tel" id="contactPhone" name="phone">
+          </div>
+          <div class="field">
+            <label for="contactInquiry">Inquiry Type</label>
+            <select id="contactInquiry" name="inquiryType" required>
+              <option value="" disabled selected>Select one</option>
+              <option value="family">Family Inquiry</option>
+              <option value="owner">Owner Inquiry</option>
+              <option value="career">Career Interest</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" rows="4"></textarea>
+          </div>
+          <div class="contact__submit">
+            <button type="submit" class="btn btn--solid" id="contactSubmitBtn">Submit Inquiry</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================
+     PAGE 2: OWNERS
+     ========================================== -->
+<main class="page" id="page-owners">
+
+  <!-- HERO -->
+  <section class="owners-hero">
+    <div class="owners-hero__inner">
+      <div class="eyebrow">For Owners</div>
+      <h1 class="owners-hero__title">An Operator You Can Hold to a Number.</h1>
+      <p class="owners-hero__lede">We tie our management fee to the metrics that matter to you: occupancy, NOI, and retention. If the building underperforms, so does our compensation. That alignment is the foundation of every engagement.</p>
+      <div class="owners-hero__actions">
+        <a class="btn btn--solid btn--lg" href="#proposal" onclick="scrollToSection(event,'proposal')">Request a Proposal</a>
+        <a class="btn btn--outline btn--lg" href="#reporting" onclick="scrollToSection(event,'reporting')">See a Reporting Sample</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY VEGA ALM -->
+  <section class="why-vega">
+    <div class="why-vega__inner">
+      <div class="eyebrow">Why Vega ALM</div>
+      <div class="why-vega__cards">
+        <div class="why-card">
+          <h3 class="why-card__title">Aligned Incentives</h3>
+          <p class="why-card__body">We tie our fee to NOI performance, not just revenue. When the building wins, we win.</p>
+        </div>
+        <div class="why-card">
+          <h3 class="why-card__title">Operator-Owner Reporting</h3>
+          <p class="why-card__body">Monthly P&amp;L, census dashboard, and capital planning delivered in a format owners actually read.</p>
+        </div>
+        <div class="why-card">
+          <h3 class="why-card__title">Transition Expertise</h3>
+          <p class="why-card__body">We have taken over underperforming communities and stabilized them within two quarters. Our playbook is tested.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OWNER REPORTING -->
+  <section class="reporting" id="reporting">
+    <div class="reporting__grid">
+      <div class="reporting__left">
+        <div class="eyebrow">Reporting</div>
+        <h2>Monthly Transparency, No Exceptions</h2>
+        <p>Every owner receives a full financial package by the 15th of the following month. The package includes a community-level P&amp;L, a census and occupancy dashboard, and a rolling 12-month trend report.</p>
+        <p>We use a standardized chart of accounts across all communities so comparisons are meaningful and variance analysis is straightforward.</p>
+        <p>Quarterly, we add a capital expenditure review and a staffing audit. Annual budgets are built collaboratively with each ownership group.</p>
+      </div>
+      <div class="reporting__right">
+        <table class="reporting__table">
+          <thead>
+            <tr>
+              <th>Community</th>
+              <th>Units</th>
+              <th>Occupancy</th>
+              <th>NOI Variance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Willow Creek, Salt Lake City</td>
+              <td>48</td>
+              <td>96%</td>
+              <td><span class="badge badge--ok">+4.2%</span></td>
+            </tr>
+            <tr>
+              <td>Orchard Park, Provo</td>
+              <td>64</td>
+              <td>91%</td>
+              <td><span class="badge badge--attention">-1.8%</span></td>
+            </tr>
+            <tr>
+              <td>Bell Canyon, Sandy</td>
+              <td>36</td>
+              <td>98%</td>
+              <td><span class="badge badge--ok">+7.1%</span></td>
+            </tr>
+            <tr>
+              <td>Harvest House, Ogden</td>
+              <td>52</td>
+              <td>94%</td>
+              <td><span class="badge badge--ok">+2.3%</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="reporting__table-caption">Illustrative figures. Placeholder data pending real portfolio numbers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section class="stats-band" id="ownersStatsBand">
+    <div class="stats-band__grid">
+      <div class="stat">
+        <div class="stat__number" data-target="14" data-suffix="">0</div>
+        <div class="stat__label">Communities</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number" data-target="1180" data-suffix="" data-comma="true">0</div>
+        <div class="stat__label">Units</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number" data-target="94" data-suffix="%">0%</div>
+        <div class="stat__label">Occupancy</div>
+      </div>
+      <div class="stat">
+        <div class="stat__number" data-target="12" data-suffix="">0</div>
+        <div class="stat__label">Years Operating</div>
+      </div>
+    </div>
+    <p class="stats-band__caption">Placeholder data for illustration purposes.</p>
+  </section>
+
+  <!-- ENGAGEMENT TYPES -->
+  <section class="engagement">
+    <div class="engagement__grid">
+      <div class="engagement__photo photo-slot">
+        <span>Community Photo</span>
+      </div>
+      <div class="engagement__right">
+        <div class="eyebrow">Engagement Types</div>
+        <h2>How We Work With Owners</h2>
+        <div class="engagement__entry">
+          <h3 class="engagement__entry-title">Full Management</h3>
+          <p class="engagement__entry-body">End-to-end operations, clinical, sales, and financial management under a single contract.</p>
+        </div>
+        <div class="engagement__entry">
+          <h3 class="engagement__entry-title">Consulting</h3>
+          <p class="engagement__entry-body">Targeted operational or clinical consulting for owners who keep their own team in place.</p>
+        </div>
+        <div class="engagement__entry">
+          <h3 class="engagement__entry-title">Transition Management</h3>
+          <p class="engagement__entry-body">Short-term stabilization for communities changing hands or recovering from regulatory action.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPOSAL FORM -->
+  <section class="proposal" id="proposal">
+    <div class="proposal__grid">
+      <div class="proposal__left">
+        <div class="eyebrow">Request a Proposal</div>
+        <h2>Let Us Show You the Numbers</h2>
+        <p>Tell us about your community and we will put together a management proposal tailored to your ownership structure and operating goals.</p>
+        <p class="proposal__nda">All submissions are treated as confidential. We are happy to sign an NDA before any detailed discussion.</p>
+      </div>
+      <form id="proposalForm" onsubmit="handleFormSubmit(event, 'proposalSubmitBtn', 'Proposal request received. We will follow up within one business day.')">
+        <div class="proposal__form-grid">
+          <div class="field">
+            <label for="propName">Your Name</label>
+            <input type="text" id="propName" name="name" required>
+          </div>
+          <div class="field">
+            <label for="propEntity">Ownership Entity</label>
+            <input type="text" id="propEntity" name="entity" required>
+          </div>
+          <div class="field">
+            <label for="propEmail">Email</label>
+            <input type="email" id="propEmail" name="email" required>
+          </div>
+          <div class="field">
+            <label for="propPhone">Phone</label>
+            <input type="tel" id="propPhone" name="phone">
+          </div>
+          <div class="field">
+            <label for="propCommunity">Community Name</label>
+            <input type="text" id="propCommunity" name="community">
+          </div>
+          <div class="field">
+            <label for="propUnits">Unit Count</label>
+            <input type="number" id="propUnits" name="units" min="1">
+          </div>
+          <div class="field">
+            <label for="propEngagement">Engagement Type</label>
+            <select id="propEngagement" name="engagementType">
+              <option value="" disabled selected>Select one</option>
+              <option value="full">Full Management</option>
+              <option value="consulting">Consulting</option>
+              <option value="transition">Transition Management</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="propCare">Care Levels</label>
+            <select id="propCare" name="careLevels">
+              <option value="" disabled selected>Select one</option>
+              <option value="independent">Independent Living</option>
+              <option value="assisted">Assisted Living</option>
+              <option value="memory">Memory Care</option>
+              <option value="mixed">Mixed</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="propMessage">Message</label>
+            <textarea id="propMessage" name="message" rows="4"></textarea>
+          </div>
+          <div class="proposal__submit">
+            <button type="submit" class="btn btn--solid" id="proposalSubmitBtn">Submit Request</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================
+     PAGE 3: ABOUT
+     ========================================== -->
+<main class="page" id="page-about">
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero__inner">
+      <div class="eyebrow">About</div>
+      <h1 class="about-hero__title">A Real Estate Operator That Learned to Run Care.</h1>
+      <p class="about-hero__lede">Vega ALM started because a real estate firm needed better operations in its own buildings. What began as an internal solution became a standalone management company serving owners across the region.</p>
+    </div>
+  </section>
+
+  <!-- HISTORY TIMELINE -->
+  <section class="timeline">
+    <div class="timeline__inner">
+      <div class="eyebrow">Our History</div>
+      <div class="timeline__grid">
+        <div class="timeline__cell">
+          <div class="timeline__year">2012</div>
+          <div class="timeline__title">Founded</div>
+          <p class="timeline__body">Vega begins as a real estate investment firm focused on senior housing.</p>
+        </div>
+        <div class="timeline__cell">
+          <div class="timeline__year">2016</div>
+          <div class="timeline__title">First Operation</div>
+          <p class="timeline__body">Vega takes over management of its first assisted living community after a third-party operator underperforms.</p>
+        </div>
+        <div class="timeline__cell">
+          <div class="timeline__year">2019</div>
+          <div class="timeline__title">Formalized</div>
+          <p class="timeline__body">Assisted Living Management is established as a standalone operating company within the Vega platform.</p>
+        </div>
+        <div class="timeline__cell">
+          <div class="timeline__year">2024</div>
+          <div class="timeline__title">Scale</div>
+          <p class="timeline__body">The portfolio grows to 14 communities across three states with consistent operating metrics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEGA RELATIONSHIP -->
+  <section class="vega-relationship">
+    <div class="vega-relationship__grid">
+      <div class="vega-relationship__left">
+        <div class="eyebrow eyebrow--dark">Vega Platform</div>
+        <h2>Built by Vega. Run Independently.</h2>
+        <p>Vega ALM operates as an independent management company within the Vega platform. Our leadership team makes operating decisions without layers of approval, which means faster responses to the realities on the ground in each community.</p>
+        <p>The Vega platform provides shared infrastructure: legal, accounting, human resources, and capital markets expertise. That lets our operators focus on what they do best, which is running buildings and taking care of residents.</p>
+        <p>Ownership alignment is built into the structure. Vega invests in many of the communities we manage, which means our interests as operator and owner are never in conflict.</p>
+      </div>
+      <div class="vega-relationship__logo">
+        <svg class="vega-relationship__logo-svg" viewBox="0 0 186.57 293.85" aria-label="Vega">
+          <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
+          <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="leadership">
+    <div class="leadership__inner">
+      <div class="eyebrow">Leadership</div>
+      <div class="leadership__grid">
+        <div class="leader">
+          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <h3 class="leader__name">Sayer Leslie</h3>
+          <div class="leader__role">Owner, Chief Executive</div>
+        </div>
+        <div class="leader">
+          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <h3 class="leader__name">Name TK</h3>
+          <div class="leader__role">Chief Operating Officer</div>
+        </div>
+        <div class="leader">
+          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <h3 class="leader__name">Name TK</h3>
+          <div class="leader__role">Director of Clinical Services</div>
+        </div>
+        <div class="leader">
+          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <h3 class="leader__name">Name TK</h3>
+          <div class="leader__role">Director of Sales</div>
+        </div>
+      </div>
+      <p class="leadership__caption">Awaiting confirmed names and portraits.</p>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="values__inner">
+      <div class="eyebrow">What We Believe</div>
+      <div class="values__cards">
+        <div class="value-card">
+          <div class="value-card__kicker">Principle</div>
+          <h3 class="value-card__title">Staffing First</h3>
+          <p class="value-card__body">When staffing is right, care follows. We publish our ratios and hold ourselves to them.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card__kicker">Principle</div>
+          <h3 class="value-card__title">Transparent Reporting</h3>
+          <p class="value-card__body">Owners see what we see. Monthly financials, census data, and incident reports without filters.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card__kicker">Principle</div>
+          <h3 class="value-card__title">Resident Retention</h3>
+          <p class="value-card__body">The best measure of care quality is whether residents stay. We track it and tie compensation to it.</p>
+        </div>
+      </div>
+      <div class="values__action">
+        <a class="btn btn--solid btn--lg" href="#owners">Work With Us</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================
+     PAGE 4: CAREERS
+     ========================================== -->
+<main class="page" id="page-careers">
+
+  <!-- HERO -->
+  <section class="careers-hero">
+    <div class="careers-hero__inner">
+      <div class="eyebrow">Careers</div>
+      <h1 class="careers-hero__title">The Staffing Plan Is the Care Plan.</h1>
+      <p class="careers-hero__lede">We believe the quality of care in a community is determined by the people who show up every day. That is why we invest in staffing ratios, training, and a culture where caregivers stay and grow.</p>
+    </div>
+  </section>
+
+  <!-- WHY WORK HERE -->
+  <section class="why-work">
+    <div class="why-work__inner">
+      <div class="eyebrow">Why Work Here</div>
+      <div class="why-work__cards">
+        <div class="why-card">
+          <h3 class="why-card__title">Published Ratios</h3>
+          <p class="why-card__body">We staff above state minimums and publish our caregiver-to-resident ratios publicly. You will never work short.</p>
+        </div>
+        <div class="why-card">
+          <h3 class="why-card__title">Promote From Within</h3>
+          <p class="why-card__body">Every community leader started on the floor. We fund training and promote before we hire outside.</p>
+        </div>
+        <div class="why-card">
+          <h3 class="why-card__title">Tuition and Licensure</h3>
+          <p class="why-card__body">CNA certification, med-tech training, and LPN tuition assistance are available from day one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSISTENT ASSIGNMENT -->
+  <section class="consistent">
+    <div class="consistent__grid">
+      <div class="consistent__photo photo-slot">
+        <span>Community Photo</span>
+      </div>
+      <div class="consistent__right">
+        <div class="eyebrow">Consistent Assignment</div>
+        <h2>Same Residents, Same Caregivers.</h2>
+        <p>Our consistent assignment model means caregivers work with the same group of residents every shift. That continuity builds trust, catches changes in condition earlier, and makes the work more meaningful.</p>
+        <p>Rotating assignments might look efficient on a schedule, but they erode the relationships that define good care. We choose consistency over convenience, and we see it in our retention numbers for both residents and staff.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN ROLES -->
+  <section class="roles">
+    <div class="roles__inner">
+      <div class="eyebrow">Open Positions</div>
+      <p class="roles__caption">Placeholder postings.</p>
+      <div class="accordion" id="rolesAccordion">
+
+        <div class="accordion-row open" data-role="Resident Care Aide">
+          <div class="accordion__header" onclick="toggleAccordion(this)">
+            <span class="accordion__title">Resident Care Aide</span>
+            <span class="accordion__location">Salt Lake City, UT</span>
+            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
+            <span class="accordion__caret">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+          </div>
+          <div class="accordion__body">
+            <div class="accordion__summary">
+              <p>Resident Care Aides are the foundation of daily life in our communities. You will assist residents with personal care, mobility, meals, and social activities while building meaningful relationships through consistent assignment.</p>
+            </div>
+            <div class="accordion__details">
+              <h4 class="accordion__req-heading">Requirements</h4>
+              <ul class="accordion__req-list">
+                <li>CNA certification or equivalent state credential</li>
+                <li>1+ year of experience in senior living or long-term care</li>
+                <li>Ability to lift 50 lbs and stand for extended periods</li>
+                <li>Current CPR and First Aid certification</li>
+              </ul>
+              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-row" data-role="Licensed Practical Nurse">
+          <div class="accordion__header" onclick="toggleAccordion(this)">
+            <span class="accordion__title">Licensed Practical Nurse</span>
+            <span class="accordion__location">Provo, UT</span>
+            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
+            <span class="accordion__caret">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+          </div>
+          <div class="accordion__body">
+            <div class="accordion__summary">
+              <p>Our LPNs lead the clinical side of resident care, managing medication administration, care plan updates, and communication with families and physicians. You will work closely with a consistent group of residents and their care aides.</p>
+            </div>
+            <div class="accordion__details">
+              <h4 class="accordion__req-heading">Requirements</h4>
+              <ul class="accordion__req-list">
+                <li>Active LPN license in the state of Utah</li>
+                <li>Experience with electronic health records</li>
+                <li>Strong communication skills with residents, families, and staff</li>
+                <li>Familiarity with assisted living regulations preferred</li>
+              </ul>
+              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-row" data-role="Community Sales Director">
+          <div class="accordion__header" onclick="toggleAccordion(this)">
+            <span class="accordion__title">Community Sales Director</span>
+            <span class="accordion__location">Sandy, UT</span>
+            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
+            <span class="accordion__caret">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+          </div>
+          <div class="accordion__body">
+            <div class="accordion__summary">
+              <p>The Community Sales Director owns census development for a single community. You will build referral relationships, conduct tours, follow up with prospective families, and collaborate with the operations team to ensure a smooth move-in experience.</p>
+            </div>
+            <div class="accordion__details">
+              <h4 class="accordion__req-heading">Requirements</h4>
+              <ul class="accordion__req-list">
+                <li>3+ years of senior living sales experience</li>
+                <li>Proven track record of meeting or exceeding occupancy targets</li>
+                <li>Experience with CRM tools and lead management</li>
+                <li>Deep understanding of the local referral landscape</li>
+              </ul>
+              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-row" data-role="Executive Director">
+          <div class="accordion__header" onclick="toggleAccordion(this)">
+            <span class="accordion__title">Executive Director</span>
+            <span class="accordion__location">Ogden, UT</span>
+            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
+            <span class="accordion__caret">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+          </div>
+          <div class="accordion__body">
+            <div class="accordion__summary">
+              <p>The Executive Director leads all aspects of community operations: staffing, clinical quality, sales performance, financial results, and regulatory compliance. You will report to Vega ALM leadership and work with the ownership group.</p>
+            </div>
+            <div class="accordion__details">
+              <h4 class="accordion__req-heading">Requirements</h4>
+              <ul class="accordion__req-list">
+                <li>Active administrator license in the state of Utah</li>
+                <li>5+ years of senior living leadership experience</li>
+                <li>Demonstrated ability to manage P&amp;L and drive occupancy</li>
+                <li>Strong track record with state survey outcomes</li>
+              </ul>
+              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="application" id="apply">
+    <div class="application__grid">
+      <div class="application__left">
+        <div class="eyebrow">Apply</div>
+        <h2>Join Our Team</h2>
+        <p>Tell us who you are and what role interests you. A person reads every application, and we respond within five business days.</p>
+      </div>
+      <form id="applicationForm" onsubmit="handleFormSubmit(event, 'applicationSubmitBtn', 'Application received. A person reads every one.')">
+        <div class="application__form-grid">
+          <div class="field">
+            <label for="appName">Your Name</label>
+            <input type="text" id="appName" name="name" required>
+          </div>
+          <div class="field">
+            <label for="appPhone">Phone</label>
+            <input type="tel" id="appPhone" name="phone">
+          </div>
+          <div class="field field--full">
+            <label for="appEmail">Email</label>
+            <input type="email" id="appEmail" name="email" required>
+          </div>
+          <div class="field">
+            <label for="appRole">Role</label>
+            <select id="appRole" name="role">
+              <option value="" disabled selected>Select one</option>
+              <option value="care-aide">Resident Care Aide</option>
+              <option value="lpn">Licensed Practical Nurse</option>
+              <option value="sales-director">Community Sales Director</option>
+              <option value="executive-director">Executive Director</option>
+              <option value="other">Something Else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="appLicense">Current Licensure</label>
+            <select id="appLicense" name="licensure">
+              <option value="" disabled selected>Select one</option>
+              <option value="cna">CNA</option>
+              <option value="med-tech">Med Tech</option>
+              <option value="lpn">LPN</option>
+              <option value="rn">RN</option>
+              <option value="admin">Administrator</option>
+              <option value="none">None Yet</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="appExperience">Tell Us About Your Experience</label>
+            <textarea id="appExperience" name="experience" rows="4"></textarea>
+          </div>
+          <div class="application__submit">
+            <button type="submit" class="btn btn--solid" id="applicationSubmitBtn">Submit Application</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__logo">
+        <svg class="footer__logo-lockup" viewBox="0 0 186.57 293.85" aria-label="Vega">
+          <path d="M0,67.93h32.68l59.02,184.67h.63l62.83-184.67h31.41l-80.27,225.92h-30.78L0,67.93Z" fill="currentColor"/>
+          <path d="M93.29,0c-4.49,31.47-14.06,56.29-26.21,67.93,12.14,11.65,21.71,36.46,26.21,67.93,4.49-31.47,14.06-56.29,26.21-67.93-12.14-11.65-21.71-36.46-26.21-67.93Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="footer__columns">
+        <div class="footer__col">
+          <h4 class="footer__col-heading">Company</h4>
+          <a href="#about">About</a>
+          <a href="#about" onclick="setTimeout(function(){document.querySelector('.leadership')&&document.querySelector('.leadership').scrollIntoView({behavior:'smooth'})},100)">Leadership</a>
+          <a href="#careers">Careers</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-heading">Care</h4>
+          <a href="#home" onclick="setTimeout(function(){var e=document.getElementById('our-communities');e&&e.scrollIntoView({behavior:'smooth'})},100)">Our Communities</a>
+          <a href="#home" onclick="setTimeout(function(){var e=document.querySelector('.services');e&&e.scrollIntoView({behavior:'smooth'})},100)">Services</a>
+          <a href="#home" onclick="setTimeout(function(){var e=document.getElementById('contact');e&&e.scrollIntoView({behavior:'smooth'})},100)">Schedule a Visit</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-heading">Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__fine">
+      &copy; 2024 Vega Assisted Living Management. All rights reserved. A Vega Company.
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     JAVASCRIPT
+     ========================================== -->
+<script>
+(function() {
+  'use strict';
+
+  /* ========================================
+     DATA
+     ======================================== */
+  var communities = [
+    { name: 'Willow Creek', city: 'Salt Lake City, UT', units: 48, occupancy: 96, level: 'Assisted Living', yearOpened: '2016', licenseType: 'Type I' },
+    { name: 'Orchard Park', city: 'Provo, UT', units: 64, occupancy: 91, level: 'Independent Living', yearOpened: '2014', licenseType: 'Type II' },
+    { name: 'Bell Canyon', city: 'Sandy, UT', units: 36, occupancy: 98, level: 'Memory Care', yearOpened: '2018', licenseType: 'Type I-MC' },
+    { name: 'Harvest House', city: 'Ogden, UT', units: 52, occupancy: 94, level: 'Assisted Living', yearOpened: '2017', licenseType: 'Type I' },
+    { name: 'Cedar Terrace', city: 'Draper, UT', units: 44, occupancy: 89, level: 'Independent Living', yearOpened: '2015', licenseType: 'Type II' },
+    { name: 'Stonebridge', city: 'Logan, UT', units: 40, occupancy: 97, level: 'Memory Care', yearOpened: '2020', licenseType: 'Type I-MC' }
+  ];
+
+  /* ========================================
+     ROUTING
+     ======================================== */
+  var pages = ['home', 'owners', 'about', 'careers'];
+  var currentPage = 'home';
+
+  function getHash() {
+    var h = window.location.hash.replace('#', '').split('/')[0];
+    return pages.indexOf(h) !== -1 ? h : 'home';
+  }
+
+  function showPage(page) {
+    currentPage = page;
+    pages.forEach(function(p) {
+      var el = document.getElementById('page-' + p);
+      if (el) {
+        el.classList.toggle('active', p === page);
+      }
+    });
+
+    // Update nav links
+    document.querySelectorAll('.nav__link, .nav__drawer-link').forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('data-page') === page);
+    });
+
+    // Update nav CTA
+    updateNavCta(page);
+
+    // Reset nav theme
+    var nav = document.getElementById('mainNav');
+    nav.removeAttribute('data-theme');
+
+    // Setup stats observer for homepage
+    if (page === 'home') {
+      setupStatsObserver();
+      setupNavThemeFlip();
+    } else {
+      cleanupNavThemeFlip();
+    }
+
+    // Setup stats observer for other pages with stats bands
+    if (page === 'owners') {
+      setupStatsObserverForBand('ownersStatsBand');
+    }
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+
+    // Close mobile drawer
+    closeMobileDrawer();
+
+    // Reset forms
+    document.querySelectorAll('form').forEach(function(form) {
+      form.reset();
+    });
+    document.querySelectorAll('.btn--solid[type="submit"]').forEach(function(btn) {
+      if (btn.dataset.originalText) {
+        btn.textContent = btn.dataset.originalText;
+      }
+    });
+  }
+
+  function updateNavCta(page) {
+    var btn = document.getElementById('navCtaBtn');
+    var drawerBtn = document.getElementById('navDrawerCtaBtn');
+    var ctaConfig = {
+      home:    { text: 'Schedule a Visit', target: 'contact' },
+      about:   { text: 'Schedule a Visit', target: 'contact' },
+      owners:  { text: 'Request a Proposal', target: 'proposal' },
+      careers: { text: 'Apply Now', target: 'apply' }
+    };
+    var config = ctaConfig[page] || ctaConfig.home;
+    btn.textContent = config.text;
+    btn.onclick = function() {
+      if (page === 'home' || page === 'about') {
+        if (currentPage !== 'home') {
+          window.location.hash = '#home';
+          setTimeout(function() {
+            var el = document.getElementById('contact');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        } else {
+          var el = document.getElementById('contact');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        var el = document.getElementById(config.target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    drawerBtn.textContent = config.text;
+    drawerBtn.onclick = function() {
+      closeMobileDrawer();
+      btn.onclick();
+    };
+  }
+
+  window.navigateTo = function(page, section) {
+    window.location.hash = '#' + page;
+    if (section) {
+      setTimeout(function() {
+        var el = document.getElementById(section);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
+  window.scrollToSection = function(e, sectionId) {
+    e.preventDefault();
+    var el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  window.addEventListener('hashchange', function() {
+    showPage(getHash());
+  });
+
+  /* ========================================
+     COMMUNITY GRID
+     ======================================== */
+  function renderCommunities(filter) {
+    var grid = document.getElementById('communityGrid');
+    grid.innerHTML = '';
+    var filtered = filter === 'all' ? communities : communities.filter(function(c) { return c.level === filter; });
+
+    filtered.forEach(function(c) {
+      var cell = document.createElement('div');
+      cell.className = 'community-cell';
+      cell.onclick = function() { openDrawer(c); };
+
+      var occBadgeClass = c.occupancy >= 95 ? 'badge--ok' : (c.occupancy >= 90 ? 'badge--sage' : 'badge--attention');
+
+      cell.innerHTML =
+        '<div class="community-cell__photo photo-slot"><span>Community Photo</span></div>' +
+        '<div class="community-cell__top">' +
+          '<span class="community-cell__name">' + c.name + '</span>' +
+          '<span class="badge ' + occBadgeClass + '">' + c.occupancy + '%</span>' +
+        '</div>' +
+        '<p class="community-cell__meta">' + c.city + ' &middot; ' + c.units + ' units</p>' +
+        '<span class="community-cell__level">' + c.level + '</span>';
+
+      grid.appendChild(cell);
+    });
+  }
+
+  // Filter chips
+  document.getElementById('communityFilters').addEventListener('click', function(e) {
+    var chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+    renderCommunities(chip.dataset.filter);
+  });
+
+  /* ========================================
+     COMMUNITY DRAWER
+     ======================================== */
+  function openDrawer(community) {
+    var drawer = document.getElementById('communityDrawer');
+    var scrim = document.getElementById('drawerScrim');
+
+    document.getElementById('drawerLevel').textContent = community.level;
+    document.getElementById('drawerName').textContent = community.name;
+    document.getElementById('drawerCity').textContent = community.city;
+
+    var badgesHtml =
+      '<span class="badge badge--sage">' + community.level + '</span>' +
+      '<span class="badge ' + (community.occupancy >= 95 ? 'badge--ok' : 'badge--attention') + '">' + community.occupancy + '% Occupied</span>';
+    document.getElementById('drawerBadges').innerHTML = badgesHtml;
+
+    var specsHtml =
+      '<div class="drawer__spec"><span class="drawer__spec-label">Units</span><span class="drawer__spec-value">' + community.units + '</span></div>' +
+      '<div class="drawer__spec"><span class="drawer__spec-label">Occupancy</span><span class="drawer__spec-value">' + community.occupancy + '%</span></div>' +
+      '<div class="drawer__spec"><span class="drawer__spec-label">Year Opened</span><span class="drawer__spec-value">' + community.yearOpened + '</span></div>' +
+      '<div class="drawer__spec"><span class="drawer__spec-label">License Type</span><span class="drawer__spec-value">' + community.licenseType + '</span></div>';
+    document.getElementById('drawerSpecs').innerHTML = specsHtml;
+
+    drawer.classList.add('open');
+    scrim.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    document.getElementById('communityDrawer').classList.remove('open');
+    document.getElementById('drawerScrim').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  document.getElementById('drawerScrim').addEventListener('click', closeDrawer);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeDrawer();
+      closeMobileDrawer();
+    }
+  });
+
+  /* ========================================
+     NAV THEME FLIP (homepage only)
+     ======================================== */
+  var navObserver = null;
+
+  function setupNavThemeFlip() {
+    cleanupNavThemeFlip();
+    var statsBand = document.getElementById('homeStatsBand');
+    var nav = document.getElementById('mainNav');
+    if (!statsBand) return;
+
+    navObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (currentPage !== 'home') return;
+        if (entry.isIntersecting) {
+          nav.setAttribute('data-theme', 'dark');
+        } else {
+          nav.removeAttribute('data-theme');
+        }
+      });
+    }, {
+      rootMargin: '-' + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 72) + 'px 0px 0px 0px',
+      threshold: 0
+    });
+
+    navObserver.observe(statsBand);
+  }
+
+  function cleanupNavThemeFlip() {
+    if (navObserver) {
+      navObserver.disconnect();
+      navObserver = null;
+    }
+  }
+
+  /* ========================================
+     STAT COUNT-UP
+     ======================================== */
+  var animatedBands = {};
+
+  function formatNumber(n, useComma) {
+    if (!useComma) return n.toString();
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function animateCountUp(el) {
+    var target = parseInt(el.dataset.target);
+    var suffix = el.dataset.suffix || '';
+    var useComma = el.dataset.comma === 'true';
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reducedMotion) {
+      el.textContent = formatNumber(target, useComma) + suffix;
+      return;
+    }
+
+    var duration = 2000;
+    var start = null;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = Math.min((timestamp - start) / duration, 1);
+      // ease-out
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * target);
+      el.textContent = formatNumber(current, useComma) + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  function setupStatsObserver() {
+    setupStatsObserverForBand('homeStatsBand');
+  }
+
+  function setupStatsObserverForBand(bandId) {
+    if (animatedBands[bandId]) return;
+    var band = document.getElementById(bandId);
+    if (!band) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !animatedBands[bandId]) {
+          animatedBands[bandId] = true;
+          band.querySelectorAll('.stat__number').forEach(function(el) {
+            animateCountUp(el);
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.75 });
+
+    observer.observe(band);
+  }
+
+  /* ========================================
+     ACCORDION
+     ======================================== */
+  window.toggleAccordion = function(header) {
+    var row = header.closest('.accordion-row');
+    var accordion = row.closest('.accordion');
+    var isOpen = row.classList.contains('open');
+
+    accordion.querySelectorAll('.accordion-row').forEach(function(r) {
+      r.classList.remove('open');
+    });
+
+    if (!isOpen) {
+      row.classList.add('open');
+    }
+  };
+
+  /* ========================================
+     FORMS
+     ======================================== */
+  window.handleFormSubmit = function(e, btnId, message) {
+    e.preventDefault();
+    var btn = document.getElementById(btnId);
+
+    // Store original text
+    if (!btn.dataset.originalText) {
+      btn.dataset.originalText = btn.textContent;
+    }
+
+    btn.textContent = 'Received';
+    showToast(message);
+
+    // Reset after a moment
+    setTimeout(function() {
+      e.target.reset();
+      btn.textContent = btn.dataset.originalText;
+    }, 3000);
+  };
+
+  /* ========================================
+     TOAST
+     ======================================== */
+  var toastTimeout = null;
+
+  function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function() {
+      toast.classList.remove('show');
+    }, 2600);
+  }
+
+  /* ========================================
+     MOBILE NAV
+     ======================================== */
+  var hamburger = document.getElementById('hamburgerBtn');
+  var drawer = document.getElementById('navDrawer');
+
+  hamburger.addEventListener('click', function() {
+    var isOpen = hamburger.classList.contains('open');
+    if (isOpen) {
+      closeMobileDrawer();
+    } else {
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  function closeMobileDrawer() {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close drawer when clicking a link
+  drawer.querySelectorAll('.nav__drawer-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      closeMobileDrawer();
+    });
+  });
+
+  /* ========================================
+     INIT
+     ======================================== */
+  renderCommunities('all');
+  showPage(getHash());
+
+})();
+</script>
+</body>
+</html>
