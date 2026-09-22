@@ -201,7 +201,7 @@ table { border-collapse: collapse; }
 
   --container-max: 1080px;
   --gutter: 48px;
-  --nav-height: 72px;
+  --nav-height: 80px;
 }
 
 /* ========================================
@@ -582,7 +582,7 @@ body {
 }
 
 .nav__logo-svg {
-  height: 48px;
+  height: 64px;
   width: auto;
   color: var(--text-heading);
   transition: color var(--dur-theme) var(--ease-standard);
@@ -2004,7 +2004,8 @@ body {
   }
 
   .home-hero {
-    min-height: 90vh;
+    min-height: auto;
+    padding-top: 120px;
     padding-bottom: 56px;
   }
 
@@ -2136,8 +2137,71 @@ body {
     font-size: 32px;
   }
 
-  .approach__quote-text {
-    font-size: 22px;
+  .engagement__photo {
+    height: 240px;
+  }
+
+  .consistent__photo {
+    height: 240px;
+  }
+
+  .reporting__table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ========================================
+   RESPONSIVE: SMALL MOBILE
+   ======================================== */
+@media (max-width: 480px) {
+  :root {
+    --gutter: 16px;
+  }
+
+  .nav__logo-svg {
+    height: 36px;
+  }
+
+  .nav__phone {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .home-hero__title {
+    font-size: 36px;
+  }
+
+  .home-hero__desc {
+    font-size: 15px;
+  }
+
+  .home-hero__actions {
+    flex-direction: column;
+  }
+
+  .home-hero__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .owners-hero__title,
+  .about-hero__title,
+  .careers-hero__title {
+    font-size: 30px;
+  }
+
+  .owners-hero__actions,
+  .home-hero__actions {
+    flex-direction: column;
+  }
+
+  .leadership__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__logo-svg {
+    height: 56px;
   }
 }
 
