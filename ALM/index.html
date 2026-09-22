@@ -1000,6 +1000,14 @@ body {
   max-width: 24ch;
 }
 
+.services__subtitle {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin-top: 16px;
+  max-width: 54ch;
+}
+
 .services__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1012,6 +1020,13 @@ body {
 .service-card {
   border-top: 1px solid var(--border-on-light);
   padding-top: 26px;
+}
+
+.service-card__icon {
+  width: 32px;
+  height: 32px;
+  color: var(--accent);
+  margin-bottom: 16px;
 }
 
 .service-card__kicker {
@@ -1060,35 +1075,9 @@ body {
 }
 
 .approach__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  align-items: start;
-}
-
-.approach__quote {
-  border-left: 1px solid var(--border-on-light);
-  padding-left: 32px;
-}
-
-.approach__quote-text {
-  font-weight: 300;
-  font-size: 26px;
-  line-height: 1.5;
-  letter-spacing: -0.015em;
-  color: var(--text-heading);
-  margin-bottom: 24px;
-}
-
-.approach__quote-attr {
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--label-on-light);
 }
 
 .approach__content p {
@@ -2228,12 +2217,12 @@ body {
     <div class="home-hero__content">
       <h1 class="home-hero__title">Owned by You.<br>Operated by Us.</h1>
       <div class="home-hero__sub">
-        <span class="home-hero__tag">Est. 2012 &middot; A Vega Company</span>
-        <p class="home-hero__desc">Vega ALM is a third-party senior living operator. We manage assisted living, memory care, and independent living communities on behalf of building owners across the Mountain West.</p>
+        <span class="home-hero__tag">A Vega Company</span>
+        <p class="home-hero__desc">Vega Assisted Living Management is a third-party senior living operator. We manage assisted living, memory care, and independent living communities on behalf of building owners across the Mountain West.</p>
       </div>
       <div class="home-hero__actions">
         <a class="btn btn--solid btn--lg" href="#contact" onclick="scrollToSection(event,'contact')">Request a Proposal</a>
-        <a class="btn btn--outline btn--lg" href="#services" onclick="scrollToSection(event,'services')">What We Manage</a>
+        <a class="btn btn--outline btn--lg" href="#services" onclick="scrollToSection(event,'services')">Our Services</a>
       </div>
     </div>
   </section>
@@ -2248,7 +2237,7 @@ body {
           <h2>The People Behind the Operations</h2>
         </div>
         <div class="home-leadership__head-right">
-          <p>Our leadership team brings together real estate investment experience with hands-on senior living operations. Every member has worked inside the communities we manage.</p>
+          <p>Our leadership team combines hands-on senior living operations with a sharp focus on building performance. Every member has worked inside the communities we manage, and every decision is measured by the results it delivers for owners.</p>
         </div>
       </div>
       <div class="home-leadership__grid">
@@ -2256,21 +2245,21 @@ body {
           <div class="home-leader__portrait photo-slot"><img src="assets/team/sayer-leslie.png" alt="Sayer Leslie"></div>
           <h3 class="home-leader__name">Sayer Leslie</h3>
           <div class="home-leader__role">Owner, Chief Executive</div>
-          <p class="home-leader__bio">Sayer founded Vega in 2012 as a real estate investment firm and built ALM into a standalone operating company. He remains involved in every transition and ownership relationship.</p>
+          <p class="home-leader__bio">Sayer is a results-driven operations leader with extensive experience managing healthcare and assisted living facilities. Known for turning around underperforming operations, he takes a hands-on, systems-based approach to compliance, financial performance, and resident care. His focus on facility metrics and process improvement drives the standard across the portfolio.</p>
           <a class="home-leader__phone" href="tel:+18015550134">(801) 555-0134</a>
         </article>
         <article class="home-leader">
           <div class="home-leader__portrait photo-slot"><img src="assets/team/wes-norton.png" alt="Wes Norton"></div>
           <h3 class="home-leader__name">Wes Norton</h3>
           <div class="home-leader__role">Chief Operating Officer</div>
-          <p class="home-leader__bio">Wes oversees daily operations across the portfolio, from staffing and compliance to vendor management. He joined Vega ALM in 2018.</p>
+          <p class="home-leader__bio">Wes has spent his career building people systems inside fast-moving organizations, navigating 35 acquisitions across four states and more than 4,000 employees. He partners with leadership to translate business goals into operational plans that get implemented, bringing deep experience in culture-building, change management, and team development during periods of rapid growth.</p>
           <a class="home-leader__phone" href="tel:+18015550135">(801) 555-0135</a>
         </article>
         <article class="home-leader">
           <div class="home-leader__portrait photo-slot"><img src="assets/team/mary-evans.png" alt="Mary Evans"></div>
           <h3 class="home-leader__name">Mary Evans</h3>
           <div class="home-leader__role">Director of Clinical Services</div>
-          <p class="home-leader__bio">Mary leads the clinical team, including care plan development, medication oversight, and survey readiness. She brings 15 years of long-term care nursing experience.</p>
+          <p class="home-leader__bio">Mary is a compassionate care leader with a strong background in resident advocacy and frontline operations. Starting as a resident advocate, she gained deep insight into residents' clinical and emotional needs. Now overseeing care delivery, staff training, and compliance, she is known for her hands-on leadership and for raising the standard of care across every community she serves.</p>
           <a class="home-leader__phone" href="tel:+18015550136">(801) 555-0136</a>
         </article>
       </div>
@@ -2280,39 +2269,46 @@ body {
   <!-- SERVICES -->
   <section class="services" id="services" aria-label="Senior living management services">
     <div class="services__header">
-      <div class="eyebrow">What We Manage</div>
+      <div class="eyebrow">Our Services</div>
       <h2 class="services__title">Full-Service Management for Senior Living</h2>
+      <p class="services__subtitle">Every service below is one we deliver daily across our portfolio. Not a capability deck, but the work we do.</p>
     </div>
     <div class="services__grid">
       <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/><path d="M9 10h.01"/><path d="M15 10h.01"/></svg>
         <div class="service-card__kicker">Operations</div>
         <h3 class="service-card__title">Day-to-Day Management</h3>
-        <p class="service-card__body">Staffing, compliance, vendor contracts, and resident services.</p>
+        <p class="service-card__body">Staffing, scheduling, vendor contracts, and resident services. We run every department under a single operator so nothing falls between teams.</p>
       </article>
       <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a2 2 0 0 1 2 0l6.5 3.75a2 2 0 0 1 1 1.73v7.04a2 2 0 0 1-1 1.73L13 20a2 2 0 0 1-2 0l-6.5-3.75a2 2 0 0 1-1-1.73V7.48a2 2 0 0 1 1-1.73Z"/><path d="M12 12v.01"/><path d="M8 8.5l4 2.3 4-2.3"/><path d="M12 12l0 5.2"/></svg>
         <div class="service-card__kicker">Clinical</div>
         <h3 class="service-card__title">Clinical Oversight</h3>
-        <p class="service-card__body">Care plans, medication administration, and state survey readiness.</p>
+        <p class="service-card__body">Care plans, medication administration, and survey readiness. Our clinical team is embedded in each community, not visiting from a regional office.</p>
       </article>
       <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         <div class="service-card__kicker">Sales</div>
         <h3 class="service-card__title">Census Development</h3>
-        <p class="service-card__body">Local outreach, referral partnerships, and conversion-focused follow-up.</p>
+        <p class="service-card__body">Local outreach, referral partnerships, and conversion-focused follow-up. We build census because we know the market around each building.</p>
       </article>
       <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         <div class="service-card__kicker">Financial</div>
         <h3 class="service-card__title">Financial Management</h3>
-        <p class="service-card__body">Monthly reporting, budgeting, accounts payable, and NOI optimization.</p>
+        <p class="service-card__body">Monthly P&amp;L, budgeting, accounts payable, and NOI optimization. Owners receive a complete financial package by the 15th of every month.</p>
       </article>
       <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
         <div class="service-card__kicker">Compliance</div>
         <h3 class="service-card__title">Regulatory Compliance</h3>
-        <p class="service-card__body">State and federal requirements, survey-ready operations year-round.</p>
+        <p class="service-card__body">State and federal requirements managed year-round, not just before a survey. Our communities operate survey-ready every day.</p>
       </article>
       <article class="service-card">
+        <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         <div class="service-card__kicker">Culinary</div>
         <h3 class="service-card__title">Dining and Life Enrichment</h3>
-        <p class="service-card__body">Restaurant-style dining and daily activities designed around residents.</p>
+        <p class="service-card__body">Restaurant-style dining and daily programming designed around residents. These are the departments residents notice first, so we staff and invest accordingly.</p>
       </article>
     </div>
   </section>
@@ -2327,18 +2323,12 @@ body {
   <!-- APPROACH -->
   <section class="approach" aria-label="Our approach to senior care management">
     <div class="approach__grid">
-      <div class="approach__quote">
-        <blockquote>
-          <p class="approach__quote-text">"We started by asking what it would take to never lose a resident we should have kept. The answer was always the same: better people, treated well, staying longer."</p>
-        </blockquote>
-        <span class="approach__quote-attr">Sayer Leslie, Owner</span>
-      </div>
       <div class="approach__content">
         <div class="eyebrow">Our Approach</div>
-        <p>Vega ALM grew out of a real estate investment firm that saw firsthand what happens when operations fall short. That experience gave us a deep respect for measurable outcomes, but it also taught us that the path to strong occupancy and retention runs through people, not spreadsheets.</p>
-        <p>We staff above state minimums. We assign caregivers to the same residents so genuine relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard.</p>
+        <p>Vega Assisted Living Management was built by people who understand what owners need from an operator. Measurable outcomes, honest reporting, and a team that treats the building like the investment it is. The path to strong occupancy and retention runs through people, not spreadsheets.</p>
+        <p>We staff to efficiency. The right people in the right roles at the right ratios, not an arbitrary headcount. We assign caregivers to the same residents so genuine relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard.</p>
         <div class="approach__pillars">
-          Staffing-First<span class="approach__pillar-sep">|</span>Transparent Reporting<span class="approach__pillar-sep">|</span>Resident Retention
+          Transparent Reporting<span class="approach__pillar-sep">|</span>Census Performance<span class="approach__pillar-sep">|</span>NOI Performance
         </div>
       </div>
     </div>
