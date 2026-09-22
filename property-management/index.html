@@ -868,9 +868,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 1024px) {
   :root { --gutter: 32px; }
 
-  .nav__links { display: none; }
-  .nav__hamburger { display: block; }
-
+  .nav__links { gap: 24px; }
   .hero__title { font-size: 46px; }
 
   .mission__inner,
@@ -884,6 +882,18 @@ img { display: block; max-width: 100%; }
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .stats__inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .process__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 0;
+  }
+
+  .accent-label { display: none; }
+
   .fees__right { justify-content: flex-start; }
 }
 
@@ -891,7 +901,11 @@ img { display: block; max-width: 100%; }
    RESPONSIVE: MOBILE
    ======================================== */
 @media (max-width: 768px) {
+  .nav__links { display: none; }
+  .nav__hamburger { display: block; }
+
   .hero__title { font-size: 38px; }
+  .hero__comet { width: 55vw; opacity: 0.035; }
 
   .pillars__inner {
     grid-template-columns: 1fr;
@@ -908,6 +922,14 @@ img { display: block; max-width: 100%; }
   .services__grid {
     grid-template-columns: 1fr;
   }
+
+  .stat__number { font-size: 40px; }
+
+  .process__steps {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .process__step::before { display: none; }
 
   .contact__form-grid {
     grid-template-columns: 1fr;
@@ -949,9 +971,205 @@ img { display: block; max-width: 100%; }
   .services__title,
   .fees__left h2,
   .faq__title,
-  .contact__info h2 {
+  .contact__info h2,
+  .process__title {
     font-size: 28px;
   }
+
+  .stats__inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .stat__number { font-size: 34px; }
+
+  .process__step { padding: 0; }
+}
+
+/* ========================================
+   HERO COMET MARK (background element)
+   ======================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+.hero__comet {
+  position: absolute;
+  right: -4vw;
+  bottom: -8vh;
+  width: 38vw;
+  max-width: 480px;
+  height: auto;
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   STATS BAND
+   ======================================== */
+.stats {
+  background: var(--surface-base);
+  padding: 64px var(--gutter);
+  border-bottom: 1px solid var(--border);
+}
+.stats__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+.stat__number {
+  font-weight: 300;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+.stat__label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ========================================
+   SCROLL REVEAL (IntersectionObserver)
+   ======================================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   SERVICE CARD HOVER
+   ======================================== */
+.service-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-left: 3px solid transparent;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-left-color: var(--accent);
+}
+
+/* ========================================
+   PROCESS (How We Work)
+   ======================================== */
+.process {
+  padding: 96px var(--gutter);
+  background: var(--surface-dark);
+  color: var(--text-on-dark);
+}
+.process__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+.process__title {
+  font-weight: 300;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-on-dark);
+  margin-bottom: 56px;
+}
+.process__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.process__step {
+  position: relative;
+  padding: 0 28px;
+}
+.process__step::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-dark);
+}
+.process__step:first-child::before { left: 50%; }
+.process__step:last-child::before { right: 50%; }
+.process__num {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--accent);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 20px;
+  background: var(--surface-dark);
+  z-index: 1;
+}
+.process__step-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+  margin-bottom: 10px;
+}
+.process__step-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-on-dark-subtle);
+}
+
+/* ========================================
+   ACCENT LINES (vertical labels)
+   ======================================== */
+.accent-label {
+  position: absolute;
+  left: var(--gutter);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.35;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+.accent-label::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.accent-label--dark {
+  color: rgba(61, 90, 110, 0.5);
+}
+.accent-label--dark::before {
+  background: rgba(61, 90, 110, 0.5);
 }
 
 /* ========================================
@@ -1039,6 +1257,11 @@ img { display: block; max-width: 100%; }
 <main id="main">
 
 <section class="hero" aria-label="Vega Property & Asset Management">
+  <!-- Comet mark background element -->
+  <svg class="hero__comet" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M200 0c-11.2 78.5-35.1 140.4-65.4 169.5 30.3 29.1 54.2 91 65.4 169.5 11.2-78.5 35.1-140.4 65.4-169.5C235.1 140.4 211.2 78.5 200 0z" fill="currentColor" opacity="0.6"/>
+    <path d="M200 180c-8 56-25 100.3-46.7 121 21.7 20.7 38.7 65 46.7 121 8-56 25-100.3 46.7-121-21.7-20.7-38.7-65-46.7-121z" fill="currentColor" opacity="0.3" transform="translate(0, 100)"/>
+  </svg>
   <div class="hero__inner">
     <div class="hero__tag">Conviction Over Cycles</div>
     <h1 class="hero__title">Property and Asset Management Built to Perform.</h1>
@@ -1071,9 +1294,34 @@ img { display: block; max-width: 100%; }
 </section>
 
 <!-- ==========================================
+     STATS BAND
+     ========================================== -->
+<section class="stats fade-up" aria-label="Key metrics">
+  <div class="stats__inner">
+    <div class="stat">
+      <div class="stat__number" data-target="24" data-suffix="hr">0hr</div>
+      <div class="stat__label">Response Time</div>
+    </div>
+    <div class="stat">
+      <div class="stat__number" data-target="98" data-suffix="%">0%</div>
+      <div class="stat__label">Occupancy Rate</div>
+    </div>
+    <div class="stat">
+      <div class="stat__number" data-target="100" data-suffix="%">0%</div>
+      <div class="stat__label">Owner Transparency</div>
+    </div>
+    <div class="stat">
+      <div class="stat__number" data-target="1" data-suffix=" Day">0 Day</div>
+      <div class="stat__label">Inquiry Response</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
      MISSION
      ========================================== -->
-<section class="mission" aria-label="Our focus">
+<section class="mission fade-up" aria-label="Our focus" style="position:relative;">
+  <span class="accent-label" style="top:96px;">Focus</span>
   <div class="mission__inner">
     <div class="mission__left">
       <div class="eyebrow">Our Focus</div>
@@ -1089,7 +1337,8 @@ img { display: block; max-width: 100%; }
 <!-- ==========================================
      SERVICES
      ========================================== -->
-<section class="services" id="services" aria-label="Property management services">
+<section class="services fade-up" id="services" aria-label="Property management services" style="position:relative;">
+  <span class="accent-label" style="top:96px;">Services</span>
   <div class="services__header">
     <div class="eyebrow">What We Handle</div>
     <h2 class="services__title">Full-Service Property and Asset Management</h2>
@@ -1138,7 +1387,7 @@ img { display: block; max-width: 100%; }
 <!-- ==========================================
      FEES
      ========================================== -->
-<section class="fees" aria-label="Fee structure">
+<section class="fees fade-up" aria-label="Fee structure">
   <div class="fees__inner">
     <div class="fees__left">
       <div class="eyebrow">Fees</div>
@@ -1152,9 +1401,41 @@ img { display: block; max-width: 100%; }
 </section>
 
 <!-- ==========================================
+     PROCESS (How We Work)
+     ========================================== -->
+<section class="process fade-up" aria-label="How we work">
+  <div class="process__inner">
+    <div class="eyebrow eyebrow--light">How We Work</div>
+    <h2 class="process__title">From First Call to Full Management.</h2>
+    <div class="process__steps">
+      <div class="process__step">
+        <div class="process__num">01</div>
+        <h3 class="process__step-title">Discovery</h3>
+        <p class="process__step-desc">We learn your property, your goals, and what has and has not worked with past management. No pitch deck, just a real conversation.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">02</div>
+        <h3 class="process__step-title">Proposal</h3>
+        <p class="process__step-desc">A clear scope of work and fee structure tailored to your property. No hidden costs, no boilerplate. Alignment from day one.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">03</div>
+        <h3 class="process__step-title">Onboarding</h3>
+        <p class="process__step-desc">We take over operations with a structured transition: vendor audits, lease reviews, tenant communication, and system setup in the first 30 days.</p>
+      </div>
+      <div class="process__step">
+        <div class="process__num">04</div>
+        <h3 class="process__step-title">Ongoing Management</h3>
+        <p class="process__step-desc">Monthly reporting, proactive maintenance, lease renewals, and strategic asset reviews. Full-service management built around your long-term goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
      FAQ
      ========================================== -->
-<section class="faq" id="faq" aria-label="Frequently asked questions">
+<section class="faq fade-up" id="faq" aria-label="Frequently asked questions">
   <div class="faq__inner">
     <div class="eyebrow">Common Questions</div>
     <h2 class="faq__title">What Owners Want to Know</h2>
@@ -1206,7 +1487,7 @@ img { display: block; max-width: 100%; }
 <!-- ==========================================
      CONTACT
      ========================================== -->
-<section class="contact" id="contact" aria-label="Schedule a consultation">
+<section class="contact fade-up" id="contact" aria-label="Schedule a consultation">
   <div class="contact__grid">
     <div class="contact__info">
       <div class="eyebrow eyebrow--light">Get Started</div>
@@ -1338,6 +1619,55 @@ img { display: block; max-width: 100%; }
     toastTimeout = setTimeout(function() {
       toast.classList.remove('show');
     }, 2600);
+  }
+
+  /* ========================================
+     SCROLL REVEAL (IntersectionObserver)
+     ======================================== */
+  var fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(function(el) { revealObserver.observe(el); });
+  } else {
+    fadeEls.forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  /* ========================================
+     ANIMATED STAT COUNTERS
+     ======================================== */
+  var statEls = document.querySelectorAll('.stat__number[data-target]');
+  if ('IntersectionObserver' in window && statEls.length) {
+    var statObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    statEls.forEach(function(el) { statObserver.observe(el); });
+  }
+
+  function animateCounter(el) {
+    var target = parseInt(el.dataset.target, 10);
+    var suffix = el.dataset.suffix || '';
+    var duration = 1400;
+    var start = performance.now();
+    function tick(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * target);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
   /* ========================================
