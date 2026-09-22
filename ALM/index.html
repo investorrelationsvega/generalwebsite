@@ -1731,30 +1731,38 @@ body {
 /* ========================================
    CAREERS PAGE
    ======================================== */
-.careers-hero {
+.careers-coming-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
   padding: 148px var(--gutter) 84px;
   background: var(--surface-base);
+  text-align: center;
 }
 
-.careers-hero__inner {
-  max-width: var(--container-max);
+.careers-coming-soon__inner {
+  max-width: 640px;
   margin: 0 auto;
 }
 
-.careers-hero__title {
+.careers-coming-soon__title {
   font-weight: 300;
-  font-size: 62px;
-  line-height: 1.08;
+  font-size: 52px;
+  line-height: 1.12;
   letter-spacing: -0.03em;
   color: var(--text-heading);
-  max-width: 19ch;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
-.careers-hero__lede {
+.careers-coming-soon__body {
   font-size: 17px;
   line-height: 1.8;
-  max-width: 58ch;
+  margin-bottom: 16px;
+}
+
+.careers-coming-soon__body:last-of-type {
+  margin-bottom: 40px;
 }
 
 /* Why Work Here */
@@ -2009,7 +2017,7 @@ body {
 
   .owners-hero__title,
   .about-hero__title,
-  .careers-hero__title {
+  .careers-coming-soon__title {
     font-size: 48px;
   }
 
@@ -2149,7 +2157,7 @@ body {
 
   .owners-hero__title,
   .about-hero__title,
-  .careers-hero__title {
+  .careers-coming-soon__title {
     font-size: 38px;
   }
 
@@ -2291,7 +2299,7 @@ body {
 
   .owners-hero__title,
   .about-hero__title,
-  .careers-hero__title {
+  .careers-coming-soon__title {
     font-size: 30px;
   }
 
@@ -2485,24 +2493,37 @@ body {
     </div>
   </section>
 
+  <!-- VALUES -->
+  <section class="values" aria-label="What we deliver">
+    <div class="values__inner">
+      <div class="eyebrow">What We Deliver</div>
+      <div class="values__cards">
+        <article class="value-card">
+          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+          <h3 class="value-card__title">Transparent Reporting</h3>
+          <p class="value-card__body">Owners see what we see. Monthly financials, census data, and variance reports without filters. Trust is built on sharing the full picture.</p>
+        </article>
+        <article class="value-card">
+          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <h3 class="value-card__title">Census Performance</h3>
+          <p class="value-card__body">Occupancy drives everything. We build census through local outreach, referral partnerships, and conversion-focused follow-up, because a full building is a performing building.</p>
+        </article>
+        <article class="value-card">
+          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          <h3 class="value-card__title">NOI Performance</h3>
+          <p class="value-card__body">We tie our management fee to NOI, not just revenue. That alignment shapes every operating decision, from staffing ratios to vendor contracts.</p>
+        </article>
+      </div>
+      <div class="values__action">
+        <a class="btn btn--solid btn--lg" href="#owners">Work With Us</a>
+      </div>
+    </div>
+  </section>
+
   <!-- FACILITY BAND -->
   <section class="facility-band" id="facility" aria-label="Facility photograph">
     <div class="facility-band__slot photo-slot">
       <img src="assets/facilities/vega-owned-exterior-wide.jpg" alt="Vega-owned assisted living community exterior">
-    </div>
-  </section>
-
-  <!-- APPROACH -->
-  <section class="approach" aria-label="Our approach to senior care management">
-    <div class="approach__grid">
-      <div class="approach__content">
-        <div class="eyebrow">Our Approach</div>
-        <p>Vega Assisted Living Management was built by people who understand what owners need from an operator. Measurable outcomes, honest reporting, and a team that treats the building like the investment it is. The path to strong occupancy and retention runs through people, not spreadsheets.</p>
-        <p>We staff to efficiency. The right people in the right roles at the right ratios, not an arbitrary headcount. We assign caregivers to the same residents so genuine relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard.</p>
-        <div class="approach__pillars">
-          Transparent Reporting<span class="approach__pillar-sep">|</span>Census Performance<span class="approach__pillar-sep">|</span>NOI Performance
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2795,7 +2816,21 @@ body {
     </div>
   </section>
 
-  <!-- HOW WE OPTIMIZE -->
+  <!-- OUR APPROACH -->
+  <section class="approach" aria-label="Our approach to senior care management">
+    <div class="approach__grid">
+      <div class="approach__content">
+        <div class="eyebrow">Our Approach</div>
+        <p>Vega Assisted Living Management was built by people who understand what owners need from an operator. Measurable outcomes, honest reporting, and a team that treats the building like the investment it is. The path to strong occupancy and retention runs through people, not spreadsheets.</p>
+        <p>We staff to efficiency. The right people in the right roles at the right ratios, not an arbitrary headcount. We assign caregivers to the same residents so genuine relationships can form. We report monthly with full transparency, because owners who see the real numbers make better decisions, and operators who share them hold themselves to a higher standard.</p>
+        <div class="approach__pillars">
+          Transparent Reporting<span class="approach__pillar-sep">|</span>Census Performance<span class="approach__pillar-sep">|</span>NOI Performance
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET-INFORMED OPERATIONS -->
   <section class="optimize" aria-label="How we optimize for owners">
     <div class="optimize__inner">
       <div class="eyebrow">Market-Informed Operations</div>
@@ -2858,45 +2893,6 @@ body {
     </div>
   </section>
 
-  <!-- LEADERSHIP -->
-  <section class="leadership leadership--compact" aria-label="Leadership team">
-    <div class="leadership__inner">
-      <div class="eyebrow">Leadership</div>
-      <div class="leadership__row">
-        <span class="leadership__person"><strong>Sayer Leslie</strong> Owner, Chief Executive</span>
-        <span class="leadership__person"><strong>Wes Norton</strong> Chief Operating Officer</span>
-        <span class="leadership__person"><strong>Mary Evans</strong> Director of Clinical Services</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- VALUES -->
-  <section class="values" aria-label="Our guiding principles">
-    <div class="values__inner">
-      <div class="eyebrow">What We Deliver</div>
-      <div class="values__cards">
-        <article class="value-card">
-          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-          <h3 class="value-card__title">Transparent Reporting</h3>
-          <p class="value-card__body">Owners see what we see. Monthly financials, census data, and variance reports without filters. Trust is built on sharing the full picture.</p>
-        </article>
-        <article class="value-card">
-          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <h3 class="value-card__title">Census Performance</h3>
-          <p class="value-card__body">Occupancy drives everything. We build census through local outreach, referral partnerships, and conversion-focused follow-up, because a full building is a performing building.</p>
-        </article>
-        <article class="value-card">
-          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-          <h3 class="value-card__title">NOI Performance</h3>
-          <p class="value-card__body">We tie our management fee to NOI, not just revenue. That alignment shapes every operating decision, from staffing ratios to vendor contracts.</p>
-        </article>
-      </div>
-      <div class="values__action">
-        <a class="btn btn--solid btn--lg" href="#owners">Work With Us</a>
-      </div>
-    </div>
-  </section>
-
 </main>
 
 <!-- ==========================================
@@ -2904,220 +2900,14 @@ body {
      ========================================== -->
 <main class="page" id="page-careers">
 
-  <!-- HERO -->
-  <section class="careers-hero" aria-label="Career opportunities at Vega ALM">
-    <div class="careers-hero__inner">
+  <!-- COMING SOON -->
+  <section class="careers-coming-soon" aria-label="Careers coming soon">
+    <div class="careers-coming-soon__inner">
       <div class="eyebrow">Careers</div>
-      <h1 class="careers-hero__title">The Staffing Plan Is the Care Plan.</h1>
-      <p class="careers-hero__lede">We believe the quality of care in a community is determined by the people who show up every day. That is why we invest in staffing ratios, training, and a culture where caregivers feel valued, stay longer, and grow into new roles.</p>
-    </div>
-  </section>
-
-  <!-- WHY WORK HERE -->
-  <section class="why-work" aria-label="Why work at Vega ALM">
-    <div class="why-work__inner">
-      <div class="eyebrow">Why Work Here</div>
-      <div class="why-work__cards">
-        <article class="why-card">
-          <h3 class="why-card__title">Published Ratios</h3>
-          <p class="why-card__body">We staff above state minimums and hold ourselves to published caregiver-to-resident ratios. You will never be asked to work short-staffed.</p>
-        </article>
-        <article class="why-card">
-          <h3 class="why-card__title">Promote From Within</h3>
-          <p class="why-card__body">Every community leader started on the floor. We fund training and promote before we hire outside, because the best leaders already understand the work.</p>
-        </article>
-        <article class="why-card">
-          <h3 class="why-card__title">Tuition and Licensure</h3>
-          <p class="why-card__body">CNA certification, med-tech training, and LPN tuition assistance are available from day one. We want you to build a career here, and we will invest in helping you get there.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONSISTENT ASSIGNMENT -->
-  <section class="consistent" aria-label="Our consistent assignment model">
-    <div class="consistent__grid">
-      <div class="consistent__photo photo-slot">
-        <img src="assets/facilities/interior-suite.jpg" alt="Resident suite interior">
-      </div>
-      <div class="consistent__right">
-        <div class="eyebrow">Consistent Assignment</div>
-        <h2>Same Residents, Same Caregivers.</h2>
-        <p>Our consistent assignment model means caregivers work with the same group of residents every shift. That continuity builds genuine trust, helps you notice changes in condition earlier, and makes the work more meaningful.</p>
-        <p>Rotating assignments might look efficient on a schedule, but they come at the cost of the relationships that define good care. We choose consistency over convenience, and we see the difference in retention for both residents and staff.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPEN ROLES -->
-  <section class="roles" aria-label="Open positions">
-    <div class="roles__inner">
-      <div class="eyebrow">Open Positions</div>
-      <p class="roles__caption">Placeholder postings.</p>
-      <div class="accordion" id="rolesAccordion">
-
-        <div class="accordion-row open" data-role="Resident Care Aide">
-          <div class="accordion__header" onclick="toggleAccordion(this)">
-            <span class="accordion__title">Resident Care Aide</span>
-            <span class="accordion__location">Assisted Living</span>
-            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
-            <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </div>
-          <div class="accordion__body">
-            <div class="accordion__summary">
-              <p>Resident Care Aides are the heart of daily life in our communities. You will assist residents with personal care, mobility, meals, and social activities while building meaningful relationships through consistent assignment.</p>
-            </div>
-            <div class="accordion__details">
-              <h4 class="accordion__req-heading">Requirements</h4>
-              <ul class="accordion__req-list">
-                <li>CNA certification or equivalent state credential</li>
-                <li>1+ year of experience in senior living or long-term care</li>
-                <li>Ability to lift 50 lbs and stand for extended periods</li>
-                <li>Current CPR and First Aid certification</li>
-              </ul>
-              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-row" data-role="Licensed Practical Nurse">
-          <div class="accordion__header" onclick="toggleAccordion(this)">
-            <span class="accordion__title">Licensed Practical Nurse</span>
-            <span class="accordion__location">Assisted Living</span>
-            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
-            <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </div>
-          <div class="accordion__body">
-            <div class="accordion__summary">
-              <p>Our LPNs lead the clinical side of resident care, managing medication administration, care plan updates, and communication with families and physicians. You will work closely with a consistent group of residents and their care aides.</p>
-            </div>
-            <div class="accordion__details">
-              <h4 class="accordion__req-heading">Requirements</h4>
-              <ul class="accordion__req-list">
-                <li>Active LPN license in applicable state</li>
-                <li>Experience with electronic health records</li>
-                <li>Strong communication skills with residents, families, and staff</li>
-                <li>Familiarity with assisted living regulations preferred</li>
-              </ul>
-              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-row" data-role="Community Sales Director">
-          <div class="accordion__header" onclick="toggleAccordion(this)">
-            <span class="accordion__title">Community Sales Director</span>
-            <span class="accordion__location">Senior Living</span>
-            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
-            <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </div>
-          <div class="accordion__body">
-            <div class="accordion__summary">
-              <p>The Community Sales Director drives census development through local outreach, referral partnerships, and conversion-focused follow-up. You will work closely with the operations team to ensure every move-in is well-organized.</p>
-            </div>
-            <div class="accordion__details">
-              <h4 class="accordion__req-heading">Requirements</h4>
-              <ul class="accordion__req-list">
-                <li>3+ years of senior living sales experience</li>
-                <li>Proven track record of meeting or exceeding occupancy targets</li>
-                <li>Experience with CRM tools and lead management</li>
-                <li>Deep understanding of the local referral landscape</li>
-              </ul>
-              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-row" data-role="Executive Director">
-          <div class="accordion__header" onclick="toggleAccordion(this)">
-            <span class="accordion__title">Executive Director</span>
-            <span class="accordion__location">Assisted Living</span>
-            <span class="accordion__badge-col"><span class="badge badge--sage">Full-Time</span></span>
-            <span class="accordion__caret">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
-            </span>
-          </div>
-          <div class="accordion__body">
-            <div class="accordion__summary">
-              <p>The Executive Director leads all aspects of community life: staffing, clinical quality, sales, financial results, and regulatory compliance. You will set the tone for your community's culture and work closely with Vega ALM leadership and the ownership group.</p>
-            </div>
-            <div class="accordion__details">
-              <h4 class="accordion__req-heading">Requirements</h4>
-              <ul class="accordion__req-list">
-                <li>Active administrator license in applicable state</li>
-                <li>5+ years of senior living leadership experience</li>
-                <li>Demonstrated ability to manage P&amp;L and drive occupancy</li>
-                <li>Strong track record with state survey outcomes</li>
-              </ul>
-              <button class="btn btn--sm btn--solid" onclick="event.stopPropagation(); navigateTo('careers','apply')">Apply for This Role</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- APPLICATION FORM -->
-  <section class="application" id="apply" aria-label="Submit a job application">
-    <div class="application__grid">
-      <div class="application__left">
-        <div class="eyebrow">Apply</div>
-        <h2>Join Our Team</h2>
-        <p>Tell us who you are and what role interests you. A real person reads every application, and we respond within five business days.</p>
-      </div>
-      <form id="applicationForm" onsubmit="handleFormSubmit(event, 'applicationSubmitBtn', 'Application received. A person reads every one.')">
-        <div class="application__form-grid">
-          <div class="field">
-            <label for="appName">Your Name</label>
-            <input type="text" id="appName" name="name" required>
-          </div>
-          <div class="field">
-            <label for="appPhone">Phone</label>
-            <input type="tel" id="appPhone" name="phone">
-          </div>
-          <div class="field field--full">
-            <label for="appEmail">Email</label>
-            <input type="email" id="appEmail" name="email" required>
-          </div>
-          <div class="field">
-            <label for="appRole">Role</label>
-            <select id="appRole" name="role">
-              <option value="" disabled selected>Select one</option>
-              <option value="care-aide">Resident Care Aide</option>
-              <option value="lpn">Licensed Practical Nurse</option>
-              <option value="sales-director">Community Sales Director</option>
-              <option value="executive-director">Executive Director</option>
-              <option value="other">Something Else</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="appLicense">Current Licensure</label>
-            <select id="appLicense" name="licensure">
-              <option value="" disabled selected>Select one</option>
-              <option value="cna">CNA</option>
-              <option value="med-tech">Med Tech</option>
-              <option value="lpn">LPN</option>
-              <option value="rn">RN</option>
-              <option value="admin">Administrator</option>
-              <option value="none">None Yet</option>
-            </select>
-          </div>
-          <div class="field field--full">
-            <label for="appExperience">Tell Us About Your Experience</label>
-            <textarea id="appExperience" name="experience" rows="4"></textarea>
-          </div>
-          <div class="application__submit">
-            <button type="submit" class="btn btn--solid" id="applicationSubmitBtn">Submit Application</button>
-          </div>
-        </div>
-      </form>
+      <h1 class="careers-coming-soon__title">We Are Building Something Worth Joining.</h1>
+      <p class="careers-coming-soon__body">Vega Assisted Living Management is growing, and we will be hiring soon. We are looking for people who believe that staffing is the care plan, not just a line item.</p>
+      <p class="careers-coming-soon__body">When we open roles, you will find them here. In the meantime, reach out if you want to introduce yourself.</p>
+      <a class="btn btn--solid btn--lg" href="mailto:sayer@vegarei.com">Get in Touch</a>
     </div>
   </section>
 
@@ -3144,7 +2934,6 @@ body {
         <div class="footer__col">
           <h4 class="footer__col-heading">Company</h4>
           <a href="#about">About</a>
-          <a href="#about" onclick="setTimeout(function(){document.querySelector('.leadership')&&document.querySelector('.leadership').scrollIntoView({behavior:'smooth'})},100)">Leadership</a>
           <a href="#careers">Careers</a>
         </div>
         <div class="footer__col">
