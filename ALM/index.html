@@ -524,6 +524,13 @@ body {
   overflow: hidden;
 }
 
+.photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--img-filter);
+}
+
 .photo-slot span {
   font-weight: 600;
   font-size: 11px;
@@ -574,11 +581,20 @@ body {
 .nav__logo-img {
   height: 48px;
   width: auto;
-  transition: filter var(--dur-theme) var(--ease-standard);
 }
 
-.nav[data-theme="dark"] .nav__logo-img {
-  filter: brightness(0) invert(1);
+.nav__logo-img--dark {
+  display: none;
+}
+
+.nav[data-theme="dark"] .nav__logo-img--light {
+  display: none;
+}
+
+.nav[data-theme="dark"] .nav__logo-img--dark {
+  display: block;
+  height: 48px;
+  width: auto;
 }
 
 .nav__links {
@@ -722,8 +738,6 @@ body {
 .footer__logo-img {
   height: 80px;
   width: auto;
-  filter: invert(1);
-  mix-blend-mode: screen;
 }
 
 .footer__columns {
@@ -921,6 +935,7 @@ body {
 .home-leader__portrait {
   width: 100%;
   aspect-ratio: 4 / 5;
+  border: 1px solid var(--border-on-light);
 }
 
 .home-leader__name {
@@ -1336,8 +1351,15 @@ body {
 
 .engagement__photo {
   height: 340px;
-  background: var(--surface-base);
   border: 1px solid var(--border-on-light);
+  overflow: hidden;
+}
+
+.engagement__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--img-filter);
 }
 
 .engagement__right h2 {
@@ -1537,8 +1559,6 @@ body {
 .vega-relationship__logo-img {
   height: 104px;
   width: auto;
-  filter: invert(1);
-  mix-blend-mode: screen;
 }
 
 /* Leadership (About page) */
@@ -1697,6 +1717,14 @@ body {
 
 .consistent__photo {
   height: 360px;
+  overflow: hidden;
+}
+
+.consistent__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--img-filter);
 }
 
 .consistent__right h2 {
@@ -2153,7 +2181,8 @@ body {
 <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
     <a class="nav__brand" href="#home" aria-label="Vega ALM Home">
-      <img class="nav__logo-img" src="vega-alm-logo.png" alt="Vega Assisted Living Management">
+      <img class="nav__logo-img nav__logo-img--light" src="assets/vega-alm-lockup.png" alt="Vega Assisted Living Management">
+      <img class="nav__logo-img nav__logo-img--dark" src="assets/vega-alm-lockup-white.png" alt="Vega Assisted Living Management">
     </a>
     <div class="nav__links" id="navLinks">
       <a class="nav__link" href="#home" data-page="home">Home</a>
@@ -2224,21 +2253,21 @@ body {
       </div>
       <div class="home-leadership__grid">
         <article class="home-leader">
-          <div class="home-leader__portrait photo-slot"><span>Portrait</span></div>
+          <div class="home-leader__portrait photo-slot"><img src="assets/team/sayer-leslie.png" alt="Sayer Leslie"></div>
           <h3 class="home-leader__name">Sayer Leslie</h3>
           <div class="home-leader__role">Owner, Chief Executive</div>
           <p class="home-leader__bio">Sayer founded Vega in 2012 as a real estate investment firm and built ALM into a standalone operating company. He remains involved in every transition and ownership relationship.</p>
           <a class="home-leader__phone" href="tel:+18015550134">(801) 555-0134</a>
         </article>
         <article class="home-leader">
-          <div class="home-leader__portrait photo-slot"><span>Portrait</span></div>
+          <div class="home-leader__portrait photo-slot"><img src="assets/team/wes-norton.png" alt="Wes Norton"></div>
           <h3 class="home-leader__name">Wes Norton</h3>
           <div class="home-leader__role">Chief Operating Officer</div>
           <p class="home-leader__bio">Wes oversees daily operations across the portfolio, from staffing and compliance to vendor management. He joined Vega ALM in 2018.</p>
           <a class="home-leader__phone" href="tel:+18015550135">(801) 555-0135</a>
         </article>
         <article class="home-leader">
-          <div class="home-leader__portrait photo-slot"><span>Portrait</span></div>
+          <div class="home-leader__portrait photo-slot"><img src="assets/team/mary-evans.png" alt="Mary Evans"></div>
           <h3 class="home-leader__name">Mary Evans</h3>
           <div class="home-leader__role">Director of Clinical Services</div>
           <p class="home-leader__bio">Mary leads the clinical team, including care plan development, medication oversight, and survey readiness. She brings 15 years of long-term care nursing experience.</p>
@@ -2291,7 +2320,7 @@ body {
   <!-- FACILITY BAND -->
   <section class="facility-band" id="facility" aria-label="Facility photograph">
     <div class="facility-band__slot photo-slot">
-      <span>Facility Photograph</span>
+      <img src="assets/facilities/vega-owned-exterior-wide.jpg" alt="Vega-owned assisted living community exterior">
     </div>
   </section>
 
@@ -2317,8 +2346,8 @@ body {
 
   <!-- INTERIOR PAIR -->
   <section class="interior-pair" aria-label="Interior photographs">
-    <div class="interior-pair__slot photo-slot"><span>Interior Photo</span></div>
-    <div class="interior-pair__slot photo-slot"><span>Interior Photo</span></div>
+    <div class="interior-pair__slot photo-slot"><img src="assets/facilities/interior-common.jpg" alt="Common area interior"></div>
+    <div class="interior-pair__slot photo-slot"><img src="assets/facilities/interior-dining.jpg" alt="Dining room interior"></div>
   </section>
 
   <!-- CONTACT -->
@@ -2480,7 +2509,7 @@ body {
   <section class="engagement" aria-label="How we work with building owners">
     <div class="engagement__grid">
       <div class="engagement__photo photo-slot">
-        <span>Community Photo</span>
+        <img src="assets/facilities/vega-owned-exterior.jpg" alt="Vega-owned community exterior">
       </div>
       <div class="engagement__right">
         <div class="eyebrow">Engagement Types</div>
@@ -2619,7 +2648,7 @@ body {
         <p>Ownership alignment is built into the structure. Vega invests in many of the communities we manage, which means our interests as operator and owner move in the same direction.</p>
       </div>
       <div class="vega-relationship__logo">
-        <img class="vega-relationship__logo-img" src="vega-alm-logo.png" alt="Vega Assisted Living Management">
+        <img class="vega-relationship__logo-img" src="assets/vega-alm-lockup-white.png" alt="Vega Assisted Living Management">
       </div>
     </div>
   </section>
@@ -2630,17 +2659,17 @@ body {
       <div class="eyebrow">Leadership</div>
       <div class="leadership__grid">
         <article class="leader">
-          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <div class="leader__portrait photo-slot"><img src="assets/team/sayer-leslie.png" alt="Sayer Leslie"></div>
           <h3 class="leader__name">Sayer Leslie</h3>
           <div class="leader__role">Owner, Chief Executive</div>
         </article>
         <article class="leader">
-          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <div class="leader__portrait photo-slot"><img src="assets/team/wes-norton.png" alt="Wes Norton"></div>
           <h3 class="leader__name">Wes Norton</h3>
           <div class="leader__role">Chief Operating Officer</div>
         </article>
         <article class="leader">
-          <div class="leader__portrait photo-slot"><span>Portrait</span></div>
+          <div class="leader__portrait photo-slot"><img src="assets/team/mary-evans.png" alt="Mary Evans"></div>
           <h3 class="leader__name">Mary Evans</h3>
           <div class="leader__role">Director of Clinical Services</div>
         </article>
@@ -2714,7 +2743,7 @@ body {
   <section class="consistent" aria-label="Our consistent assignment model">
     <div class="consistent__grid">
       <div class="consistent__photo photo-slot">
-        <span>Community Photo</span>
+        <img src="assets/facilities/interior-suite.jpg" alt="Resident suite interior">
       </div>
       <div class="consistent__right">
         <div class="eyebrow">Consistent Assignment</div>
@@ -2906,7 +2935,7 @@ body {
   <div class="footer__inner">
     <div class="footer__top">
       <div class="footer__logo">
-        <img class="footer__logo-img" src="vega-alm-logo.png" alt="Vega Assisted Living Management">
+        <img class="footer__logo-img" src="assets/vega-alm-lockup-white.png" alt="Vega Assisted Living Management">
       </div>
       <div class="footer__columns">
         <div class="footer__col">
