@@ -201,7 +201,7 @@ table { border-collapse: collapse; }
 
   --container-max: 1080px;
   --gutter: 48px;
-  --nav-height: 80px;
+  --nav-height: 72px;
 }
 
 /* ========================================
@@ -582,7 +582,7 @@ body {
 }
 
 .nav__logo-svg {
-  height: 64px;
+  height: 52px;
   width: auto;
   color: var(--text-heading);
   transition: color var(--dur-theme) var(--ease-standard);
@@ -1452,51 +1452,88 @@ body {
   max-width: 58ch;
 }
 
-/* Timeline */
-.timeline {
+/* Optimize for Owners */
+.optimize {
   background: var(--surface-alt);
   padding: 96px 0;
 }
 
-.timeline__inner {
+.optimize__inner {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
-.timeline__grid {
+.optimize__title {
+  font-weight: 300;
+  font-size: 42px;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--text-heading);
+  max-width: 24ch;
+  margin-top: 8px;
+}
+
+.optimize__subtitle {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin-top: 16px;
+  max-width: 58ch;
+}
+
+.optimize__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--valm-rule);
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
-.timeline__cell {
+.optimize__tile {
   background: var(--surface-base);
   padding: 30px 26px 34px;
 }
 
-.timeline__year {
-  font-weight: 300;
-  font-size: 34px;
+.optimize__tile-icon {
   color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.timeline__title {
+.optimize__tile-title {
   font-weight: 600;
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 17px;
   color: var(--text-heading);
   margin-bottom: 12px;
 }
 
-.timeline__body {
+.optimize__tile-body {
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--text-body);
+}
+
+/* Compact Leadership */
+.leadership--compact {
+  padding: 64px 0;
+}
+
+.leadership__row {
+  display: flex;
+  gap: 48px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.leadership__person {
+  font-size: 15px;
+  color: var(--text-body);
+}
+
+.leadership__person strong {
+  color: var(--text-heading);
+  font-weight: 500;
+  margin-right: 8px;
 }
 
 /* Vega Relationship */
@@ -1901,7 +1938,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .timeline__grid {
+  .optimize__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -2084,8 +2121,12 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .timeline__grid {
+  .optimize__grid {
     grid-template-columns: 1fr;
+  }
+
+  .optimize__title {
+    font-size: 32px;
   }
 
   .vega-relationship__grid {
@@ -2160,7 +2201,7 @@ body {
   }
 
   .nav__logo-svg {
-    height: 36px;
+    height: 40px;
   }
 
   .nav__phone {
@@ -2231,12 +2272,14 @@ body {
 <nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
     <a class="nav__brand" href="#home" aria-label="Vega ALM Home">
-      <svg class="nav__logo-svg" viewBox="0 0 1602 587" role="img" aria-label="Vega Assisted Living Management">
+      <svg class="nav__logo-svg" viewBox="0 0 1602 880" role="img" aria-label="Vega Assisted Living Management">
         <polygon fill="currentColor" points="474.94 371.81 694.38 371.81 694.38 320.83 474.94 320.83 474.94 184.06 727.34 184.06 727.34 133.09 416.51 133.09 416.51 575.71 733.55 575.71 733.55 524.74 474.94 524.74 474.94 371.81"/>
         <path fill="currentColor" d="M1441.79,133.12h-62.16l-169.15,442.55h62.82l51.03-135.47,18-51.03,67.08-183.39h1.3l63.46,183.39,18,51.03,47.27,135.47h62.69l-160.34-442.55Z"/>
         <path fill="currentColor" d="M0,133.09h64.04l115.63,361.8h1.24l123.09-361.8h61.54l-157.28,442.62h-60.3L0,133.09Z"/>
         <path fill="currentColor" d="M182.77,0c-8.8,61.66-27.56,110.27-51.34,133.09,23.79,22.82,42.54,71.43,51.34,133.09,8.8-61.66,27.56-110.27,51.34-133.09-23.79-22.82-42.54-71.43-51.34-133.09Z"/>
         <path fill="currentColor" d="M965.68,381.82h137.75v129.49c-10.38,6.49-21.85,11.63-34.51,15.59-19.29,6.09-40.54,9.07-63.72,9.07-27.33,0-51.03-5.05-71.23-15.28-20.07-10.1-36.65-23.7-49.73-40.67-12.95-16.97-22.66-36.78-28.88-59.06-6.22-22.41-9.33-45.85-9.33-70.33s3.63-46.11,10.88-67.74c7.25-21.5,17.74-40.41,31.47-56.6,13.6-16.19,30.3-29.01,49.99-38.85,19.69-9.71,41.96-14.63,66.82-14.63,21.12,0,39.89,2.46,56.21,7.25,16.45,4.79,30.56,11.27,42.61,19.56,8.28,5.7,16.7,12.56,23.96,20.08l33.41-43.52c-9.45-8.81-21.11-16.84-29.14-21.76-18-11.01-37.68-18.52-59.31-24.09-21.5-5.7-44.17-8.42-67.74-8.42-35.62,0-67.22,6.73-94.8,20.2-27.58,13.47-50.9,31.21-69.94,53.1-19.04,22.02-33.42,46.88-43.13,74.6-9.84,27.84-14.63,55.95-14.63,84.57,0,34.45,5.05,65.92,15.15,94.54,10.23,28.49,24.87,53.1,44.17,73.56,19.29,20.59,42.74,36.39,70.2,47.66,27.58,11.14,58.54,16.71,92.99,16.71,31.09,0,65.15-2.59,92.73-12.95,2.48-.88,5.08-1.96,7.76-3.17h0c.16-.07.32-.14.48-.22.19-.09.38-.17.58-.26,16.42-7.43,35.61-19.49,51.54-35.86v-207.45h-192.61v54.86Z"/>
+        <text fill="currentColor" font-family="Archivo, sans-serif" font-weight="300" font-size="80" letter-spacing="20" text-anchor="middle" x="801" y="710">ASSISTED LIVING</text>
+        <text fill="currentColor" font-family="Archivo, sans-serif" font-weight="300" font-size="80" letter-spacing="20" text-anchor="middle" x="801" y="820">MANAGEMENT</text>
       </svg>
     </a>
     <div class="nav__links" id="navLinks">
@@ -2659,35 +2702,45 @@ body {
   <section class="about-hero" aria-label="About Vega Assisted Living Management">
     <div class="about-hero__inner">
       <div class="eyebrow">About</div>
-      <h1 class="about-hero__title">A Real Estate Operator That Learned to Run Care.</h1>
-      <p class="about-hero__lede">Vega ALM started because a real estate firm saw what happens when a third-party operator does not share the same priorities as the building owner. What began as an internal solution became a standalone management company grounded in operational discipline and a staffing-first philosophy.</p>
+      <h1 class="about-hero__title">Built to Operate. Measured by Results.</h1>
+      <p class="about-hero__lede">Vega Assisted Living Management was built by people who understand what owners need from an operator. Every decision we make is measured by the results it delivers: census performance, NOI, and the quality of care inside the building.</p>
     </div>
   </section>
 
-  <!-- HISTORY TIMELINE -->
-  <section class="timeline" aria-label="Company history">
-    <div class="timeline__inner">
-      <div class="eyebrow">Our History</div>
-      <div class="timeline__grid">
-        <article class="timeline__cell">
-          <div class="timeline__year">2012</div>
-          <div class="timeline__title">Founded</div>
-          <p class="timeline__body">Vega begins as a real estate investment firm focused on senior housing, learning the industry from the ownership side.</p>
+  <!-- HOW WE OPTIMIZE -->
+  <section class="optimize" aria-label="How we optimize for owners">
+    <div class="optimize__inner">
+      <div class="eyebrow">Market-Informed Operations</div>
+      <h2 class="optimize__title">We Manage to the Data, Not Around It.</h2>
+      <p class="optimize__subtitle">Every operating decision is benchmarked against current market data. Here is what we watch and how it shapes the way we manage for owners.</p>
+      <div class="optimize__grid">
+        <article class="optimize__tile">
+          <div class="optimize__tile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="optimize__tile-title">Census</h3>
+          <p class="optimize__tile-body">We set occupancy targets by submarket, not national averages. Census strategy is reviewed monthly with local market data, referral pipeline tracking, and competitive rate analysis.</p>
         </article>
-        <article class="timeline__cell">
-          <div class="timeline__year">2016</div>
-          <div class="timeline__title">First Operation</div>
-          <p class="timeline__body">Takes over management of a first community after a third-party operator underperforms. The experience shapes the operating model.</p>
+        <article class="optimize__tile">
+          <div class="optimize__tile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="optimize__tile-title">Revenue</h3>
+          <p class="optimize__tile-body">Rate optimization is reviewed monthly alongside occupancy. We price each unit against the local competitive set so owners capture market-rate revenue without sacrificing census.</p>
         </article>
-        <article class="timeline__cell">
-          <div class="timeline__year">2019</div>
-          <div class="timeline__title">Formalized</div>
-          <p class="timeline__body">ALM established as a standalone operating company within the Vega platform, with its own leadership and clinical team.</p>
+        <article class="optimize__tile">
+          <div class="optimize__tile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <h3 class="optimize__tile-title">Expense Management</h3>
+          <p class="optimize__tile-body">We benchmark operating costs against industry data and renegotiate vendor contracts on a rolling basis. Owners see every variance in the monthly financial package.</p>
         </article>
-        <article class="timeline__cell">
-          <div class="timeline__year">2024</div>
-          <div class="timeline__title">Scale</div>
-          <p class="timeline__body">Portfolio grows steadily, earning the trust of building owners through consistent, transparent operations.</p>
+        <article class="optimize__tile">
+          <div class="optimize__tile-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          </div>
+          <h3 class="optimize__tile-title">Market Intelligence</h3>
+          <p class="optimize__tile-body">We monitor construction pipelines, demographic shifts, and regulatory changes in every market where we operate. When the competitive landscape changes, we adjust before it impacts performance.</p>
         </article>
       </div>
     </div>
@@ -2718,46 +2771,33 @@ body {
   </section>
 
   <!-- LEADERSHIP -->
-  <section class="leadership" aria-label="Leadership team">
+  <section class="leadership leadership--compact" aria-label="Leadership team">
     <div class="leadership__inner">
       <div class="eyebrow">Leadership</div>
-      <div class="leadership__grid">
-        <article class="leader">
-          <div class="leader__portrait photo-slot"><img src="assets/team/sayer-leslie.png" alt="Sayer Leslie"></div>
-          <h3 class="leader__name">Sayer Leslie</h3>
-          <div class="leader__role">Owner, Chief Executive</div>
-        </article>
-        <article class="leader">
-          <div class="leader__portrait photo-slot"><img src="assets/team/wes-norton.png" alt="Wes Norton"></div>
-          <h3 class="leader__name">Wes Norton</h3>
-          <div class="leader__role">Chief Operating Officer</div>
-        </article>
-        <article class="leader">
-          <div class="leader__portrait photo-slot"><img src="assets/team/mary-evans.png" alt="Mary Evans"></div>
-          <h3 class="leader__name">Mary Evans</h3>
-          <div class="leader__role">Director of Clinical Services</div>
-        </article>
+      <div class="leadership__row">
+        <span class="leadership__person"><strong>Sayer Leslie</strong> Owner, Chief Executive</span>
+        <span class="leadership__person"><strong>Wes Norton</strong> Chief Operating Officer</span>
+        <span class="leadership__person"><strong>Mary Evans</strong> Director of Clinical Services</span>
       </div>
-      <p class="leadership__caption">Bios and direct numbers are placeholder.</p>
     </div>
   </section>
 
   <!-- VALUES -->
   <section class="values" aria-label="Our guiding principles">
     <div class="values__inner">
-      <div class="eyebrow">What We Believe</div>
+      <div class="eyebrow">What We Deliver</div>
       <div class="values__cards">
-        <article class="value-card">
-          <h3 class="value-card__title">Staffing First</h3>
-          <p class="value-card__body">When staffing is right, care follows. We hold ourselves to ratios above state minimums, because the quality of care starts with the people delivering it.</p>
-        </article>
         <article class="value-card">
           <h3 class="value-card__title">Transparent Reporting</h3>
           <p class="value-card__body">Owners see what we see. Monthly financials, census data, and variance reports without filters. Trust is built on sharing the full picture.</p>
         </article>
         <article class="value-card">
-          <h3 class="value-card__title">Resident Retention</h3>
-          <p class="value-card__body">The best measure of care quality is whether residents stay. We track it, learn from it, and build our practices around it.</p>
+          <h3 class="value-card__title">Census Performance</h3>
+          <p class="value-card__body">Occupancy drives everything. We build census through local outreach, referral partnerships, and conversion-focused follow-up, because a full building is a performing building.</p>
+        </article>
+        <article class="value-card">
+          <h3 class="value-card__title">NOI Performance</h3>
+          <p class="value-card__body">We tie our management fee to NOI, not just revenue. That alignment shapes every operating decision, from staffing ratios to vendor contracts.</p>
         </article>
       </div>
       <div class="values__action">
