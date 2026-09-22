@@ -1656,6 +1656,60 @@ body {
   padding-top: 26px;
 }
 
+.value-card__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+/* Stats Band */
+.stats-band {
+  background: var(--surface-dark);
+  padding: 64px 0;
+}
+
+.stats-band__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.stats-band__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.stats-band__item {
+  text-align: center;
+}
+
+.stats-band__number {
+  font-weight: 200;
+  font-size: 48px;
+  letter-spacing: -0.03em;
+  color: var(--text-on-dark);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.stats-band__label {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+}
+
+.stats-band__note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--valm-grey-on-dark);
+  margin-top: 32px;
+  font-style: italic;
+}
+
 .value-card__title {
   font-weight: 600;
   font-size: 17px;
@@ -2127,6 +2181,15 @@ body {
 
   .optimize__title {
     font-size: 32px;
+  }
+
+  .stats-band__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+
+  .stats-band__number {
+    font-size: 36px;
   }
 
   .vega-relationship__grid {
@@ -2707,6 +2770,31 @@ body {
     </div>
   </section>
 
+  <!-- STATS BAND -->
+  <section class="stats-band" aria-label="Portfolio performance">
+    <div class="stats-band__inner">
+      <div class="stats-band__grid">
+        <div class="stats-band__item">
+          <div class="stats-band__number">XX</div>
+          <div class="stats-band__label">Communities Managed</div>
+        </div>
+        <div class="stats-band__item">
+          <div class="stats-band__number">XX%</div>
+          <div class="stats-band__label">Avg. Occupancy</div>
+        </div>
+        <div class="stats-band__item">
+          <div class="stats-band__number">100%</div>
+          <div class="stats-band__label">On-Time Reporting</div>
+        </div>
+        <div class="stats-band__item">
+          <div class="stats-band__number">XX%</div>
+          <div class="stats-band__label">Owner Renewal Rate</div>
+        </div>
+      </div>
+      <p class="stats-band__note">Placeholder figures. Update with current portfolio data.</p>
+    </div>
+  </section>
+
   <!-- HOW WE OPTIMIZE -->
   <section class="optimize" aria-label="How we optimize for owners">
     <div class="optimize__inner">
@@ -2788,14 +2876,17 @@ body {
       <div class="eyebrow">What We Deliver</div>
       <div class="values__cards">
         <article class="value-card">
+          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
           <h3 class="value-card__title">Transparent Reporting</h3>
           <p class="value-card__body">Owners see what we see. Monthly financials, census data, and variance reports without filters. Trust is built on sharing the full picture.</p>
         </article>
         <article class="value-card">
+          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <h3 class="value-card__title">Census Performance</h3>
           <p class="value-card__body">Occupancy drives everything. We build census through local outreach, referral partnerships, and conversion-focused follow-up, because a full building is a performing building.</p>
         </article>
         <article class="value-card">
+          <svg class="value-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
           <h3 class="value-card__title">NOI Performance</h3>
           <p class="value-card__body">We tie our management fee to NOI, not just revenue. That alignment shapes every operating decision, from staffing ratios to vendor contracts.</p>
         </article>
