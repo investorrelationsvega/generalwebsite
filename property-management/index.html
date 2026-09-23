@@ -986,6 +986,41 @@ img { display: block; max-width: 100%; }
 }
 
 /* ========================================
+   AGENT REFERRAL BAND
+   ======================================== */
+.referral {
+  padding: 48px var(--gutter);
+  background: var(--accent-light);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.referral__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.referral__title {
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+.referral__body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+@media (max-width: 768px) {
+  .referral__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ========================================
    HERO COMET MARK (background element)
    ======================================== */
 .hero {
@@ -1397,6 +1432,19 @@ img { display: block; max-width: 100%; }
     <div class="fees__right">
       <a class="btn btn--solid btn--lg" href="#contact">Request a Quote</a>
     </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     AGENT REFERRAL
+     ========================================== -->
+<section class="referral fade-up" aria-label="Agent referral program">
+  <div class="referral__inner">
+    <div class="referral__text">
+      <h3 class="referral__title">Agents &amp; Brokers</h3>
+      <p class="referral__body">Ask about our agent referral program.</p>
+    </div>
+    <a class="btn btn--outline" href="tel:+18019215746">(801) 921-5746</a>
   </div>
 </section>
 
