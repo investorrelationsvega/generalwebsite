@@ -340,17 +340,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     toastTimeout = setTimeout(function() { t.classList.remove('show'); }, 2600);
   }
 
+  // Replace YOUR_SCRIPT_URL with the Google Apps Script web app URL
+  var GOOGLE_SCRIPT_URL = 'YOUR_SCRIPT_URL';
+
   window.handleSubmit = function(e) {
     e.preventDefault();
     var btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    setTimeout(function() {
-      document.getElementById('connectForm').style.display = 'none';
+    var form = document.getElementById('connectForm');
+    var data = {
+      first_name: form.first_name.value,
+      last_name: form.last_name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      company: form.company.value,
+      interest: form.interest.value,
+      message: form.message.value,
+      referred_by: form.referred_by.value,
+      ref: form.ref.value
+    };
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      form.style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
       showToast('Your information has been received.');
-    }, 600);
+    })
+    .catch(function() {
+      showToast('Something went wrong. Please try again.');
+      btn.textContent = 'Send';
+      btn.disabled = false;
+    });
   };
 })();
 </script>
