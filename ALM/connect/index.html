@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect with Vega Assisted Living Management</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #3f6350;
+  --sage-hover: #345242;
+  --sage-light: rgba(63, 99, 80, 0.06);
+  --surface: #faf9f7;
+  --surface-alt: #f0eeeb;
+  --dark: #1a1e21;
+  --body: #4a4e52;
+  --subtle: #7a7e82;
+  --border: #ddd9d3;
+  --font: 'Archivo', -apple-system, 'Helvetica Neue', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  color: var(--body);
+  background: var(--surface);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+::selection { background: var(--sage); color: #fff; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+}
+
+.logo-link {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.logo-svg {
+  height: 44px;
+  width: auto;
+  color: var(--dark);
+}
+
+.greeting {
+  margin-bottom: 32px;
+}
+
+.greeting__title {
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.greeting__body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body);
+}
+
+.greeting__ref {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  padding: 4px 12px;
+  background: var(--sage-light);
+  border: 1px solid rgba(63, 99, 80, 0.12);
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field { display: flex; flex-direction: column; }
+.field label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-bottom: 6px;
+}
+.field input,
+.field textarea,
+.field select {
+  font-family: var(--font);
+  font-size: 16px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--dark);
+  border-radius: 0;
+  -webkit-appearance: none;
+  transition: border-color 0.2s;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-bottom-color: var(--sage);
+}
+.field textarea { resize: vertical; min-height: 80px; }
+.field select { cursor: pointer; }
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 20px;
+}
+
+.submit-area {
+  padding-top: 8px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 14px 36px;
+  border: none;
+  cursor: pointer;
+  background: var(--sage);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--sage-hover); }
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.footer-line {
+  padding: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--subtle);
+  opacity: 0.6;
+}
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px);
+  background: var(--dark);
+  color: #fff;
+  padding: 14px 32px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 500;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.success {
+  text-align: center;
+  padding: 48px 0;
+}
+.success__icon {
+  width: 48px;
+  height: 48px;
+  color: var(--sage);
+  margin-bottom: 20px;
+}
+.success__title {
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+.success__body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body);
+}
+
+@media (max-width: 520px) {
+  .page { padding: 32px 20px; }
+  .greeting__title { font-size: 24px; }
+  .row-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+    <a class="logo-link" href="/ALM/" aria-label="Vega Assisted Living Management">
+      <svg class="logo-svg" viewBox="0 0 1520 620" role="img" aria-label="Vega ALM">
+        <polygon fill="currentColor" points="474.94 371.81 694.38 371.81 694.38 320.83 474.94 320.83 474.94 184.06 727.34 184.06 727.34 133.09 416.51 133.09 416.51 575.71 733.55 575.71 733.55 524.74 474.94 524.74 474.94 371.81"/>
+        <path fill="currentColor" d="M1441.79,133.12h-62.16l-169.15,442.55h62.82l51.03-135.47,18-51.03,67.08-183.39h1.3l63.46,183.39,18,51.03,47.27,135.47h62.69l-160.34-442.55Z"/>
+        <path fill="currentColor" d="M0,133.09h64.04l115.63,361.8h1.24l123.09-361.8h61.54l-157.28,442.62h-60.3L0,133.09Z"/>
+        <path fill="currentColor" d="M182.77,0c-8.8,61.66-27.56,110.27-51.34,133.09,23.79,22.82,42.54,71.43,51.34,133.09,8.8-61.66,27.56-110.27,51.34-133.09-23.79-22.82-42.54-71.43-51.34-133.09Z"/>
+        <path fill="currentColor" d="M965.68,381.82h137.75v129.49c-10.38,6.49-21.85,11.63-34.51,15.59-19.29,6.09-40.54,9.07-63.72,9.07-27.33,0-51.03-5.05-71.23-15.28-20.07-10.1-36.65-23.7-49.73-40.67-12.95-16.97-22.66-36.78-28.88-59.06-6.22-22.41-9.33-45.85-9.33-70.33s3.63-46.11,10.88-67.74c7.25-21.5,17.74-40.41,31.47-56.6,13.6-16.19,30.3-29.01,49.99-38.85,19.69-9.71,41.96-14.63,66.82-14.63,21.12,0,39.89,2.46,56.21,7.25,16.45,4.79,30.56,11.27,42.61,19.56,8.28,5.7,16.7,12.56,23.96,20.08l33.41-43.52c-9.45-8.81-21.11-16.84-29.14-21.76-18-11.01-37.68-18.52-59.31-24.09-21.5-5.7-44.17-8.42-67.74-8.42-35.62,0-67.22,6.73-94.8,20.2-27.58,13.47-50.9,31.21-69.94,53.1-19.04,22.02-33.42,46.88-43.13,74.6-9.84,27.84-14.63,55.95-14.63,84.57,0,34.45,5.05,65.92,15.15,94.54,10.23,28.49,24.87,53.1,44.17,73.56,19.29,20.59,42.74,36.39,70.2,47.66,27.58,11.14,58.54,16.71,92.99,16.71,31.09,0,65.15-2.59,92.73-12.95,2.48-.88,5.08-1.96,7.76-3.17h0c.16-.07.32-.14.48-.22.19-.09.38-.17.58-.26,16.42-7.43,35.61-19.49,51.54-35.86v-207.45h-192.61v54.86Z"/>
+      </svg>
+    </a>
+
+    <div class="greeting">
+      <h1 class="greeting__title" id="greetingTitle">Thanks for Connecting.</h1>
+      <p class="greeting__body">We would love to continue the conversation. Leave your information below and we will follow up within one business day.</p>
+      <div class="greeting__ref" id="refBadge" style="display:none"></div>
+    </div>
+
+    <form class="form-grid" id="connectForm" onsubmit="handleSubmit(event)">
+      <input type="hidden" id="refSource" name="ref" value="">
+      <input type="hidden" id="refPerson" name="referred_by" value="">
+      <div class="row-2">
+        <div class="field">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="first_name" required>
+        </div>
+        <div class="field">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="last_name" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+      <div class="field">
+        <label for="company">Company / Organization</label>
+        <input type="text" id="company" name="company">
+      </div>
+      <div class="field">
+        <label for="interest">What Are You Interested In?</label>
+        <select id="interest" name="interest">
+          <option value="" disabled selected>Select one</option>
+          <option value="management-services">Management Services</option>
+          <option value="partnership">Partnership Opportunities</option>
+          <option value="development">Development / New Projects</option>
+          <option value="investment">Investment</option>
+          <option value="general">General Inquiry</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Anything Else?</label>
+        <textarea id="message" name="message" rows="3"></textarea>
+      </div>
+      <div class="submit-area">
+        <button type="submit" class="btn" id="submitBtn">Send</button>
+      </div>
+    </form>
+
+    <div class="success" id="successMsg" style="display:none">
+      <svg class="success__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <h2 class="success__title">We Got It.</h2>
+      <p class="success__body">Thanks for reaching out. Someone from our team will follow up within one business day.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer-line">&copy; 2026 Vega Assisted Living Management. A Vega Company.</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref') || '';
+  var person = '';
+
+  if (ref.indexOf('sayer') !== -1) {
+    person = 'Sayer';
+  } else if (ref.indexOf('wes') !== -1) {
+    person = 'Wes';
+  }
+
+  document.getElementById('refSource').value = ref;
+  document.getElementById('refPerson').value = person;
+
+  if (person) {
+    document.getElementById('greetingTitle').textContent =
+      'Thanks for Connecting with ' + person + '.';
+  }
+
+  if (ref) {
+    var badge = document.getElementById('refBadge');
+    badge.style.display = 'inline-block';
+    badge.textContent = 'Referred by ' + (person || ref);
+  }
+
+  var toastTimeout = null;
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function() { t.classList.remove('show'); }, 2600);
+  }
+
+  window.handleSubmit = function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    setTimeout(function() {
+      document.getElementById('connectForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+      showToast('Your information has been received.');
+    }, 600);
+  };
+})();
+</script>
+
+</body>
+</html>
