@@ -3388,14 +3388,47 @@ body {
       btn.dataset.originalText = btn.textContent;
     }
 
-    btn.textContent = 'Received';
-    showToast(message);
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    // Reset after a moment
-    setTimeout(function() {
-      e.target.reset();
+    var form = e.target;
+    var fd = new FormData(form);
+    var nameParts = (fd.get('name') || '').trim().split(/\s+/);
+    var interest = [fd.get('engagementType'), fd.get('careLevels')].filter(Boolean).join(' / ');
+    var notes = fd.get('message') || '';
+    if (fd.get('community')) notes = 'Community: ' + fd.get('community') + (notes ? '\n' + notes : '');
+    var data = {
+      first_name: nameParts.shift() || '',
+      last_name: nameParts.join(' '),
+      email: fd.get('email') || '',
+      phone: fd.get('phone') || '',
+      company: fd.get('entity') || '',
+      interest: interest,
+      message: notes,
+      referred_by: 'ALM Site',
+      ref: form.id === 'proposalForm' ? 'alm-proposal-page' : 'alm-contact'
+    };
+
+    fetch('https://script.google.com/a/macros/vegarei.com/s/AKfycbwVXoBjcByueFEXaQmNT5W1QTj9gqnZUhS7RyTd3TFIVAiahaLwaQ1rH0ncBCDV8kSk/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      btn.textContent = 'Received';
+      showToast(message);
+      form.reset();
+      setTimeout(function() {
+        btn.textContent = btn.dataset.originalText;
+        btn.disabled = false;
+      }, 3000);
+    })
+    .catch(function() {
+      showToast('Something went wrong. Please call or email us directly.');
       btn.textContent = btn.dataset.originalText;
-    }, 3000);
+      btn.disabled = false;
+    });
   };
 
   /* ========================================

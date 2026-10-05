@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<link rel="canonical" href="https://vegarei.com/property-management/">
+<link rel="canonical" href="https://www.vegarei.com/property-management/">
 <meta name="description" content="Vega Property & Asset Management provides full-service property management and strategic asset management for multifamily and commercial real estate. Leasing, maintenance, financial reporting, tenant relations, compliance, capital improvement analysis, and long-term return strategy.">
 <meta name="keywords" content="property management, asset management, multifamily property management, commercial property management, property and asset management, capital improvement analysis, hold sell strategy, tenant relations, leasing services, maintenance coordination, financial reporting, property management Utah">
 <meta name="robots" content="index, follow">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vega Property & Asset Management | Full-Service Property & Asset Management">
 <meta property="og:description" content="Hands-on property and asset management for multifamily and commercial real estate. Leasing, maintenance, financial reporting, tenant relations, compliance, and strategic asset management.">
-<meta property="og:url" content="https://vegarei.com/property-management/">
+<meta property="og:url" content="https://www.vegarei.com/property-management/">
 <meta property="og:site_name" content="Vega Property & Asset Management">
 <meta property="og:locale" content="en_US">
 
@@ -35,7 +35,7 @@
   "@type": "ProfessionalService",
   "name": "Vega Property & Asset Management",
   "description": "Full-service property and asset management for multifamily and commercial real estate. Vega Property & Asset Management provides leasing, maintenance coordination, financial reporting, tenant relations, compliance management, and strategic asset management.",
-  "url": "https://vegarei.com/property-management/",
+  "url": "https://www.vegarei.com/property-management/",
   "telephone": "+1-801-921-5746",
   "email": "connor@vegarei.com",
   "parentOrganization": {
@@ -196,7 +196,7 @@
       "@type": "ListItem",
       "position": 2,
       "name": "Property Management",
-      "item": "https://vegarei.com/property-management/"
+      "item": "https://www.vegarei.com/property-management/"
     }
   ]
 }
@@ -1727,14 +1727,43 @@ img { display: block; max-width: 100%; }
     if (!btn.dataset.originalText) {
       btn.dataset.originalText = btn.textContent;
     }
-    btn.textContent = 'Sent';
+    btn.textContent = 'Sending…';
     btn.disabled = true;
-    showToast('Thank you. We will be in touch within one business day.');
-    setTimeout(function() {
+
+    var form = document.getElementById('contactForm');
+    var nameParts = document.getElementById('contactName').value.trim().split(/\s+/);
+    var data = {
+      first_name: nameParts.shift() || '',
+      last_name: nameParts.join(' '),
+      email: form.email.value,
+      phone: form.phone.value,
+      company: '',
+      interest: form.propertyType.value,
+      message: form.message.value,
+      referred_by: 'Property Management Site',
+      ref: 'pm-website'
+    };
+
+    fetch('https://script.google.com/a/macros/vegarei.com/s/AKfycbwVXoBjcByueFEXaQmNT5W1QTj9gqnZUhS7RyTd3TFIVAiahaLwaQ1rH0ncBCDV8kSk/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      btn.textContent = 'Sent';
+      showToast('Thank you. We will be in touch within one business day.');
+      form.reset();
+      setTimeout(function() {
+        btn.textContent = btn.dataset.originalText;
+        btn.disabled = false;
+      }, 3000);
+    })
+    .catch(function() {
+      showToast('Something went wrong. Please call or email us directly.');
       btn.textContent = btn.dataset.originalText;
       btn.disabled = false;
-      document.getElementById('contactForm').reset();
-    }, 3000);
+    });
   };
 
 })();
